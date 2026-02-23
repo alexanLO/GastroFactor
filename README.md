@@ -1,5 +1,7 @@
 # GastroFactor
 
+Este é um site para profissionais da área alimentícia calcular fator de cocção e correção, mas também é meu portfolio profissional.
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
 
 ## Development server
