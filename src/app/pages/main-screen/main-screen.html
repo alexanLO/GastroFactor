@@ -3,214 +3,204 @@
     <div class="logo">Gastro Factor</div>
     <div class="menu">
       <a routerLink="/grastrofactor" class="active">Home</a>
-      <!-- TODO depois verificar como colocar os links das paginas -->
-      <a href="">Minhas Receitas</a>
-      <a href="">Sobre</a>
+      <a routerLink="/minhas-receitas">Minhas Receitas</a>
+      <a routerLink="/sobre">Sobre</a>
     </div>
     <div class="auth">
       <a routerLink="/login">Login</a>
-      <img
-        alt="Foto de perfil do usuario"
-        class="profile-image"
-        src="/profile.png"
-        />
-      </div>
-    </nav>
-  </header>
+      <img alt="Foto de perfil do usuario" class="profile-image" src="/profile.png" />
+    </div>
+  </nav>
+</header>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="hero-background">
-        <img
-          class="hero-image"
-          src="/hero.png"
-          alt="Cozinha profissional"
-          />
-          <div class="hero-overlay"></div>
+<main>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-background">
+      <img class="hero-image" src="/hero.png" alt="Cozinha profissional" />
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <span class="hero-label">Matemática Culinária</span>
+      <h1 class="hero-title">
+        Precisão <br />
+        no Prato.
+      </h1>
+      <p class="hero-subtitle">
+        Transforme ingredientes brutos em sucesso <br />
+        culinário calculado com os padrões da <br />
+        indústria.
+      </p>
+    </div>
+  </section>
+
+  <!-- Calculation Slate -->
+  <section class="calculation-section">
+    <div class="calculation-container">
+      <div class="calculation-panel">
+        <div class="calculation-header">
+          <h2 class="calculation-title">Painel de Cálculo</h2>
+          <div class="calculation-info">
+            <span class="icon"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="15px"
+                viewBox="0 -960 960 960"
+                width="15px"
+                fill="#ffb86b"
+              >
+                <path
+                  d="M508.5-291.5Q520-303 520-320t-11.5-28.5Q497-360 480-360t-28.5 11.5Q440-337 440-320t11.5 28.5Q463-280 480-280t28.5-11.5ZM440-440h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
+                /></svg
+            ></span>
+            Entrada de Ficha Técnica
+          </div>
         </div>
 
-        <div class="hero-content">
-          <span class="hero-label">Matemática Culinária</span>
-          <h1 class="hero-title">
-            Precisão <br />
-            no Prato.
-          </h1>
-          <p class="hero-subtitle">
-            Transforme ingredientes brutos em sucesso <br />
-            culinário calculado com os padrões da <br />
-            indústria.
+        <form class="calculation-form">
+          <div class="form-group">
+            <label for="foodName">Nome do Alimento</label>
+            <input
+              id="foodName"
+              type="text"
+              placeholder="Ex: Filé Mignon"
+              [(ngModel)]="foodName"
+              name="foodName"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="foodWight">Peso do Alimento (kg)</label>
+            <input
+              id="foodWight"
+              type="number"
+              placeholder="Ex: 1.000"
+              step="0.001"
+              [(ngModel)]="foodWeight"
+              name="foodWeight"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="inputTipo">Tipo de Peso</label>
+            <select id="inputTipo" class="select-field" [(ngModel)]="typeWeight" name="typeWeight">
+              <option value="bruto">Peso Bruto</option>
+              <option value="liquido">Peso Líquido</option>
+              <option value="cozido">Peso Cozido</option>
+            </select>
+          </div>
+        </form>
+        <div class="calculation-actions">
+          <button type="button" class="button-calculate" (click)="onCalculate()">
+            Calcular
+            <span class="icon"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#181210"
+              >
+                <path
+                  d="M320-240h60v-80h80v-60h-80v-80h-60v80h-80v60h80v80Zm200-30h200v-60H520v60Zm0-100h200v-60H520v60Zm44-152 56-56 56 56 42-42-56-58 56-56-42-42-56 56-56-56-42 42 56 56-56 58 42 42Zm-314-70h200v-60H250v60Zm-50 472q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"
+                /></svg
+            ></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Conteúdo Educacional -->
+  <section class="education-section">
+    <div class="education-container">
+      <!-- Fator de Correção -->
+      <div class="correction-factor-container">
+        <div class="correction-metrics">
+          <span></span>
+          <span> Metricas Essenciais </span>
+        </div>
+        <div class="correction-header">
+          <h3 class="correction-title">Fator de Correção (FC)</h3>
+        </div>
+        <div class="correction-info">
+          <p>
+            O índice que determina a perda de massa durante a limpeza e <br />
+            preparo. É a relação entre o Peso Bruto e o Peso Líquido. Essencial <br />
+            para o cálculo de compras e precificação precisa.
           </p>
         </div>
-      </section>
+        <div class="correction-formula">
+          <span>FC = PB / PL</span>
+        </div>
+      </div>
 
-      <!-- Calculation Slate -->
-      <section class="calculation-section">
-        <div class="calculation-container">
-          <div class="calculation-panel">
-            <div class="calculation-header">
-              <h2 class="calculation-title">Painel de Cálculo</h2>
-              <div class="calculation-info">
-                <span class="icon"
-                  ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="15px"
-                  viewBox="0 -960 960 960"
-                  width="15px"
-                  fill="#ffb86b"
-                  >
-                  <path
-                    d="M508.5-291.5Q520-303 520-320t-11.5-28.5Q497-360 480-360t-28.5 11.5Q440-337 440-320t11.5 28.5Q463-280 480-280t28.5-11.5ZM440-440h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
-                    /></svg
-                  ></span>
-                  Entrada de Ficha Técnica
-                </div>
-              </div>
+      <!-- Fator de Cocção -->
+      <div class="coccion-factor-container">
+        <div class="coccion-header">
+          <h3 class="coccion-title">Fator de Cocção (FCy)</h3>
+          <p>
+            Avalia o rendimento final após o processo <br />
+            térmico. Crucial para definir o tamanho das <br />
+            porções servidas aos clientes.
+          </p>
+        </div>
+        <div class="coccion-impact">
+          <p>Impacto no custo</p>
+          <div class="coccion-bar">
+            <div class="coccion-bar-fill"></div>
+          </div>
+        </div>
+      </div>
 
-              <form class="calculation-form">
-                <div class="form-group">
-                  <label for="foodName">Nome do Alimento</label>
-                  <input
-                    id="foodName"
-                    type="text"
-                    placeholder="Ex: Filé Mignon"
-                    [(ngModel)]="foodName"
-                    name="foodName"
-                    />
-                  </div>
+      <!-- Registration Banner -->
+      <div class="registration-banner">
+        <div class="banner-bg"></div>
+        <div class="banner-content">
+          <h3 class="registration-title">Centralize seu conhecimento culinário.</h3>
+          <p>
+            Crie sua conta para salvar suas receitas e exportar fichas técnicas <br />
+            profissionais com um clique.
+          </p>
+        </div>
+        <div class="banner-action">
+           <button class="banner-button">Criar Conta Grátis</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                  <div class="form-group">
-                    <label for="foodWight">Peso do Alimento (kg)</label>
-                    <input
-                      id="foodWight"
-                      type="number"
-                      placeholder="Ex: 1.000"
-                      step="0.001"
-                      [(ngModel)]="foodWeight"
-                      name="foodWeight"
-                      />
-                    </div>
+  <!-- Signature Imagery -->
+  <section class="signature-imagery">
+    <div class="signature-card">
+      <img
+        class="signature-image"
+        data-alt="close-up de mãos limpando um grande robalo em um balcão de cozinha de aço inoxidável com iluminação focada"
+        src="/signature-left.png"
+      />
+      <div class="signature-overlay"></div>
+      <div class="signature-caption">
+        <p class="signature-text">Eficiência começa com dados.</p>
+      </div>
+    </div>
 
-                    <div class="form-group">
-                      <label for="inputTipo">Tipo de Peso</label>
-                      <select id="inputTipo" class="select-field" [(ngModel)]="typeWeight" name="typeWeight">
-                        <option value="bruto">Peso Bruto</option>
-                        <option value="liquido">Peso Líquido</option>
-                        <option value="cozido">Peso Cozido</option>
-                      </select>
-                    </div>
-                  </form>
-                  <div class="calculation-actions">
-                    <button type="button" class="button-calculate" (click)="onCalculate()">
-                      Calcular
-                      <span class="icon"
-                        ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#181210"
-                        >
-                        <path
-                          d="M320-240h60v-80h80v-60h-80v-80h-60v80h-80v60h80v80Zm200-30h200v-60H520v60Zm0-100h200v-60H520v60Zm44-152 56-56 56 56 42-42-56-58 56-56-42-42-56 56-56-56-42 42 56 56-56 58 42 42Zm-314-70h200v-60H250v60Zm-50 472q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"
-                          /></svg
-                        ></span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </section>
+    <div class="signature-card">
+      <img
+        class="signature-image"
+        data-alt="imagem aérea de mise en place com legumes organizados e balanças em uma mesa rústica escura"
+        src="/signature-right.png"
+      />
+      <div class="signature-overlay"></div>
+      <div class="signature-caption">
+        <p class="signature-text">A arte encontra a álgebra.</p>
+      </div>
+    </div>
+  </section>
+</main>
 
-              <!-- Seção Conteúdo Educacional -->
-              <section class="education-section">
-                <div class="education-container">
-                  <!-- Fator de Correção -->
-                  <div class="correction-factor-container">
-                    <div class="correction-metrics">
-                      <span></span>
-                      <span> Metricas Essenciais </span>
-                    </div>
-                    <div class="correction-header">
-                      <h3 class="correction-title">Fator de Correção (FC)</h3>
-                    </div>
-                    <div class="correction-info">
-                      <p>
-                        O índice que determina a perda de massa durante a limpeza e <br />
-                        preparo. É a relação entre o Peso Bruto e o Peso Líquido. Essencial <br />
-                        para o cálculo de compras e precificação precisa.
-                      </p>
-                    </div>
-                    <div class="correction-formula">
-                      <span>FC = PB / PL</span>
-                    </div>
-                  </div>
+<app-footer></app-footer>
 
-                  <!-- Fator de Cocção -->
-                  <div class="coccion-factor-container">
-                    <div class="coccion-header">
-                      <h3 class="coccion-title">Fator de Cocção (FCy)</h3>
-                      <p>
-                        Avalia o rendimento final após o processo <br />
-                        térmico. Crucial para definir o tamanho das <br />
-                        porções servidas aos clientes.
-                      </p>
-                    </div>
-                    <div class="coccion-impact">
-                      <p>Impacto no custo</p>
-                      <div class="coccion-bar">
-                        <div class="coccion-bar-fill"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Registration Banner -->
-                  <div class="registration-banner">
-                    <div class="banner-bg"></div>
-                    <div class="banner-content">
-                      <h3 class="registration-title">Centralize seu conhecimento culinário.</h3>
-                      <p>
-                        Crie sua conta para salvar suas receitas e exportar fichas técnicas <br />
-                        profissionais com um clique.
-                      </p>
-                    </div>
-                    <div class="banner-action">
-                      <button class="banner-button">Criar Conta Grátis</button>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <!-- Signature Imagery -->
-              <section class="signature-imagery">
-                <div class="signature-card">
-                  <img
-                    class="signature-image"
-                    data-alt="close-up de mãos limpando um grande robalo em um balcão de cozinha de aço inoxidável com iluminação focada"
-                    src="/signature-left.png"
-                    />
-                    <div class="signature-overlay"></div>
-                    <div class="signature-caption">
-                      <p class="signature-text">Eficiência começa com dados.</p>
-                    </div>
-                  </div>
-
-                  <div class="signature-card">
-                    <img
-                      class="signature-image"
-                      data-alt="imagem aérea de mise en place com legumes organizados e balanças em uma mesa rústica escura"
-                      src="/signature-right.png"
-                      />
-                      <div class="signature-overlay"></div>
-                      <div class="signature-caption">
-                        <p class="signature-text">A arte encontra a álgebra.</p>
-                      </div>
-                    </div>
-                  </section>
-                </main>
-
-                <app-footer></app-footer>
-
-                @if (showDialog) {
-                  <app-calcular-dialog [result]="calculationResult" (close)="closeDialog()">
-                  </app-calcular-dialog>
-                }
+@if (showResultModal) {
+  <app-calcular-dialog [result]="calculationResult" (close)="closeModal()"> </app-calcular-dialog>
+}
