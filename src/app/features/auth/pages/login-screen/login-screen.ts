@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavbarAlternative } from "../../component/navbar-alternative/navbar-alternative";
-import { Footer } from "../../component/footer/footer";
+import { Footer } from '../../../../component/footer/footer';
+import { NavbarAlternative } from '../../../../component/navbar-alternative/navbar-alternative';
 
 @Component({
   selector: 'app-login-screen',
@@ -9,6 +9,5 @@ import { Footer } from "../../component/footer/footer";
   styleUrl: './login-screen.scss',
 })
 export class LoginScreen {
-
   hide = true;
 }
