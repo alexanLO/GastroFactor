@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Footer } from '../../../../../component/footer/footer';
-import { NavbarAlternative } from '../../../../../component/navbar-alternative/navbar-alternative';
+import { Footer } from '../../../../component/footer/footer';
+import { NavbarAlternative } from '../../../../component/navbar-alternative/navbar-alternative';
 
 @Component({
   selector: 'app-login-page.component',
