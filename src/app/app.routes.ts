@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
-import { LoginScreen } from './pages/login-screen/login-screen';
+
 import { MainScreen } from './pages/main-screen/main-screen';
+import { LoginScreen } from './features/auth/pages/login-screen/login-screen';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'grastrofactor', pathMatch: 'full' },
