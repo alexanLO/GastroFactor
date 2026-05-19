@@ -40,7 +40,7 @@ $surface: #181210;
 $on-surface: #ede0dc;
 $primary: #ffb86b;
 $on-primary: #492900;
-$font-body: Work Sans, sans-serif;
+$font-sans: Work Sans, sans-serif;
 
 html, body {
   height: 100%;
@@ -51,7 +51,7 @@ html, body {
 body {
   background: $surface;
   color: $on-surface;
-  font-family: $font-body;
+  font-family: $font-sans;
 
   ::selection {
     background: $primary;
