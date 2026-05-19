@@ -40,7 +40,6 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular/build": "^19.1.9",
     "@angular/cli": "^21.2.11",
     "@angular/compiler-cli": "^21.2.13",
     "@types/express": "^5.0.1",
