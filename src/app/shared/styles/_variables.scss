@@ -4,11 +4,13 @@
 $outline: #a88a7e;
 $outline-variant: #594238;
 
-// 
+//
 $on-background: #ede0dc;
 $background: #181210;
+$white: #ffffff;
+$black: #000;
 
-// 
+//
 $on-secondary-fixed-variant: #5b403c;
 $secondary-fixed: #ffdad4;
 $on-secondary-fixed: #2b1613;
@@ -18,7 +20,7 @@ $on-secondary: #422a26;
 $secondary: #e3beb8;
 $secondary-fixed-dim: #e3beb8;
 
-//  
+//
 $inverse-surface: #ede0dc;
 $surface-container-lowest: #130d0b;
 $surface-tint: #ffb86b;
@@ -61,7 +63,6 @@ $on-error-container: #ffdad6;
 $error: #ffb4ab;
 $on-error: #690005;
 
-
 $border-radius: (
   DEFAULT: 0.125rem,
   lg: 0.25rem,
@@ -70,10 +71,5 @@ $border-radius: (
 );
 
 // Fontes
-$font-headline: Newsreader, serif;
-$font-body:
-  Work Sans,
-  sans-serif;
-$font-label:
-  Work Sans,
-  sans-serif;
+$font-serif: 'Newsreader', serif;
+$font-sans: 'Work Sans', sans-serif;

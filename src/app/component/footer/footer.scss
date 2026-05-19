@@ -32,14 +32,14 @@
       }
 
       .footer-logo {
-        font-family: $font-body;
+        font-family: $font-sans;
         font-size: 1.125rem;
         line-height: 1.75rem;
         color: $primary;
       }
 
       .footer-description {
-        font-family: $font-body;
+        font-family: $font-sans;
         font-size: 0.75rem;
         line-height: 1rem;
         text-transform: uppercase;
@@ -60,7 +60,7 @@
         align-items: center;
         gap: 0.5rem;
 
-        font-family: $font-body;
+        font-family: $font-sans;
         font-size: 0.75rem;
         line-height: 1rem;
         text-transform: uppercase;
