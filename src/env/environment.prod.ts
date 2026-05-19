@@ -1,8 +1,8 @@
-/**
- * Configurações para ambiente de DESENVOLVIMENTO
- * Executar: ng serve (usa este arquivo por padrão)
- */
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+// Configurações para ambiente de PRODUÇÃO
 export const environment = {
-  production: false,
-  srvFactorApi: 'https://backend-9b44.onrender.com/'
+  production: true,
+  baseAddress: 'https://gastrofactor-api.onrender.com'
 };

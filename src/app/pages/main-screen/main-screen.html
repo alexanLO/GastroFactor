@@ -174,7 +174,9 @@
           </p>
         </div>
         <div class="banner-action">
-          <button class="banner-button">Criar Conta Grátis</button>
+          <button class="banner-button" (click)="onRegister()">
+            Criar Conta Grátis
+          </button>
         </div>
       </div>
     </div>
@@ -284,5 +286,10 @@
   </div>
 </footer>
 
-<app-calcular-dialog *ngIf="showDialog" [result]="calculationResult" (close)="closeDialog()">
-</app-calcular-dialog>
+@if (showDialog) {
+  <app-calcular-dialog [result]="calculationResult" (close)="closeModal()"> </app-calcular-dialog>
+}
+
+@if (showRegisterModal) {
+  <app-register (close)="closeModal()"></app-register>
+}

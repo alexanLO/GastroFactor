@@ -26,10 +26,19 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": ["src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app/shared/styles"]
+            }
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/env/environment.ts",
+                  "with": "src/env/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -44,7 +53,24 @@
               ],
               "outputHashing": "all"
             },
-            "development": {
+            "homologation": {
+              "fileReplacements": [
+                {
+                  "replace": "src/env/environment.ts",
+                  "with": "src/env/environment.hom.ts"
+                }
+              ],
+              "optimization": true,
+              "extractLicenses": true,
+              "sourceMap": false
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/env/environment.ts",
+                  "with": "src/env/environment.local.ts"
+                }
+              ],
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
@@ -58,8 +84,11 @@
             "production": {
               "buildTarget": "GastroFactor:build:production"
             },
-            "development": {
-              "buildTarget": "GastroFactor:build:development"
+            "homologation": {
+              "buildTarget": "GastroFactor:build:homologation"
+            },
+            "local": {
+              "buildTarget": "GastroFactor:build:local"
             }
           },
           "defaultConfiguration": "development"

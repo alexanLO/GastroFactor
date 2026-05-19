@@ -16,7 +16,7 @@ export class CalculationService {
   // URL base da API vem do arquivo de environment
   // Desenvolvimento: http://localhost:8080/api
   // Produção: https://api.gastrofactor.com/api
-  private readonly calcFactorUri = `${environment.srvFactorApi}v1/calculadora`;
+  private readonly calcFactorUri = `${environment.baseAddress}v1/calculadora`;
 
   constructor(private http: HttpClient) {}
 

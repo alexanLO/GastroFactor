@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CalculationService } from '../../core/services/calculation.service';
 import { CalculationRequest, CalculationResponse } from '../../shared/models/calculation.model';
 import { CalcularDialog } from '../../component/calcular-dialog/calcular-dialog';
+import { RegisterComponent } from '../../features/auth/pages/register/register.component/register.component';
 
 @Component({
   standalone: true,
   selector: 'app-main-screen',
-  imports: [CommonModule, FormsModule, CalcularDialog],
+  imports: [FormsModule, CalcularDialog, RegisterComponent],
   templateUrl: './main-screen.html',
   styleUrls: ['./main-screen.scss'],
 })
@@ -17,7 +17,9 @@ export class MainScreen {
   foodWeight: number = 0;
   typeWeight: string = 'bruto';
   calculationResult: CalculationResponse | null = null;
+
   showDialog: boolean = false;
+  showRegisterModal: boolean = false;
 
   constructor(
     private calculationService: CalculationService,
@@ -59,6 +61,11 @@ export class MainScreen {
     });
   }
 
+  onRegister() {
+    this.showRegisterModal = true;
+    document.body.classList.add('modal-open'); // trava o scroll
+  }
+
   private mapTypeWeight(type: string): 'GROSS' | 'NET' | 'COOKED' {
     switch (type) {
       case 'bruto':
@@ -72,8 +79,9 @@ export class MainScreen {
     }
   }
 
-  closeDialog() {
+  closeModal() {
     this.showDialog = false;
+    this.showRegisterModal = false;
     document.body.classList.remove('modal-open'); // libera o scroll
   }
 }
