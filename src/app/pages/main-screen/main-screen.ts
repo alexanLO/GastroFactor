@@ -1,14 +1,15 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalculationService } from '../../core/services/calculation.service';
 import { CalculationRequest, CalculationResponse } from '../../shared/models/calculation.model';
 import { CalcularDialog } from '../../component/calcular-dialog/calcular-dialog';
 import { RegisterComponent } from '../../features/auth/pages/register/register.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-main-screen',
-  imports: [FormsModule, CalcularDialog, RegisterComponent],
+  imports: [FormsModule, CalcularDialog, CommonModule, ReactiveFormsModule, RegisterComponent],
   templateUrl: './main-screen.html',
   styleUrls: ['./main-screen.scss'],
 })
@@ -57,7 +58,7 @@ export class MainScreen {
         this.showDialog = true;
         document.body.classList.remove('modal-open'); // garante liberar o scroll mesmo em caso de erro
         this.cdr.detectChanges();
-      },
+      }
     });
   }
 

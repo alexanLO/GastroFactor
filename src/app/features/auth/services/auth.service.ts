@@ -1,17 +1,49 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../../../env/environment';
+import { AuthResponse, LoginRequest, RegisterRequest } from '../../../shared/models/auth.model';
 
+/**
+ * Serviço responsável pela comunicação com o backend Spring Boot
+ * para registrar e logar um usuario
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-    private readonly uriApiLogin = `${environment.baseAddress}/v1/auth/login`;
-    private readonly uriApiRegister = `${environment.baseAddress}/v1/auth/register`;
+  private readonly uriApiLogin = `${environment.baseAddress}/v1/auth/login`;
+  private readonly uriApiRegister = `${environment.baseAddress}/v1/auth/register`;
 
-      /**
-   * Envia os dados do formulário de registro de usuário para o backend
-   * @param req - Dados do formulário (foodName, foodWeight, typeWeight)
-   * @returns Observable com token de acesso e o refresh token
+  constructor(
+    private http: HttpClient,
+    private log: NGXLogger,
+  ) {}
+
+  /**
+   * Envia os dados do formulário de login de usuário para o backend
+   * @param request - Dados do formulário (email, password)
+   * @returns Observable com token de acesso e refresh token
    */
-  userRegisterApi(){}
+  userLogin(request: LoginRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(this.uriApiLogin, request).pipe(
+      tap((response) => {
+        this.log.info('Login realizado com sucesso.');
+      }),
+    );
+  }
+
+  /**
+   * Envia os dados do formulário de cadastro de usuário para o backend
+   * @param request - Dados do formulário (name, email, password, profession)
+   * @returns Observable com token de acesso e refresh token
+   */
+  userRegister(request: RegisterRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(this.uriApiRegister, request).pipe(
+      tap((response) => {
+        this.log.info('Usuário cadastrado com sucesso.');
+      }),
+    );
+  }
 }

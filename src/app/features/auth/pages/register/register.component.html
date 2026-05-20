@@ -26,7 +26,7 @@
     </header>
 
     <section class="modal-body">
-      <form (ngSubmit)="onSubmit()" class="register-form">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
         <div class="form-group">
           <label for="name">NOME COMPLETO</label>
           <input
@@ -84,8 +84,7 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-submit">
-          <!--TODO [disabled]="registerForm.invalid" -->
+        <button type="submit" class="btn-submit" [disabled]="registerForm.invalid">
           CRIAR CONTA
         </button>
       </form>
