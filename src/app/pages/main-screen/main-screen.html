@@ -8,7 +8,7 @@
       <a href="">Sobre</a>
     </div>
     <div class="auth">
-      <a href="">Login</a>
+      <a (click)="onLogin()">Login</a>
       <img
         alt="Chef Profile"
         class="profile-image"
@@ -174,9 +174,7 @@
           </p>
         </div>
         <div class="banner-action">
-          <button class="banner-button" (click)="onRegister()">
-            Criar Conta Grátis
-          </button>
+          <button class="banner-button" (click)="onRegister()">Criar Conta Grátis</button>
         </div>
       </div>
     </div>
@@ -292,4 +290,8 @@
 
 @if (showRegisterModal) {
   <app-register (close)="closeModal()"></app-register>
+}
+
+@if (showLoginModal) {
+  <app-login-page (close)="closeModal()"></app-login-page>
 }

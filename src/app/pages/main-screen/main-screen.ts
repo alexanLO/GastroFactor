@@ -5,11 +5,12 @@ import { CalculationRequest, CalculationResponse } from '../../shared/models/cal
 import { CalcularDialog } from '../../component/calcular-dialog/calcular-dialog';
 import { RegisterComponent } from '../../features/auth/pages/register/register.component';
 import { CommonModule } from '@angular/common';
+import { LoginPageComponent } from "../../features/auth/pages/login/login-page.component/login-page.component";
 
 @Component({
   standalone: true,
   selector: 'app-main-screen',
-  imports: [FormsModule, CalcularDialog, CommonModule, ReactiveFormsModule, RegisterComponent],
+  imports: [FormsModule, CalcularDialog, CommonModule, ReactiveFormsModule, RegisterComponent, LoginPageComponent],
   templateUrl: './main-screen.html',
   styleUrls: ['./main-screen.scss'],
 })
@@ -21,6 +22,7 @@ export class MainScreen {
 
   showDialog: boolean = false;
   showRegisterModal: boolean = false;
+  showLoginModal: boolean = false;
 
   constructor(
     private calculationService: CalculationService,
@@ -64,7 +66,12 @@ export class MainScreen {
 
   onRegister() {
     this.showRegisterModal = true;
-    document.body.classList.add('modal-open'); // trava o scroll
+   // document.body.classList.add('modal-open'); // trava o scroll
+  }
+  
+  onLogin() {
+    this.showLoginModal = true;
+  //  document.body.classList.add('modal-open'); // trava o scroll
   }
 
   private mapTypeWeight(type: string): 'GROSS' | 'NET' | 'COOKED' {
@@ -83,6 +90,7 @@ export class MainScreen {
   closeModal() {
     this.showDialog = false;
     this.showRegisterModal = false;
+    this.showLoginModal = false;
     document.body.classList.remove('modal-open'); // libera o scroll
   }
 }

@@ -4,8 +4,8 @@ export interface LoginRequest {
 }
 
 export interface AuthResponse {
-  accessToken: String;
-  refreshToken: String;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface RegisterRequest {
