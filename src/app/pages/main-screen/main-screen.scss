@@ -1,7 +1,6 @@
 @use 'variables' as *;
 @import 'normalize.css';
 
-
 // Estilos para o host do componente
 .main-screen-host {
   min-height: 100vh;
@@ -26,6 +25,8 @@
     font-size: 24px;
     font-style: italic;
     color: $primary;
+    cursor: default;
+    user-select: none;
   }
 
   .menu a {
@@ -205,7 +206,7 @@
             font-weight: 600;
             color: $on-surface-variant;
           }
-          
+
           .select-field {
             width: 100%;
             padding: 12px;
