@@ -22,10 +22,12 @@ import { ErrorInputComponent } from '../../../../../shared/components/error-inpu
 })
 export class LoginPageComponent {
   @Output() close = new EventEmitter<void>();
+
   private authService = inject(AuthService);
   private formBuilder = inject(NonNullableFormBuilder);
   private cdr = inject(ChangeDetectorRef);
   private log = inject(NGXLogger);
+ 
   public loginForm: FormGroup;
 
   constructor() {
@@ -49,10 +51,10 @@ export class LoginPageComponent {
         this.onClose();
         this.cdr.detectChanges();
       },
-      error:(error: any) => {
-        this.log.info("Erro ao tentar logar o usuário", error)
+      error: (error: any) => {
+        this.log.info('Erro ao tentar logar o usuário', error);
         this.cdr.detectChanges();
-      }
+      },
     });
   }
 

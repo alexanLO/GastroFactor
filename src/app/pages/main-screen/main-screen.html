@@ -9,12 +9,13 @@
         <a href="">Sobre</a>
       </div>
       <div class="auth">
-        <a (click)="onLogin()">Login</a>
-        <img
-          alt="Chef Profile"
-          class="profile-image"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuAq6afdSd512JpJfuRbpFuZCHapNOOnOnB7W28dA8nntoHs-eUYLh9u443PnVtzijERg-aBrraE_080xcbsEZeQtjWCfz1-jnWY_cXqjQNAV28jagUazJkuzoJagT8jKRh2d_eL2S38__1Z8kAE9Qf_HbbFIvgL38lNtmhsmSth10zB5czTm2ufNQ687fsfx0ih_sn2NIku-hMuUerVtU20ba6WJmFt8_D5KQPTsuLt9giT1QK9IZQ0hAqbFA2F6eiAyIjo_aB-hy"
-        />
+        @if (!authService.isAuthenticated()) {
+          <a (click)="onLogin()">Login</a>
+        } @else {
+          <a (click)="onLogout()">Logout</a>
+        }
+
+        <img alt="Chef Profile" class="profile-image" src="/profile.png" />
       </div>
     </nav>
   </header>

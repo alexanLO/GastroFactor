@@ -1,16 +1,24 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalculationService } from '../../core/services/calculation.service';
 import { CalculationRequest, CalculationResponse } from '../../shared/models/calculation.model';
 import { CalcularDialog } from '../../component/calcular-dialog/calcular-dialog';
 import { RegisterComponent } from '../../features/auth/pages/register/register.component';
 import { CommonModule } from '@angular/common';
-import { LoginPageComponent } from "../../features/auth/pages/login/login-page.component/login-page.component";
+import { LoginPageComponent } from '../../features/auth/pages/login/login-page.component/login-page.component';
+import { AuthService } from '../../features/auth/services/auth.service';
 
 @Component({
   standalone: true,
   selector: 'app-main-screen',
-  imports: [FormsModule, CalcularDialog, CommonModule, ReactiveFormsModule, RegisterComponent, LoginPageComponent],
+  imports: [
+    FormsModule,
+    CalcularDialog,
+    CommonModule,
+    ReactiveFormsModule,
+    RegisterComponent,
+    LoginPageComponent,
+  ],
   templateUrl: './main-screen.html',
   styleUrls: ['./main-screen.scss'],
 })
@@ -24,14 +32,13 @@ export class MainScreen {
   showRegisterModal: boolean = false;
   showLoginModal: boolean = false;
 
-  constructor(
-    private calculationService: CalculationService,
-    private cdr: ChangeDetectorRef,
-  ) {}
+  public authService = inject(AuthService);
+  private calculationService = inject(CalculationService);
+  private cdr = inject(ChangeDetectorRef);
 
   onCalculate() {
     console.log(
-      'Calculando  com o nome do alimento = {}, peso do alimento = {}, tipo de peso = {}',
+      'Chamando API para calcular com o nome do alimento = {}, peso do alimento = {}, tipo de peso = {}',
       this.foodName,
       this.foodWeight,
       this.typeWeight,
@@ -45,7 +52,7 @@ export class MainScreen {
       typeWeight: this.mapTypeWeight(this.typeWeight),
     };
 
-    console.log('Chamando requisição do serviço:', request);
+    console.log('Fazendo requisição do serviço: ', request);
 
     this.calculationService.calculateFactor(request).subscribe({
       next: (response) => {
@@ -60,18 +67,22 @@ export class MainScreen {
         this.showDialog = true;
         document.body.classList.remove('modal-open'); // garante liberar o scroll mesmo em caso de erro
         this.cdr.detectChanges();
-      }
+      },
     });
   }
 
   onRegister() {
     this.showRegisterModal = true;
-   // document.body.classList.add('modal-open'); // trava o scroll
+    document.body.classList.add('modal-open');
   }
-  
+
   onLogin() {
     this.showLoginModal = true;
-  //  document.body.classList.add('modal-open'); // trava o scroll
+    document.body.classList.add('modal-open');
+  }
+
+  onLogout(){
+    this.authService.userLogout();
   }
 
   private mapTypeWeight(type: string): 'GROSS' | 'NET' | 'COOKED' {

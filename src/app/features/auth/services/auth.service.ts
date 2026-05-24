@@ -54,10 +54,11 @@ export class AuthService {
 
   userLogout() {
     this.loggedIn = false;
+    localStorage.removeItem('access_token');
   }
 
   isAuthenticated(): boolean {
     // checa se existe token válido
-    return this.loggedIn && !!localStorage.getItem('access_token');
+    return !!localStorage.getItem('access_token');
   }
 }
