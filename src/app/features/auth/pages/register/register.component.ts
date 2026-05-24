@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Inject, Output } from '@angular/core';
 import {
   AbstractControl,
   FormGroup,
@@ -24,15 +24,15 @@ export class RegisterComponent {
   @Output() close = new EventEmitter<void>();
   @Output() navigateToLogin = new EventEmitter<void>();
 
-  authResult: AuthResponse | null = null;
-  registerForm: FormGroup;
+  private authService = inject(AuthService);
+  private formBuilder = inject(NonNullableFormBuilder);
+  private cdr = inject(ChangeDetectorRef);
+  private log = inject(NGXLogger);
 
-  constructor(
-    private authService: AuthService,
-    private cdr: ChangeDetectorRef,
-    private log: NGXLogger,
-    private formBuilder: NonNullableFormBuilder,
-  ) {
+  public authResult: AuthResponse | null = null;
+  public registerForm: FormGroup;
+
+  constructor() {
     this.registerForm = this.formBuilder.group(
       {
         name: ['', Validators.required],
@@ -46,7 +46,7 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    console.log("chamando backend")
+    console.log('chamando backend');
     const request: RegisterRequest = {
       name: this.registerForm.get('name')?.value,
       email: this.registerForm.get('email')?.value,
@@ -56,13 +56,13 @@ export class RegisterComponent {
 
     this.log.info('Chamando requisição do serviço: {}', request);
     this.authService.userRegister(request).subscribe({
-      next: (response) => {
+      next: (response: AuthResponse) => {
         this.log.info('Resposta recebida');
         this.authResult = response;
         this.onClose();
         this.cdr.detectChanges();
       },
-      error: (error) => {
+      error: (error: any) => {
         this.log.error('Erro ao tentar registrar o usuário:', error);
         this.cdr.detectChanges();
       },

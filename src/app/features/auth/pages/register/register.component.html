@@ -1,4 +1,4 @@
-<div
+<!-- <div
   class="modal-overlay"
   open
   aria-labelledby="register-title"
@@ -112,4 +112,114 @@
       </p>
     </footer>
   </div>
-</div>
+</div> -->
+
+<body class="app">
+  <div class="noise-overlay"></div>
+
+  <!-- Backdrop -->
+  <div class="backdrop"></div>
+
+  <!-- Registration Modal -->
+  <main class="register-modal">
+    <article class="register-card glass-panel editorial-shadow">
+      <!-- Close Button -->
+
+      <button
+        class="register-card__close"
+        type="button"
+        aria-label="Fechar modal"
+        (click)="onClose()"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M18 6L6 18M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Left Side: Editorial Image -->
+      <section class="editorial-image">
+        <img
+          alt="Chef in professional kitchen"
+          class="editorial-image__img"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2m1sI6JI_wG7qj0_017XxAuQWnSpii9xkHDGWFL1KJQ3WT1JHc31s0i4cEfAGWORVmy1Nm1cNa38av4wxe11LM6sbLuNnrmpMGb9MrOh2hRT5kSJMuiKE4asU04vybw6Hnol2zQj2osm0VQt2wuK_Rz3JWE6cQaY3Avbq4WL12ywVxed-MVEmuCrxvukWNf0S6JoTTNaMCPQ0gRCRn1UGZ9_geMiBGRwemMVU47TlFFfplq20UNhAViGZV-LRV-IAJkuSYHC4Wr7Y"
+        />
+        <div class="editorial-image__overlay"></div>
+        <div class="editorial-image__caption">
+          <h1>
+            Junte-se ao Gastro Factor. <br />
+            <span>Transforme sua cozinha com a precisão dos dados.</span>
+          </h1>
+        </div>
+      </section>
+
+      <!-- Right Side: Registration Form -->
+      <section class="register-form-section">
+        <div class="register-form-container">
+
+
+          <header class="register-header">
+            <h2 id="login-title" class="register-header__title">Criar Nova Conta</h2>
+            <p>Comece sua jornada na engenharia gastronômica.</p>
+            <div class="divider divider--left"></div>
+          </header>
+
+          <form class="register-form">
+            <div class="form-group">
+              <label>Nome Completo</label>
+              <input type="text" placeholder="Ex: Auguste Escoffier" formControlName="name"/>
+            </div>
+
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" placeholder="nome@restaurante.com" formControlName="email"/>
+            </div>
+
+            <div class="form-group">
+              <label>Ocupação</label>
+              <select formControlName="occupation">
+                <option disabled selected>Selecione sua função</option>
+                <option value="chef">Chef Executivo</option>
+                <option value="sous">Sub Chef</option>
+                <option value="manager">Gerente de A&amp;B</option>
+                <option value="owner">Proprietário</option>
+                <option value="consultant">Consultor Gastronômico</option>
+                <option value="student">Estudante</option>
+                <option value="enthusiast">Entusiasta da Gastronomia</option>
+                <option value="other">Outros</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Senha</label>
+                <input type="password" placeholder="••••••••" formControlName="password"/>
+              </div>
+              <div class="form-group">
+                <label>Confirmar Senha</label>
+                <input type="password" placeholder="••••••••" formControlName="confirmsPassword"/>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn__primary">
+              <span>Criar Conta</span>
+            </button>
+          </form>
+
+          <footer class="register-footer">
+            <p>
+              Ao se registrar, você concorda com nossos
+              <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.
+            </p>
+          </footer>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
