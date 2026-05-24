@@ -12,11 +12,12 @@ import {
 import { NGXLogger } from 'ngx-logger';
 import { AuthResponse, RegisterRequest } from '../../../../shared/models/auth.model';
 import { AuthService } from '../../services/auth.service';
+import { ErrorInputComponent } from "../../../../shared/components/error-input/error-input.component";
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ErrorInputComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
@@ -46,7 +47,7 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    console.log('chamando backend');
+    this.log.info('Chamando API para cadastrar usuario');
     const request: RegisterRequest = {
       name: this.registerForm.get('name')?.value,
       email: this.registerForm.get('email')?.value,
@@ -54,7 +55,7 @@ export class RegisterComponent {
       password: this.registerForm.get('password')?.value,
     };
 
-    this.log.info('Chamando requisição do serviço: {}', request);
+    this.log.info('Fazendo requisição do serviço: {}', request);
     this.authService.userRegister(request).subscribe({
       next: (response: AuthResponse) => {
         this.log.info('Resposta recebida');

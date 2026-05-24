@@ -54,15 +54,23 @@
             <div class="divider divider--left"></div>
           </header>
 
-          <form class="register-form">
+          <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
               <label>Nome Completo</label>
               <input type="text" placeholder="Ex: Auguste Escoffier" formControlName="name"/>
+                <app-error-input
+                  [control]="registerForm.get('name')"
+                  fieldName="name"
+                ></app-error-input>
             </div>
 
             <div class="form-group">
               <label>E-mail</label>
               <input type="email" placeholder="nome@restaurante.com" formControlName="email"/>
+                <app-error-input
+                  [control]="registerForm.get('email')"
+                  fieldName="email"
+                ></app-error-input>
             </div>
 
             <div class="form-group">
@@ -84,10 +92,18 @@
               <div class="form-group">
                 <label>Senha</label>
                 <input type="password" placeholder="••••••••" formControlName="password"/>
+                  <app-error-input
+                  [control]="registerForm.get('password')"
+                  fieldName="password"
+                ></app-error-input>
               </div>
               <div class="form-group">
                 <label>Confirmar Senha</label>
                 <input type="password" placeholder="••••••••" formControlName="confirmsPassword"/>
+                  <app-error-input
+                  [control]="registerForm.get('confirmsPassword')"
+                  fieldName="confirmsPassword"
+                ></app-error-input>
               </div>
             </div>
 

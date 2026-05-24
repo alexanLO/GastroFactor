@@ -1,5 +1,5 @@
 export interface LoginRequest {
-  emai: String;
+  email: String;
   password: String;
 }
 
