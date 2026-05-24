@@ -1,0 +1,11 @@
+@if (control?.invalid && control?.touched) {
+  <div class="error-message">
+    @if (control?.errors?.['required']) {
+      <span> {{ fieldName }} é obrigatório. </span>
+    }
+
+    @if (control?.errors?.['email']) {
+      <span> {{ fieldName }} informado não é válido. </span>
+    }
+  </div>
+}

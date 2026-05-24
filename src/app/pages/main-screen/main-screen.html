@@ -1,290 +1,296 @@
-<header>
-  <nav class="navbar">
-    <div class="logo">Gastro Factor</div>
-    <div class="menu">
-      <a routerLink="/gastro-factor" class="active">Home</a>
-      <!-- TODO depois verificar como colocar os links das paginas -->
-      <a href="">Minhas Receitas</a>
-      <a href="">Sobre</a>
-    </div>
-    <div class="auth">
-      <a href="">Login</a>
-      <img
-        alt="Chef Profile"
-        class="profile-image"
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuAq6afdSd512JpJfuRbpFuZCHapNOOnOnB7W28dA8nntoHs-eUYLh9u443PnVtzijERg-aBrraE_080xcbsEZeQtjWCfz1-jnWY_cXqjQNAV28jagUazJkuzoJagT8jKRh2d_eL2S38__1Z8kAE9Qf_HbbFIvgL38lNtmhsmSth10zB5czTm2ufNQ687fsfx0ih_sn2NIku-hMuUerVtU20ba6WJmFt8_D5KQPTsuLt9giT1QK9IZQ0hAqbFA2F6eiAyIjo_aB-hy"
-      />
-    </div>
-  </nav>
-</header>
-
-<main>
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-background">
-      <img
-        class="hero-image"
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgNHOvgysTBBg0Yspl3qkGqVoqp_sTUGFF0UfvkHK5it26xeRsVkeo_9ifNty5VzYr1geM-Yg6bJBJxjVRiKBxnbd7v-p-LtmB80FHo9WEvoHFsoZ6TGoWQx-vFGLzElYpr5XeHnbML7Y-8eT8IugVIuhUcUVqWV9y9gA8f43HvnOsJvTBQhrQW4ipcN5u7wpve37pusux0d5vhfLsGEMiKDDwpfP35R6aNqQ2BI4mjO_l7paCXUr7ubKAzopiJwM2AL_DDdCHaKqU"
-        alt="Cozinha profissional"
-      />
-      <div class="hero-overlay"></div>
-    </div>
-
-    <div class="hero-content">
-      <span class="hero-label">Matemática Culinária</span>
-      <h1 class="hero-title">
-        Precisão <br />
-        no Prato.
-      </h1>
-      <p class="hero-subtitle">
-        Transforme ingredientes brutos em sucesso <br />
-        culinário calculado com os padrões da <br />
-        indústria.
-      </p>
-    </div>
-  </section>
-
-  <!-- Calculation Slate -->
-  <section class="calculation-section">
-    <div class="calculation-container">
-      <div class="calculation-panel">
-        <div class="calculation-header">
-          <h2 class="calculation-title">Painel de Cálculo</h2>
-          <div class="calculation-info">
-            <span class="icon"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="15px"
-                viewBox="0 -960 960 960"
-                width="15px"
-                fill="#ffb86b"
-              >
-                <path
-                  d="M508.5-291.5Q520-303 520-320t-11.5-28.5Q497-360 480-360t-28.5 11.5Q440-337 440-320t11.5 28.5Q463-280 480-280t28.5-11.5ZM440-440h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
-                /></svg
-            ></span>
-            Entrada de Ficha Técnica
-          </div>
-        </div>
-
-        <form class="calculation-form">
-          <div class="form-group">
-            <label for="foodName">Nome do Alimento</label>
-            <input
-              id="foodName"
-              type="text"
-              placeholder="Ex: Filé Mignon"
-              [(ngModel)]="foodName"
-              name="foodName"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="foodWight">Peso do Alimento (kg)</label>
-            <input
-              id="foodWight"
-              type="number"
-              placeholder="Ex: 1.000"
-              step="0.001"
-              [(ngModel)]="foodWeight"
-              name="foodWeight"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="inputTipo">Tipo de Peso</label>
-            <select id="inputTipo" class="select-field" [(ngModel)]="typeWeight" name="typeWeight">
-              <option value="bruto">Peso Bruto</option>
-              <option value="liquido">Peso Líquido</option>
-              <option value="cozido">Peso Cozido</option>
-            </select>
-          </div>
-        </form>
-        <div class="calculation-actions">
-          <button type="button" class="button-calculate" (click)="onCalculate()">
-            Calcular
-            <span class="icon"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#181210"
-              >
-                <path
-                  d="M320-240h60v-80h80v-60h-80v-80h-60v80h-80v60h80v80Zm200-30h200v-60H520v60Zm0-100h200v-60H520v60Zm44-152 56-56 56 56 42-42-56-58 56-56-42-42-56 56-56-56-42 42 56 56-56 58 42 42Zm-314-70h200v-60H250v60Zm-50 472q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"
-                /></svg
-            ></span>
-          </button>
-        </div>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Gastro Factor</div>
+      <div class="menu">
+        <a routerLink="/gastro-factor" class="active">Home</a>
+        <!-- TODO depois verificar como colocar os links das paginas -->
+        <a href="">Minhas Receitas</a>
+        <a href="">Sobre</a>
       </div>
-    </div>
-  </section>
+      <div class="auth">
+        @if (!authService.isAuthenticated()) {
+          <a (click)="onLogin()">Login</a>
+        } @else {
+          <a (click)="onLogout()">Logout</a>
+        }
 
-  <!-- Seção Conteúdo Educacional -->
-  <section class="education-section">
-    <div class="education-container">
-      <!-- Fator de Correção -->
-      <div class="correction-factor-container">
-        <div class="correction-metrics">
-          <span></span>
-          <span> Metricas Essenciais </span>
-        </div>
-        <div class="correction-header">
-          <h3 class="correction-title">Fator de Correção (FC)</h3>
-        </div>
-        <div class="correction-info">
-          <p>
-            O índice que determina a perda de massa durante a limpeza e <br />
-            preparo. É a relação entre o Peso Bruto e o Peso Líquido. Essencial <br />
-            para o cálculo de compras e precificação precisa.
-          </p>
-        </div>
-        <div class="correction-formula">
-          <span>FC = PB / PL</span>
-        </div>
+        <img alt="Chef Profile" class="profile-image" src="/profile.png" />
       </div>
-
-      <!-- Fator de Cocção -->
-      <div class="coccion-factor-container">
-        <div class="coccion-header">
-          <h3 class="coccion-title">Fator de Cocção (FCy)</h3>
-          <p>
-            Avalia o rendimento final após o processo <br />
-            térmico. Crucial para definir o tamanho das <br />
-            porções servidas aos clientes.
-          </p>
-        </div>
-        <div class="coccion-impact">
-          <p>Impacto no custo</p>
-          <div class="coccion-bar">
-            <div class="coccion-bar-fill"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Registration Banner -->
-      <div class="registration-banner">
-        <div class="banner-bg"></div>
-        <div class="banner-content">
-          <h3 class="registration-title">Centralize seu conhecimento culinário.</h3>
-          <p>
-            Crie sua conta para salvar suas receitas e exportar fichas técnicas <br />
-            profissionais com um clique.
-          </p>
-        </div>
-        <div class="banner-action">
-          <button class="banner-button" (click)="onRegister()">
-            Criar Conta Grátis
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Signature Imagery -->
-  <section class="signature-imagery">
-    <div class="signature-card">
-      <img
-        class="signature-image"
-        data-alt="close-up of hands cleaning a large sea bass on a stainless steel kitchen counter with focused lighting"
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkwjdOFeCn2YU9_0CyR_faUwPYdr3e4t02hWs27CXucqaHU9Z2yPxedH0F2zYDsBTR1xdqiyiKjYHgOH36L1rsiGyNN5l2J1GRk9m-cWdVbP9tKv-DN8tB4VfgTCZcCSHubf6s5xRcOOIS0OHwG4SS_fvA4fjCfXzUcChfFOKJpbpFpGBBu3vx0B2o09LPayo3ZNMe_lRcgqiRl7cwtuOc59T8Qp3tNKqncdnDXUeQRnI5yWlkoIT3wHQLshbSab-EdElKKWZ58VMs"
-      />
-      <div class="signature-overlay"></div>
-      <div class="signature-caption">
-        <p class="signature-text">Eficiência começa com dados.</p>
-      </div>
-    </div>
-
-    <div class="signature-card">
-      <img
-        class="signature-image"
-        data-alt="overhead shot of mise en place with organized vegetables and scales on a dark rustic table"
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhns3cbDIxTlCv6e03-s7eqry5s5UWLeldL86UysGqRwxkWBaM4FTtJ5KjIdH7Qj3A_V-sc_COzDYOurGZtYhKhqdS_WtGb9pQOltkyPk7mOf9miaup61RSb17Z9b56Sb7Bc-bEnebKKJwCGyspJva7Udsoo8wM74moXHzvcVL_yQ1vQrqnUogSyZNobOhWkaNrGfizBWdSb8AValFcNf6O3tSPCPYl7O03mrBJLlYQhG8-IwsdI9QqDtFa2s0_FpQ89QAzOK4QVmq"
-      />
-      <div class="signature-overlay"></div>
-      <div class="signature-caption">
-        <p class="signature-text">A arte encontra a álgebra.</p>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-container">
-    <div class="footer-brand">
-      <div class="footer-logo">Gastro Factor</div>
-      <p class="footer-description">
-        © 2026 Gastro Factor. The Modern Maître D' <br />
-        of Culinary Mathematics.
-      </p>
-    </div>
-
-    <nav class="footer-links">
-      <a class="footer-link" href="https://www.instagram.com/z_alle_/">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-instagram"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
-          />
-        </svg>
-        Instagram
-      </a>
-      <a class="footer-link" href="https://github.com/alexanLO">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-github"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
-          />
-        </svg>
-        GitHub
-      </a>
-      <a class="footer-link" href="https://www.linkedin.com/in/alexan-limaa/">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-linkedin"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
-          />
-        </svg>
-        LinkedIn
-      </a>
-      <a class="footer-link" href="#">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-shield-fill-exclamation"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.8 11.8 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7 7 0 0 0 1.048-.625 11.8 11.8 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.54 1.54 0 0 0-1.044-1.263 63 63 0 0 0-2.887-.87C9.843.266 8.69 0 8 0m-.55 8.502L7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0M8.002 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2"
-          />
-        </svg>
-        Politica de Privacidade</a
-      >
     </nav>
-  </div>
-</footer>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-background">
+        <img
+          class="hero-image"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgNHOvgysTBBg0Yspl3qkGqVoqp_sTUGFF0UfvkHK5it26xeRsVkeo_9ifNty5VzYr1geM-Yg6bJBJxjVRiKBxnbd7v-p-LtmB80FHo9WEvoHFsoZ6TGoWQx-vFGLzElYpr5XeHnbML7Y-8eT8IugVIuhUcUVqWV9y9gA8f43HvnOsJvTBQhrQW4ipcN5u7wpve37pusux0d5vhfLsGEMiKDDwpfP35R6aNqQ2BI4mjO_l7paCXUr7ubKAzopiJwM2AL_DDdCHaKqU"
+          alt="Cozinha profissional"
+        />
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        <span class="hero-label">Matemática Culinária</span>
+        <h1 class="hero-title">
+          Precisão <br />
+          no Prato.
+        </h1>
+        <p class="hero-subtitle">
+          Transforme ingredientes brutos em sucesso <br />
+          culinário calculado com os padrões da <br />
+          indústria.
+        </p>
+      </div>
+    </section>
+
+    <!-- Calculation Slate -->
+    <section class="calculation-section">
+      <div class="calculation-container">
+        <div class="calculation-panel">
+          <div class="calculation-header">
+            <h2 class="calculation-title">Painel de Cálculo</h2>
+            <div class="calculation-info">
+              <span class="icon"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="15px"
+                  viewBox="0 -960 960 960"
+                  width="15px"
+                  fill="#ffb86b"
+                >
+                  <path
+                    d="M508.5-291.5Q520-303 520-320t-11.5-28.5Q497-360 480-360t-28.5 11.5Q440-337 440-320t11.5 28.5Q463-280 480-280t28.5-11.5ZM440-440h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
+                  /></svg
+              ></span>
+              Entrada de Ficha Técnica
+            </div>
+          </div>
+
+          <form class="calculation-form">
+            <div class="form-group">
+              <label for="foodName">Nome do Alimento</label>
+              <input
+                id="foodName"
+                type="text"
+                placeholder="Ex: Filé Mignon"
+                [(ngModel)]="foodName"
+                name="foodName"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="foodWight">Peso do Alimento (kg)</label>
+              <input
+                id="foodWight"
+                type="number"
+                placeholder="Ex: 1.000"
+                step="0.001"
+                [(ngModel)]="foodWeight"
+                name="foodWeight"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="inputTipo">Tipo de Peso</label>
+              <select
+                id="inputTipo"
+                class="select-field"
+                [(ngModel)]="typeWeight"
+                name="typeWeight"
+              >
+                <option value="bruto">Peso Bruto</option>
+                <option value="liquido">Peso Líquido</option>
+                <option value="cozido">Peso Cozido</option>
+              </select>
+            </div>
+          </form>
+          <div class="calculation-actions">
+            <button type="button" class="button-calculate" (click)="onCalculate()">
+              Calcular
+              <span class="icon"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 -960 960 960"
+                  width="24px"
+                  fill="#181210"
+                >
+                  <path
+                    d="M320-240h60v-80h80v-60h-80v-80h-60v80h-80v60h80v80Zm200-30h200v-60H520v60Zm0-100h200v-60H520v60Zm44-152 56-56 56 56 42-42-56-58 56-56-42-42-56 56-56-56-42 42 56 56-56 58 42 42Zm-314-70h200v-60H250v60Zm-50 472q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"
+                  /></svg
+              ></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Conteúdo Educacional -->
+    <section class="education-section">
+      <div class="education-container">
+        <!-- Fator de Correção -->
+        <div class="correction-factor-container">
+          <div class="correction-metrics">
+            <span></span>
+            <span> Metricas Essenciais </span>
+          </div>
+          <div class="correction-header">
+            <h3 class="correction-title">Fator de Correção (FC)</h3>
+          </div>
+          <div class="correction-info">
+            <p>
+              O índice que determina a perda de massa durante a limpeza e <br />
+              preparo. É a relação entre o Peso Bruto e o Peso Líquido. Essencial <br />
+              para o cálculo de compras e precificação precisa.
+            </p>
+          </div>
+          <div class="correction-formula">
+            <span>FC = PB / PL</span>
+          </div>
+        </div>
+
+        <!-- Fator de Cocção -->
+        <div class="coccion-factor-container">
+          <div class="coccion-header">
+            <h3 class="coccion-title">Fator de Cocção (FCy)</h3>
+            <p>
+              Avalia o rendimento final após o processo <br />
+              térmico. Crucial para definir o tamanho das <br />
+              porções servidas aos clientes.
+            </p>
+          </div>
+          <div class="coccion-impact">
+            <p>Impacto no custo</p>
+            <div class="coccion-bar">
+              <div class="coccion-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Registration Banner -->
+        <div class="registration-banner">
+          <div class="banner-bg"></div>
+          <div class="banner-content">
+            <h3 class="registration-title">Centralize seu conhecimento culinário.</h3>
+            <p>
+              Crie sua conta para salvar suas receitas e exportar fichas técnicas <br />
+              profissionais com um clique.
+            </p>
+          </div>
+          <div class="banner-action">
+            <button class="banner-button" (click)="onRegister()">Criar Conta Grátis</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signature Imagery -->
+    <section class="signature-imagery">
+      <div class="signature-card">
+        <img
+          class="signature-image"
+          data-alt="close-up of hands cleaning a large sea bass on a stainless steel kitchen counter with focused lighting"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkwjdOFeCn2YU9_0CyR_faUwPYdr3e4t02hWs27CXucqaHU9Z2yPxedH0F2zYDsBTR1xdqiyiKjYHgOH36L1rsiGyNN5l2J1GRk9m-cWdVbP9tKv-DN8tB4VfgTCZcCSHubf6s5xRcOOIS0OHwG4SS_fvA4fjCfXzUcChfFOKJpbpFpGBBu3vx0B2o09LPayo3ZNMe_lRcgqiRl7cwtuOc59T8Qp3tNKqncdnDXUeQRnI5yWlkoIT3wHQLshbSab-EdElKKWZ58VMs"
+        />
+        <div class="signature-overlay"></div>
+        <div class="signature-caption">
+          <p class="signature-text">Eficiência começa com dados.</p>
+        </div>
+      </div>
+
+      <div class="signature-card">
+        <img
+          class="signature-image"
+          data-alt="overhead shot of mise en place with organized vegetables and scales on a dark rustic table"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhns3cbDIxTlCv6e03-s7eqry5s5UWLeldL86UysGqRwxkWBaM4FTtJ5KjIdH7Qj3A_V-sc_COzDYOurGZtYhKhqdS_WtGb9pQOltkyPk7mOf9miaup61RSb17Z9b56Sb7Bc-bEnebKKJwCGyspJva7Udsoo8wM74moXHzvcVL_yQ1vQrqnUogSyZNobOhWkaNrGfizBWdSb8AValFcNf6O3tSPCPYl7O03mrBJLlYQhG8-IwsdI9QqDtFa2s0_FpQ89QAzOK4QVmq"
+        />
+        <div class="signature-overlay"></div>
+        <div class="signature-caption">
+          <p class="signature-text">A arte encontra a álgebra.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">Gastro Factor</div>
+        <p class="footer-description">
+          © 2026 Gastro Factor. The Modern Maître D' <br />
+          of Culinary Mathematics.
+        </p>
+      </div>
+
+      <nav class="footer-links">
+        <a class="footer-link" href="https://www.instagram.com/z_alle_/">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-instagram"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
+            />
+          </svg>
+          Instagram
+        </a>
+        <a class="footer-link" href="https://github.com/alexanLO">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-github"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+            />
+          </svg>
+          GitHub
+        </a>
+        <a class="footer-link" href="https://www.linkedin.com/in/alexan-limaa/">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-linkedin"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
+            />
+          </svg>
+          LinkedIn
+        </a>
+        <a class="footer-link" href="#">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-shield-fill-exclamation"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.8 11.8 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7 7 0 0 0 1.048-.625 11.8 11.8 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.54 1.54 0 0 0-1.044-1.263 63 63 0 0 0-2.887-.87C9.843.266 8.69 0 8 0m-.55 8.502L7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0M8.002 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2"
+            />
+          </svg>
+          Politica de Privacidade</a
+        >
+      </nav>
+    </div>
+  </footer>
+</body>
 
 @if (showDialog) {
   <app-calcular-dialog [result]="calculationResult" (close)="closeModal()"> </app-calcular-dialog>
@@ -292,4 +298,8 @@
 
 @if (showRegisterModal) {
   <app-register (close)="closeModal()"></app-register>
+}
+
+@if (showLoginModal) {
+  <app-login-page (close)="closeModal()"></app-login-page>
 }

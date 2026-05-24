@@ -1,6 +1,4 @@
 @use 'variables' as *;
-@import 'normalize.css';
-
 
 // Estilos para o host do componente
 .main-screen-host {
@@ -54,6 +52,7 @@
       color: $on-surface;
       text-decoration: none;
       font-size: 14px;
+      cursor: pointer;
 
       &:hover {
         color: $primary;
@@ -204,7 +203,7 @@
             font-weight: 600;
             color: $on-surface-variant;
           }
-          
+
           .select-field {
             width: 100%;
             padding: 12px;

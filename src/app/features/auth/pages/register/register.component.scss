@@ -1,0 +1,342 @@
+@use 'variables' as *;
+
+body.app {
+  background: $background;
+  color: $on-background;
+  font-family: $font-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba($background, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.register-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1rem;
+
+  background: rgba(24, 18, 16, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.register-card {
+  background: $surface-container-low;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba($outline-variant, 0.2);
+  width: 100%;
+  max-width: 80rem;
+  height: auto;
+  margin-bottom: 2rem; // distância do fundo
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    height: 700px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 10;
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    color: $on-surface-variant;
+
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+
+    .material-symbols-outlined {
+      font-size: 2rem;
+    }
+  }
+}
+
+.editorial-image {
+  position: relative;
+  width: 100%;
+  height: 16rem;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    width: 50%;
+    height: 100%;
+  }
+
+  &__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, $surface, transparent);
+
+    @media (min-width: 768px) {
+      background: linear-gradient(to right, transparent, rgba($surface-container-low, 0.2));
+    }
+  }
+
+  &__caption {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    color: white;
+
+    h1 {
+      font-family: $font-serif;
+      font-size: 2rem;
+      font-weight: bold;
+      font-style: italic;
+      line-height: 1.2;
+
+      span {
+        color: $primary-fixed-dim;
+        font-size: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
+        font-size: 2.5rem;
+      }
+      @media (min-width: 1024px) {
+        font-size: 3rem;
+      }
+    }
+  }
+}
+
+.register-form-section {
+  width: 100%;
+  background: $surface-container-low;
+  padding: 2rem;
+  overflow-y: auto;
+
+  @media (min-width: 768px) {
+    width: 50%;
+    padding: 3rem;
+  }
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  &__primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    padding: 1rem;
+
+    border-radius: 0.5rem;
+
+    font-weight: 700;
+
+    color: #492900;
+
+    background: linear-gradient(to bottom right, $primary, $primary-container);
+
+    box-shadow: 0 10px 30px rgba(255, 184, 107, 0.2);
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    .material-symbols-outlined {
+      transition: transform 0.2s;
+    }
+
+    &:hover .material-symbols-outlined {
+      transform: translateX(4px);
+    }
+  }
+}
+
+.register-form-container {
+  max-width: 28rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  header {
+    margin-bottom: 2rem;
+
+    h2 {
+      font-family: $font-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $on-surface;
+    }
+
+    p {
+      margin-top: 0.5rem;
+      font-family: $font-serif;
+      font-size: 0.875rem;
+      color: $on-surface-variant;
+    }
+  }
+}
+
+.register-form {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      margin-left: 0.25rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: $on-surface-variant;
+      transition: color 0.2s;
+    }
+
+    &.focused label {
+      color: $primary;
+    }
+
+    input,
+    select {
+      background: $surface-container-highest;
+      border: 1px solid rgba($surface-container-low, 0.1);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      color: $on-surface;
+      transition: all 0.2s;
+
+      &::placeholder {
+        color: rgba($on-surface-variant, 0.4);
+      }
+
+      &:focus {
+        outline: 1px solid #ffb86b;
+        box-shadow: 0 0 0 2px $primary;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      option {
+        background-color: rgba($background, 0.9);
+      }
+    }
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .btn-submit {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    font-family: $font-serif;
+    color: $on-primary;
+    background: linear-gradient(to bottom right, $primary, $primary-container);
+    box-shadow: 0 10px 30px rgba($primary, 0.2);
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+.register-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-family: $font-serif;
+  color: rgba($on-surface-variant, 0.6);
+
+  a {
+    color: $primary;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ==========================
+// Header Form
+// ==========================
+.register-header {
+  margin-bottom: 2rem;
+
+  &__title {
+    font-size: 2rem;
+    font-family: $font-serif;
+  }
+}
+
+// ==========================
+// UTILITIES
+// ==========================
+
+.glass-panel {
+  background: rgba(47, 40, 38, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.editorial-shadow {
+  box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.6);
+}
