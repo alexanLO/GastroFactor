@@ -1,6 +1,22 @@
 @use 'variables' as *;
 @import 'normalize.css';
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
 /* Esconde a barra de scroll no Chrome, Safari e Edge */
 ::-webkit-scrollbar {
   display: none;
@@ -21,6 +37,9 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+
+  cursor: default;
+  user-select: none;
 }
 
 body {

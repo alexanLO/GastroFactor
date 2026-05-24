@@ -1,5 +1,4 @@
 @use 'variables' as *;
-@import 'normalize.css';
 
 // Estilos para o host do componente
 .main-screen-host {
@@ -25,8 +24,6 @@
     font-size: 24px;
     font-style: italic;
     color: $primary;
-    cursor: default;
-    user-select: none;
   }
 
   .menu a {

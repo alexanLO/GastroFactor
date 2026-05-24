@@ -1,26 +1,6 @@
 @use 'variables' as *;
 
 // ==========================
-// RESET
-// ==========================
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-button,
-input {
-  font: inherit;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-// ==========================
 // BASE
 // ==========================
 
@@ -303,7 +283,7 @@ a {
     transition: all 0.2s;
 
     &::placeholder {
-       color: rgba($on-surface-variant, 0.4);
+      color: rgba($on-surface-variant, 0.4);
     }
 
     &:focus {
