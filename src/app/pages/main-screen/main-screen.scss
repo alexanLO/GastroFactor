@@ -1,6 +1,4 @@
 @use 'variables' as *;
-@import 'normalize.css';
-
 
 // Estilos para o host do componente
 .main-screen-host {
@@ -22,7 +20,7 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 
   .logo {
-    font-family: $font-headline;
+    font-family: $font-serif;
     font-size: 24px;
     font-style: italic;
     color: $primary;
@@ -54,6 +52,7 @@
       color: $on-surface;
       text-decoration: none;
       font-size: 14px;
+      cursor: pointer;
 
       &:hover {
         color: $primary;
@@ -105,7 +104,7 @@
     max-width: 600px;
 
     .hero-label {
-      font-family: $font-label;
+      font-family: $font-sans;
       text-transform: uppercase;
       letter-spacing: 0.3em;
       font-size: 14px;
@@ -115,14 +114,14 @@
     }
 
     .hero-title {
-      font-family: $font-headline;
+      font-family: $font-serif;
       font-size: 84px;
       font-style: italic;
       margin-bottom: 20px;
     }
 
     .hero-subtitle {
-      font-family: $font-body;
+      font-family: $font-sans;
       font-size: 18px;
       color: $on-surface-variant;
     }
@@ -164,7 +163,7 @@
         margin-bottom: 30px;
 
         .calculation-title {
-          font-family: $font-headline;
+          font-family: $font-serif;
           font-size: 26px;
           font-style: italic;
           color: $on-surface;
@@ -175,7 +174,7 @@
           display: flex;
           align-items: center;
           gap: 8px;
-          font-family: $font-body;
+          font-family: $font-sans;
           font-size: 12px;
           text-transform: uppercase;
           color: $on-surface-variant;
@@ -199,12 +198,12 @@
           gap: 8px;
 
           label {
-            font-family: $font-label;
+            font-family: $font-sans;
             font-size: 13px;
             font-weight: 600;
             color: $on-surface-variant;
           }
-          
+
           .select-field {
             width: 100%;
             padding: 12px;
@@ -237,7 +236,7 @@
             border-radius: 8px;
             border: none;
             font-size: 15px;
-            font-family: $font-label;
+            font-family: $font-sans;
             background: #ffffff;
             color: #333;
             transition: all 0.2s ease;
@@ -264,7 +263,7 @@
           height: 55px;
           border: none;
           border-radius: 10px;
-          font-family: $font-label;
+          font-family: $font-sans;
           font-weight: bold;
           text-transform: uppercase;
           color: $surface;
@@ -332,7 +331,7 @@
         }
 
         span:nth-child(2) {
-          font-family: $font-label;
+          font-family: $font-sans;
           color: $primary;
           text-transform: uppercase;
           letter-spacing: 0.1rem;
@@ -342,7 +341,7 @@
       }
 
       .correction-title {
-        font-family: $font-headline;
+        font-family: $font-serif;
         font-style: italic;
         font-size: 2.25rem;
         line-height: 2.5rem;
@@ -363,7 +362,7 @@
         gap: 0.5rem;
 
         span {
-          font-family: $font-headline;
+          font-family: $font-serif;
           font-size: 3rem;
           line-height: 1;
           color: rgba($color: $primary, $alpha: 0.5);
@@ -386,7 +385,7 @@
 
       .coccion-header {
         .coccion-title {
-          font-family: $font-headline;
+          font-family: $font-serif;
           font-size: 2.25rem;
           margin-bottom: 1.5rem;
           padding-bottom: 1rem;
@@ -464,7 +463,7 @@
         margin-left: 2rem;
 
         .registration-title {
-          font-family: $font-headline;
+          font-family: $font-serif;
           font-style: italic;
           font-size: 1.875rem;
           line-height: 2.25rem;
@@ -489,7 +488,7 @@
           color: $primary-container;
           padding: 1rem 2.5rem 1rem 2.5rem;
           border-radius: 0.375rem;
-          font-family: $font-label;
+          font-family: $font-sans;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.1rem;
@@ -550,7 +549,7 @@
         font-size: 2.25rem;
         line-height: 2.5rem;
         font-style: italic;
-        font-family: $font-headline;
+        font-family: $font-serif;
       }
     }
   }
@@ -602,14 +601,14 @@
       }
 
       .footer-logo {
-        font-family: $font-body;
+        font-family: $font-sans;
         font-size: 1.125rem;
         line-height: 1.75rem;
         color: #d6d3d1;
       }
 
       .footer-description {
-        font-family: $font-body;
+        font-family: $font-sans;
         font-size: 0.75rem;
         line-height: 1rem;
         text-transform: uppercase;
@@ -630,7 +629,7 @@
         align-items: center;
         gap: 0.5rem;
 
-        font-family: $font-body;
+        font-family: $font-sans;
         font-size: 0.75rem;
         line-height: 1rem;
         text-transform: uppercase;

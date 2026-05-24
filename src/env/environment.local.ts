@@ -5,5 +5,5 @@
 // Executar: ng serve (usa este arquivo por padrão)
 export const environment = {
   production: false,
-  baseAddress: 'http://localhost:8081'
+  baseAddress: 'http://localhost:8080'
 };
