@@ -16,6 +16,8 @@ export class AuthService {
   private readonly uriApiLogin = `${environment.baseAddress}/v1/auth/login`;
   private readonly uriApiRegister = `${environment.baseAddress}/v1/auth/register`;
 
+  private loggedIn = false;
+
   constructor(
     private http: HttpClient,
     private log: NGXLogger,
@@ -30,6 +32,9 @@ export class AuthService {
     return this.http.post<AuthResponse>(this.uriApiLogin, request).pipe(
       tap((response) => {
         this.log.info('Login realizado com sucesso.');
+        localStorage.setItem('access_token', response.accessToken);
+        localStorage.setItem('refresh_token', response.refreshToken);
+        this.loggedIn = true;
       }),
     );
   }
@@ -45,5 +50,14 @@ export class AuthService {
         this.log.info('Usuário cadastrado com sucesso.');
       }),
     );
+  }
+
+  userLogout() {
+    this.loggedIn = false;
+  }
+
+  isAuthenticated(): boolean {
+    // checa se existe token válido
+    return this.loggedIn && !!localStorage.getItem('access_token');
   }
 }
