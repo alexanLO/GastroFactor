@@ -7,6 +7,8 @@ import { RegisterComponent } from '../../features/auth/pages/register/register.c
 import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from '../../features/auth/pages/login/login-page.component/login-page.component';
 import { AuthService } from '../../features/auth/services/auth.service';
+import { FooterComponent } from '../../component/footer/footer.component';
+
 
 @Component({
   standalone: true,
@@ -18,7 +20,8 @@ import { AuthService } from '../../features/auth/services/auth.service';
     ReactiveFormsModule,
     RegisterComponent,
     LoginPageComponent,
-  ],
+    FooterComponent
+],
   templateUrl: './main-screen.html',
   styleUrls: ['./main-screen.scss'],
 })
