@@ -1,14 +1,14 @@
-import { ChangeDetectorRef, Component, Inject, inject } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CalculationService } from '../../core/services/calculation.service';
-import { CalculationRequest, CalculationResponse } from '../../shared/models/calculation.model';
-import { CalcularDialog } from '../../component/calcular-dialog/calcular-dialog';
-import { RegisterComponent } from '../../features/auth/pages/register/register.component';
 import { CommonModule } from '@angular/common';
-import { LoginPageComponent } from '../../features/auth/pages/login/login-page.component/login-page.component';
-import { AuthService } from '../../features/auth/services/auth.service';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CalcularDialog } from '../../component/calcular-dialog/calcular-dialog';
 import { FooterComponent } from '../../component/footer/footer.component';
-
+import { CalculationService } from '../../core/services/calculation.service';
+import { LoginPageComponent } from '../../features/auth/pages/login/login-page.component/login-page.component';
+import { RegisterComponent } from '../../features/auth/pages/register/register.component';
+import { AuthService } from '../../features/auth/services/auth.service';
+import { CalculationRequest, CalculationResponse } from '../../shared/models/calculation.model';
+import { NavbarComponent } from '../../component/navbar/navbar.component';
 
 @Component({
   standalone: true,
@@ -20,8 +20,9 @@ import { FooterComponent } from '../../component/footer/footer.component';
     ReactiveFormsModule,
     RegisterComponent,
     LoginPageComponent,
-    FooterComponent
-],
+    FooterComponent,
+    NavbarComponent,
+  ],
   templateUrl: './main-screen.html',
   styleUrls: ['./main-screen.scss'],
 })
@@ -30,10 +31,10 @@ export class MainScreen {
   foodWeight: number = 0;
   typeWeight: string = 'bruto';
   calculationResult: CalculationResponse | null = null;
-
+  
   showDialog: boolean = false;
-  showRegisterModal: boolean = false;
   showLoginModal: boolean = false;
+  showRegisterModal: boolean = false;
 
   public authService = inject(AuthService);
   private calculationService = inject(CalculationService);
@@ -74,20 +75,6 @@ export class MainScreen {
     });
   }
 
-  onRegister() {
-    this.showRegisterModal = true;
-    document.body.classList.add('modal-open');
-  }
-
-  onLogin() {
-    this.showLoginModal = true;
-    document.body.classList.add('modal-open');
-  }
-
-  onLogout(){
-    this.authService.userLogout();
-  }
-
   private mapTypeWeight(type: string): 'GROSS' | 'NET' | 'COOKED' {
     switch (type) {
       case 'bruto':
@@ -103,8 +90,8 @@ export class MainScreen {
 
   closeModal() {
     this.showDialog = false;
-    this.showRegisterModal = false;
     this.showLoginModal = false;
-    document.body.classList.remove('modal-open'); // libera o scroll
+    this.showRegisterModal = false;
+    document.body.classList.remove('modal-open');
   }
 }

@@ -1,24 +1,8 @@
 <body>
-  <header>
-    <nav class="navbar">
-      <div class="logo">Gastro Factor</div>
-      <div class="menu">
-        <a routerLink="/gastro-factor" class="active">Home</a>
-        <!-- TODO depois verificar como colocar os links das paginas -->
-        <a href="">Minhas Receitas</a>
-        <a href="">Sobre</a>
-      </div>
-      <div class="auth">
-        @if (!authService.isAuthenticated()) {
-          <a (click)="onLogin()">Login</a>
-        } @else {
-          <a (click)="onLogout()">Logout</a>
-        }
-
-        <img alt="Chef Profile" class="profile-image" src="/profile.png" />
-      </div>
-    </nav>
-  </header>
+  <app-navbar-component
+    (loginClicked)="showLoginModal = true"
+    (registerClicked)="showRegisterModal = true"
+  ></app-navbar-component>
 
   <main>
     <!-- Hero Section -->
@@ -181,7 +165,9 @@
             </p>
           </div>
           <div class="banner-action">
-            <button class="banner-button" (click)="onRegister()">Criar Conta Grátis</button>
+            <button class="banner-button" (click)="showRegisterModal = true">
+              Criar Conta Grátis
+            </button>
           </div>
         </div>
       </div>
