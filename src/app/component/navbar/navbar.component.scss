@@ -4,14 +4,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: $surface-container-lowest;
+  background: $background-variant;
   color: $on-surface;
   padding: 20px;
   backdrop-filter: blur(6px);
   position: sticky;
   top: 0;
   z-index: 50;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 25px -12px rgba($white, 0.2);
 
   .logo {
     font-family: $font-serif;
