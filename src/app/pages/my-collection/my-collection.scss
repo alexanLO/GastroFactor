@@ -5,49 +5,6 @@
   color: $on-surface-variant;
   min-height: 100vh;
   font-family: $font-sans;
-
-  // Nav Bar
-  .top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 2.5rem;
-    background: rgba($background, 0.95);
-    border-bottom: 1px solid rgba($outline, 0.1);
-
-    .brand {
-      font-family: $font-serif;
-      font-style: italic;
-      font-size: 1.5rem;
-      color: $surface-tint;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      a {
-        text-decoration: none;
-        color: $on-surface-variant;
-        font-weight: 500;
-        transition: color 0.3s;
-        &.active {
-          color: $surface-tint;
-          border-bottom: 2px solid $surface-tint;
-          padding-bottom: 4px;
-        }
-        &:hover {
-          color: $surface-tint;
-        }
-      }
-    }
-
-    .user-profile .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid $surface-tint;
-    }
-  }
 }
 
 .dashboard-layout {
@@ -245,7 +202,7 @@
     background:
       linear-gradient(rgba($background, 0.7), rgba($background, 0.9)),
       url('/kitchen.png') center top / cover no-repeat;
-    border-radius: 16px;
+    border-bottom-right-radius: 16px;
     padding: 4rem;
     display: flex;
     justify-content: space-between;
@@ -437,27 +394,6 @@
       font-family: $font-serif;
       font-size: 1.25rem;
       margin-bottom: 1.5rem;
-    }
-
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 1.25rem;
-      border-top: 1px solid rgba($white, 0.05);
-      .btn-view {
-        background: transparent;
-        border: none;
-        color: $outline;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.85rem;
-        cursor: pointer;
-        &:hover {
-          color: $white;
-        }
-      }
     }
   }
 }
