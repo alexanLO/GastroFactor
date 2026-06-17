@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../features/auth/services/auth.service';
 
 @Component({
   selector: 'app-navbar-component',
   standalone: true,
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })

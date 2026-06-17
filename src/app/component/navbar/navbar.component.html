@@ -2,18 +2,17 @@
   <nav class="navbar">
     <div class="logo">Gastro Factor</div>
     <div class="menu">
-      <a routerLink="/gastro-factor" class="active">Home</a>
-      <!-- TODO depois verificar como colocar os links das paginas -->
-      <a href="">Meu Acervo</a>
-      <a href="">Sobre</a>
+      <a routerLink="/gastrofactor" routerLinkActive="active">Home</a>
+      <a routerLink="/meu-acervo" routerLinkActive="active">Meu Acervo</a>
+      <a routerLink="/sobre" routerLinkActive="active">Sobre</a>
     </div>
     <div class="auth">
       @if (!authService.isAuthenticated()) {
         <a (click)="onLogin()">Login</a>
+        <a (click)="onRegister()">Cadastrar-se</a>
       } @else {
         <a (click)="onLogout()">Logout</a>
       }
-
       <img alt="Chef Profile" class="profile-image" src="/profile.png" />
     </div>
   </nav>
