@@ -1,0 +1,20 @@
+<section class="preparation-method">
+  <div class="preparation-method-header">
+    <h2>Método de Preparo</h2>
+    <button>
+      <span class="material-symbols-outlined">add_circle</span>
+      <span>Adicionar Passo</span>
+    </button>
+  </div>
+
+  <div class="grid-step">
+    <!-- TODO verificar como por paso a passo -->
+    <article class="grid-step-item" *ngFor="let passo of passos">
+      <span class="grid-step-num">{{ passo.id }}</span>
+      <div class="grid-step-content">
+        <h3 class="grid-step-title">{{ passo.titulo }}</h3>
+        <p class="grid-step-desc">{{ passo.descricao }}</p>
+      </div>
+    </article>
+  </div>
+</section>

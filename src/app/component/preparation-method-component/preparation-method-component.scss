@@ -1,0 +1,85 @@
+@use 'variables' as *;
+
+.preparation-method {
+  background-color: $surface-container-low;
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+  margin-top: 2rem;
+
+  .preparation-method-header {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba($outline-variant, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      font-family: $font-serif;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-style: italic;
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: $primary;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: opacity 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      span:first-child {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      span:last-child {
+        font-size: 0.75rem;
+        line-height: 1rem;
+        font-family: $font-sans;
+        text-transform: uppercase;
+        letter-spacing: -0.05em;
+      }
+    }
+  }
+
+  .grid-step {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+
+  .grid-step-item {
+    display: flex;
+    gap: 2rem;
+
+    .grid-step-num {
+      font-family: $font-serif;
+      font-size: 3rem;
+      color: $primary;
+      font-weight: 700;
+      opacity: 0.5;
+    }
+
+    .grid-step-title {
+      font-family: $font-serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: $white;
+    }
+    .grid-step-desc {
+      font-size: 0.95rem;
+      color: $white;
+      line-height: 1.6;
+    }
+  }
+}
