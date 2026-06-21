@@ -36,6 +36,8 @@
     "@angular/ssr": "^21.2.11",
     "express": "^5.1.0",
     "glob": "^13.0.6",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
     "ngx-logger": "^5.0.12",
     "normalize.css": "^8.0.1",
     "rimraf": "^6.1.3",

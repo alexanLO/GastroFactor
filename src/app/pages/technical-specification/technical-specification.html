@@ -1,4 +1,6 @@
 <div class="card-body">
+  <app-navbar-component *ngIf="!isModal"></app-navbar-component>
+
   <main class="card-content">
     <header class="card-header">
       <div class="card-header-content">
@@ -6,12 +8,12 @@
         <h1 class="card-title">Ficha Técnica<br /><span>de Preparo</span></h1>
       </div>
       <div class="card-btn-conteiner">
-        <button class="card-btn-save">
+        <button class="card-btn-save" (click)="saveRecipe()">
           <span class="material-symbols-outlined">save</span>
           <span>Salvar</span>
         </button>
 
-        <button class="card-btn-export">
+        <button class="card-btn-export" (click)="exportPdf()">
           <span class="material-symbols-outlined">picture_as_pdf</span>
           <span>Exportar PDF</span>
         </button>
@@ -34,4 +36,7 @@
       <app-preparation-method-component></app-preparation-method-component>
     </div>
   </main>
+
+  <app-footer-component *ngIf="!isModal"></app-footer-component>
+
 </div>

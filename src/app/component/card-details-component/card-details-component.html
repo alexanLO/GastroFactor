@@ -2,17 +2,17 @@
   <div class="card-info-row">
     <div class="card-info-group">
       <label>NOME DA RECEITA</label>
-      <input type="text" placeholder="Ex: Costela 48h Braseada" class="input-display" />
+      <input type="text" placeholder="Ex: Costela 48h Braseada" class="input-display" [(ngModel)]="recipeName" />
     </div>
 
     <div class="card-info-group small">
       <label>RENDIMENTO (Percapita)</label>
-      <input type="number" class="input-display" placeholder="Ex: 12" />
+      <input type="number" class="input-display" placeholder="Ex: 12" [(ngModel)]="servings" />
     </div>
 
     <div class="card-info-group medium">
       <label>CATEGORIA</label>
-      <select class="select-display">
+      <select class="select-display" [(ngModel)]="category">
         <option>Entrada</option>
         <option>Prato Principal</option>
         <option>Sobremesa</option>

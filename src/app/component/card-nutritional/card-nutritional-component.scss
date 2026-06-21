@@ -57,6 +57,23 @@
         .nutri-value {
           font-weight: 700;
         }
+
+        .nutri-value-input {
+          background: transparent;
+          border: 1px solid rgba($white, 0.2);
+          color: $white;
+          padding: 0.25rem 0.5rem;
+          border-radius: 4px;
+          font-weight: 700;
+          min-width: 100px;
+          text-align: right;
+          transition: border-color 0.2s;
+
+          &:focus {
+            outline: none;
+            border-color: $primary;
+          }
+        }
       }
     }
   }
