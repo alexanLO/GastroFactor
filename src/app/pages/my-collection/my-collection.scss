@@ -282,30 +282,27 @@
       }
     }
 
-    a {
-      text-decoration: none;
-      .btn-new-sheet {
-        background: linear-gradient(135deg, $primary, $primary-container);
-        color: $surface;
-        border: none;
-        padding: 1rem 2rem;
-        border-radius: 3px;
-        font-weight: bold;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        transition: all 0.25s ease;
+    .btn-new-sheet {
+      background: linear-gradient(135deg, $primary, $primary-container);
+      color: $surface;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 3px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.25s ease;
 
-        &:hover {
-          color: $inverse-primary;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba($primary, 0.5);
-        }
+      &:hover {
+        color: $inverse-primary;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba($primary, 0.5);
+      }
 
-        &:active {
-          transform: scale(0.97);
-        }
+      &:active {
+        transform: scale(0.97);
       }
     }
   }
@@ -397,6 +394,105 @@
       font-family: $font-serif;
       font-size: 1.25rem;
       margin-bottom: 1.5rem;
+    }
+  }
+}
+
+// Modal Styles
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .modal-content {
+    background: $background;
+    border-radius: 16px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba($white, 0.1);
+      border: none;
+      color: $white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1001;
+      transition: all 0.3s;
+
+      &:hover {
+        background: rgba($white, 0.2);
+        transform: rotate(90deg);
+      }
+
+      span {
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+      }
+    }
+
+    .modal-body {
+      width: 100%;
+      height: 100%;
+      app-technical-specification {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-overlay .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 12px;
+
+    .modal-close-btn {
+      top: 1rem;
+      right: 1rem;
+      width: 2.25rem;
+      height: 2.25rem;
     }
   }
 }

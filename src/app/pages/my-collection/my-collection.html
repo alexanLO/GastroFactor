@@ -95,12 +95,10 @@
           >
           <input type="text" placeholder="Buscar fichas..." />
         </div>
-        <a routerLink="/ficha-tecnica">
-        <button class="btn-new-sheet">
-            <span class="material-symbols-outlined">add</span>
-            Nova Ficha Técnica
-          </button>
-        </a>
+        <button class="btn-new-sheet" (click)="openModal()">
+          <span class="material-symbols-outlined">add</span>
+          Nova Ficha Técnica
+        </button>
       </section>
 
       <!-- Grid de Receitas -->
@@ -143,4 +141,16 @@
 
   <!-- Footer -->
   <app-footer-component></app-footer-component>
+</div>
+
+<!-- Modal de Ficha Técnica -->
+<div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="modal-close-btn" (click)="closeModal()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="modal-body">
+      <app-technical-specification [isModal]="true"></app-technical-specification>
+    </div>
+  </div>
 </div>

@@ -1,7 +1,7 @@
 @use 'variables' as *;
 
 .table-ingredients-section {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   background: $surface-container-low;
   border-radius: 0.75rem;
   overflow: hidden;
@@ -10,10 +10,10 @@
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
   .table-ingredients-header {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid rgba($outline-variant, 0.1);
     display: flex;
     justify-content: space-between;
@@ -21,8 +21,8 @@
 
     h2 {
       font-family: $font-serif;
-      font-size: 1.5rem;
-      line-height: 2rem;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
       font-style: italic;
     }
 
@@ -66,8 +66,10 @@
       thead {
         background: $surface-container-high;
         th {
-          padding: 1rem 2rem 1rem 2rem;
+          padding: 0.75rem 1rem;
           font-weight: 600;
+          font-size: 0.75rem;
+          letter-spacing: 0.05em;
         }
       }
 
@@ -93,7 +95,7 @@
 
           td {
             background: rgba($white, 0.02);
-            padding: 1.25rem 1rem;
+            padding: 0.5rem 0.75rem;
             font-size: 0.95rem;
 
             &:first-child {
@@ -112,9 +114,9 @@
               width: 100%;
               background: transparent;
               border: 1px solid rgba($white, 0.3);
-              padding: 0.5rem;
-              font-size: 1.25rem;
-              line-height: 1.75rem;
+              padding: 0.35rem 0.4rem;
+              font-size: 0.9rem;
+              line-height: 1.25rem;
               appearance: none;
               font-family: $font-serif;
               font-style: italic;

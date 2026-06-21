@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../component/navbar/navbar.component';
 import { FooterComponent } from '../../component/footer/footer.component';
 import { TableIngredientsComponent } from '../../component/table-ingredients/table-ingredients-component';
@@ -8,7 +9,9 @@ import { CardDetailsComponent } from "../../component/card-details-component/car
 
 @Component({
   selector: 'app-technical-specification',
+  standalone: true,
   imports: [
+    CommonModule,
     NavbarComponent,
     FooterComponent,
     TableIngredientsComponent,
@@ -19,4 +22,6 @@ import { CardDetailsComponent } from "../../component/card-details-component/car
   templateUrl: './technical-specification.html',
   styleUrl: './technical-specification.scss',
 })
-export class TechnicalSpecification {}
+export class TechnicalSpecification {
+  @Input() isModal: boolean = false;
+}

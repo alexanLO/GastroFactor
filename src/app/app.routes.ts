@@ -8,5 +8,4 @@ export const routes: Routes = [
   { path: 'gastrofactor', component: MainScreen },
   { path: 'meu-acervo', component: MyCollection },
   { path: 'sobre', component: TechnicalSpecification }, // TODO depois criar a pagina sobre
-  { path: 'ficha-tecnica', component: TechnicalSpecification }
 ];
