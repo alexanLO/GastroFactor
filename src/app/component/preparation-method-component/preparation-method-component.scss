@@ -56,30 +56,82 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
-  }
 
-  .grid-step-item {
-    display: flex;
-    gap: 2rem;
+    .grid-step-item {
+      display: flex;
+      gap: 2rem;
 
-    .grid-step-num {
-      font-family: $font-serif;
-      font-size: 3rem;
-      color: $primary;
-      font-weight: 700;
-      opacity: 0.5;
-    }
+      .grid-step-num {
+        font-family: $font-serif;
+        font-size: 3rem;
+        color: $primary;
+        font-weight: 700;
+        opacity: 0.5;
+      }
 
-    .grid-step-title {
-      font-family: $font-serif;
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-      color: $white;
-    }
-    .grid-step-desc {
-      font-size: 0.95rem;
-      color: $white;
-      line-height: 1.6;
+      .grid-step-content {
+        margin-top: 1rem;
+        max-width: 40rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+
+        .step-input-title,
+        .step-input-desc {
+          margin-bottom: 0.5rem;
+          width: 100%;
+          background: transparent;
+          border: 1px solid rgba($outline-variant, 0.2);
+          border-radius: 4px;
+          padding: 0.5rem 0.75rem;
+          color: $on-surface;
+          font-family: $font-sans;
+          resize: none;
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+
+          &:focus {
+            outline: none;
+            border-color: $primary;
+          }
+        }
+
+        .step-input-desc {
+          width: 100%;
+          min-height: 8rem;
+          max-height: 20rem;
+        }
+
+        .btn-edition-conteiner {
+          display: flex;
+          gap: 0.5rem;
+          margin-top: 1rem;
+        }
+
+        .grid-step-desc {
+          margin-top: 0.5rem;
+          color: $on-surface-variant;
+        }
+
+        .confirm-btn,
+        .edit-btn,
+        .remove-btn {
+          display: flex;
+          align-items: center;
+          background: $primary;
+          color: $on-primary;
+          border-radius: 0.3rem;
+          transition: all 0.2s;
+          cursor: pointer;
+          padding: 0.2rem;
+
+          &:hover {
+            transform: scale(1.15);
+            background: $primary;
+          }
+        }
+      }
     }
   }
 }
