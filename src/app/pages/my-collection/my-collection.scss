@@ -282,27 +282,30 @@
       }
     }
 
-    .btn-new-sheet {
-      background: linear-gradient(135deg, $primary, $primary-container);
-      color: $surface;
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: 3px;
-      font-weight: bold;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      transition: all 0.25s ease;
+    a {
+      text-decoration: none;
+      .btn-new-sheet {
+        background: linear-gradient(135deg, $primary, $primary-container);
+        color: $surface;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 3px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        transition: all 0.25s ease;
 
-      &:hover {
-        color: $inverse-primary;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba($primary, 0.5);
-      }
+        &:hover {
+          color: $inverse-primary;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba($primary, 0.5);
+        }
 
-      &:active {
-        transform: scale(0.97);
+        &:active {
+          transform: scale(0.97);
+        }
       }
     }
   }
