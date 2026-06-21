@@ -8,7 +8,7 @@ import { TechnicalSpecification } from '../technical-specification/technical-spe
 @Component({
   selector: 'app-my-collection',
   standalone: true,
-  imports: [FooterComponent, NavbarComponent, RouterLink, CommonModule, TechnicalSpecification],
+  imports: [FooterComponent, NavbarComponent, CommonModule, TechnicalSpecification],
   templateUrl: './my-collection.html',
   styleUrls: ['./my-collection.scss'],
 })
