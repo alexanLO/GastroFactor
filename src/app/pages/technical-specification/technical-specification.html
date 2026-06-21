@@ -1,0 +1,41 @@
+<div class="card-body">
+  <app-navbar-component></app-navbar-component>
+
+  <main class="card-content">
+    <header class="card-header">
+      <div class="card-header-content">
+        <span class="card-subtitle">Editorial Template</span>
+        <h1 class="card-title">Ficha Técnica<br /><span>de Preparo</span></h1>
+      </div>
+      <div class="card-btn-conteiner">
+        <button class="card-btn-save">
+          <span class="material-symbols-outlined">save</span>
+          <span>Salvar</span>
+        </button>
+
+        <button class="card-btn-export">
+          <span class="material-symbols-outlined">picture_as_pdf</span>
+          <span>Exportar PDF</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="card-grid">
+      <!--TODO <div class="grid grid-cols-1 lg:grid-cols-12 gap-8"> >>>>  <div class="lg:col-span-8 space-y-8"></div> -->
+
+      <!-- Seção principal de Dados -->
+      <app-card-details-component></app-card-details-component>
+
+      <!-- Tabela de ingrediente -->
+      <app-table-ingredients-component></app-table-ingredients-component>
+
+      <!-- Sidebar Nutricional -->
+      <app-card-nutritional-component></app-card-nutritional-component>
+
+      <!-- Método de Preparo -->
+      <app-preparation-method-component></app-preparation-method-component>
+    </div>
+  </main>
+
+  <app-footer-component></app-footer-component>
+</div>
