@@ -1,0 +1,69 @@
+@use 'variables' as *;
+
+.card-details {
+    margin-top: 2rem;
+  background: rgba($surface-container-highest, 0.3);
+  backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  .card-info-row {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 2rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card-info-group {
+      > * + * {
+        margin-top: 0.25rem;
+      }
+
+      label {
+        color: $on-surface-variant;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+        display: block;
+      }
+
+      .input-display,
+      .select-display {
+        color: $on-surface;
+        width: 100%;
+        background: transparent;
+        border: 1px solid rgba($outline-variant, 0.3);
+        padding: 0.5rem;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        appearance: none;
+        font-family: $font-serif;
+        font-style: italic;
+        outline: none;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+
+        &:focus {
+          border-color: $primary;
+        }
+
+        option {
+          background: $surface;
+        }
+      }
+
+      &.small {
+        flex: 0 0 150px;
+      }
+      &.medium {
+        flex: 0 0 250px;
+      }
+    }
+  }
+}

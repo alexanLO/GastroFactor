@@ -1,0 +1,80 @@
+@use 'variables' as *;
+
+.card-sidebar-nutritional {
+  margin-top: 2rem;
+  grid-column: span 1 / span 1;
+  > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    grid-column: span 4 / span 4;
+  }
+  .card-nutritional {
+    background-color: $surface-container-low;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba($outline-variant, 0.1);
+
+    .card-nutritional-title {
+      font-family: $font-serif;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      margin-left: 1rem;
+
+      .card-nutritional-subtitle {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-family: $font-sans;
+        color: $on-surface-variant;
+        font-style: normal;
+        letter-spacing: 0em;
+      }
+    }
+
+    .nutritional-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-bottom: 1px solid rgba($outline-variant, 0.1);
+
+        .nutri-label {
+          font-family: $font-sans;
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+          text-transform: uppercase;
+        }
+
+        .nutri-value {
+          font-weight: 700;
+        }
+
+        .nutri-value-input {
+          background: transparent;
+          border: 1px solid rgba($white, 0.2);
+          color: $white;
+          padding: 0.25rem 0.5rem;
+          border-radius: 4px;
+          font-weight: 700;
+          min-width: 100px;
+          text-align: right;
+          transition: border-color 0.2s;
+
+          &:focus {
+            outline: none;
+            border-color: $primary;
+          }
+        }
+      }
+    }
+  }
+}

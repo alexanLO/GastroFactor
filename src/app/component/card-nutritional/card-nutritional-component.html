@@ -1,0 +1,27 @@
+<aside class="card-sidebar-nutritional">
+  <div class="card-nutritional">
+    <h2 class="card-nutritional-title">
+      Valor Nutricional
+      <span class="card-nutritional-subtitle">(por porção)</span>
+    </h2>
+
+    <ul class="nutritional-list">
+      <li>
+        <span class="nutri-label">CALORIAS</span>
+        <input type="text" class="nutri-value-input" [(ngModel)]="calories" placeholder="642 kcal" />
+      </li>
+      <li>
+        <span class="nutri-label">PROTEÍNAS</span>
+        <input type="text" class="nutri-value-input" [(ngModel)]="protein" placeholder="42g" />
+      </li>
+      <li>
+        <span class="nutri-label">GORDURAS TOTAIS</span>
+        <input type="text" class="nutri-value-input" [(ngModel)]="totalFat" placeholder="38g" />
+      </li>
+      <li>
+        <span class="nutri-label">CARBOIDRATOS</span>
+        <input type="text" class="nutri-value-input" [(ngModel)]="carbs" placeholder="12g" />
+      </li>
+    </ul>
+  </div>
+</aside>
