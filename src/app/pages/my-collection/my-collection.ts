@@ -18,11 +18,11 @@ export class MyCollection {
   recipes = [
     {
       title: 'Receita Exemplo 1',
-      image: 'assets/placeholder.jpg'
+      image: '/receita.png'
     },
     {
       title: 'Receita Exemplo 2',
-      image: 'assets/placeholder.jpg'
+      image: '/receita.png'
     }
   ];
 
