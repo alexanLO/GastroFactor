@@ -5,7 +5,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes),
+    provideRouter(routes, withViewTransitions()),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
   ],

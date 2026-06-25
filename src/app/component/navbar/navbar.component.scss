@@ -1,0 +1,65 @@
+@use 'variables' as *;
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $background-variant;
+  color: $on-surface;
+  padding: 20px;
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 15px 25px -12px rgba($white, 0.2);
+
+  .logo {
+    font-family: $font-serif;
+    font-size: 24px;
+    font-style: italic;
+    color: $primary;
+  }
+
+  .menu a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: $on-surface;
+    padding-bottom: 4px;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary;
+    }
+
+    &.active {
+      color: $primary;
+      border-bottom: 2px solid $primary;
+      font-weight: bold;
+    }
+  }
+
+  .auth {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    a {
+      color: $on-surface;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    .profile-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid $primary-container;
+    }
+  }
+}

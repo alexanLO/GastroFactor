@@ -1,0 +1,153 @@
+@use 'variables' as *;
+
+.table-ingredients-section {
+  margin-top: 1.5rem;
+  background: $surface-container-low;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  .table-ingredients-header {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba($outline-variant, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      font-family: $font-serif;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      font-style: italic;
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: $primary;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: opacity 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      span:first-child {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      span:last-child {
+        font-size: 0.75rem;
+        line-height: 1rem;
+        font-family: $font-sans;
+        text-transform: uppercase;
+        letter-spacing: -0.05em;
+      }
+    }
+  }
+
+  .table-ingredients-container {
+    overflow-x: auto;
+
+    .table-ingredients {
+      width: 100%;
+      text-align: left;
+      border-collapse: collapse;
+
+      thead {
+        background: $surface-container-high;
+        th {
+          padding: 0.75rem 1rem;
+          font-weight: 600;
+          font-size: 0.75rem;
+          letter-spacing: 0.05em;
+        }
+      }
+
+      tbody {
+        > * + * {
+          border-top: 1px solid rgba($outline-variant, 0.05);
+        }
+
+        tr {
+          transition-property:
+            color, background-color, border-color, text-decoration-color, fill, stroke;
+          transition-duration: 0.15s;
+          transition-timing-function: ease-in-out;
+
+          &:hover {
+            background-color: rgba($surface-container-high, 0.3);
+          }
+
+          .col-name,
+          .col-value {
+            padding: 1rem 2rem;
+          }
+
+          td {
+            background: rgba($white, 0.02);
+            padding: 0.5rem 0.75rem;
+            font-size: 0.95rem;
+
+            &:first-child {
+              border-radius: 4px 0 0 4px;
+            }
+            &:last-child {
+              border-radius: 0 4px 4px 0;
+            }
+
+            input {
+              background-color: transparent;
+              width: 100%;
+              outline: none;
+
+              color: $on-surface;
+              width: 100%;
+              background: transparent;
+              border: 1px solid rgba($white, 0.3);
+              padding: 0.35rem 0.4rem;
+              font-size: 0.9rem;
+              line-height: 1.25rem;
+              appearance: none;
+              font-family: $font-serif;
+              font-style: italic;
+              outline: none;
+              transition:
+                color 0.2s,
+                border-color 0.2s;
+
+              &:focus {
+                border-color: $primary;
+              }
+            }
+          }
+
+          .remove-btn {
+            background: none;
+            border: none;
+            color: $primary; 
+            cursor: pointer;
+            transition: opacity 0.2s;
+
+            &:hover {
+              opacity: 0.8;
+            }
+
+            .material-symbols-outlined {
+              font-size: 1.25rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
