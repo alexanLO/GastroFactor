@@ -75,6 +75,20 @@ export class MainScreen {
     });
   }
 
+  onRegister() {
+    this.showRegisterModal = true;
+    document.body.classList.add('modal-open');
+  }
+
+  onLogin() {
+    this.showLoginModal = true;
+    document.body.classList.add('modal-open');
+  }
+
+  onLogout(){
+    this.authService.userLogout();
+  }
+
   private mapTypeWeight(type: string): 'GROSS' | 'NET' | 'COOKED' {
     switch (type) {
       case 'bruto':
