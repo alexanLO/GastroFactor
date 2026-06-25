@@ -63,7 +63,7 @@ export class PdfExportService {
               }
 
               doc.save(`${recipe.details.name || 'receita'}.pdf`);
-              alert('PDF exportado com sucesso!');
+              
             } catch (error) {
               console.error('Erro ao gerar PDF:', error);
               alert('Erro ao exportar PDF!');

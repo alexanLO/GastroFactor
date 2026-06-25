@@ -1,39 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface RecipeData {
-  details: {
-    name: string;
-    servings: number;
-    category: string;
-  };
-  ingredients: Array<{
-    name: string;
-    netWeight: string;
-    correctionFactor: string;
-    grossWeight: string;
-    cookingFactor: string;
-    totalQuantity: string;
-  }>;
-  nutritional: {
-    calories: string;
-    protein: string;
-    totalFat: string;
-    carbs: string;
-  };
-  preparationMethod: Array<{
-    id: string;
-    title: string;
-    description: string;
-  }>;
-}
+import { RecipeData } from '../../shared/models/recipe-data.model';
+import { environment } from '../../../env/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
-  private apiUrl = '/api/recipes'; // Ajuste conforme sua API
+  private apiUrl = `${environment.baseAddress}/v1/calculadora`;
 
   constructor(private http: HttpClient) { }
 
