@@ -1,15 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, inject, Input, ViewChild } from '@angular/core';
 import { CardDetailsComponent } from '../../component/card-details-component/card-details-component';
 import { CardNutritionalComponent } from '../../component/card-nutritional/card-nutritional-component';
-import { FooterComponent } from '../../component/footer/footer.component';
-import { NavbarComponent } from '../../component/navbar/navbar.component';
 import { PreparationMethodComponent } from '../../component/preparation-method-component/preparation-method-component';
 import { TableIngredientsComponent } from '../../component/table-ingredients/table-ingredients-component';
 import { PdfExportService } from '../../core/services/pdf-export.service';
 import { RecipeService } from '../../core/services/recipe.service';
 import { RecipeData } from '../../shared/models/recipe-data.model';
+import { MyCollection } from '../my-collection/my-collection';
 
 @Component({
   selector: 'app-technical-specification',
@@ -17,8 +16,6 @@ import { RecipeData } from '../../shared/models/recipe-data.model';
   imports: [
     CommonModule,
     HttpClientModule,
-    NavbarComponent,
-    FooterComponent,
     TableIngredientsComponent,
     CardNutritionalComponent,
     PreparationMethodComponent,
@@ -35,10 +32,9 @@ export class TechnicalSpecification {
   @ViewChild(CardNutritionalComponent) nutritionalComponent!: CardNutritionalComponent;
   @ViewChild(PreparationMethodComponent) preparationComponent!: PreparationMethodComponent;
 
-  constructor(
-    private recipeService: RecipeService,
-    private pdfService: PdfExportService,
-  ) {}
+  private collection = inject(MyCollection);
+  private recipeService = inject(RecipeService);
+  private pdfService = inject(PdfExportService);
 
   saveRecipe(): void {
     const recipeData: RecipeData = {
@@ -49,9 +45,9 @@ export class TechnicalSpecification {
     };
 
     this.recipeService.saveRecipe(recipeData).subscribe({
-      next: (response) => {
+      next: () => {
         alert('Receita salva com sucesso!');
-        console.log('Receita salva:', response);
+        this.collection.closeModal();
       },
       error: (error) => {
         alert('Erro ao salvar a receita!');
