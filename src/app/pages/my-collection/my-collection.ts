@@ -5,11 +5,12 @@ import { NavbarComponent } from '../../component/navbar/navbar.component';
 import { RecipeService } from '../../core/services/recipe.service';
 import { RecipeData } from '../../shared/models/recipe-data.model';
 import { TechnicalSpecification } from '../technical-specification/technical-specification';
+import { RecipeCardComponent } from "../../component/recipe-card-component/recipe-card-component";
 
 @Component({
   selector: 'app-my-collection',
   standalone: true,
-  imports: [FooterComponent, NavbarComponent, CommonModule, TechnicalSpecification],
+  imports: [FooterComponent, NavbarComponent, CommonModule, TechnicalSpecification, RecipeCardComponent],
   templateUrl: './my-collection.html',
   styleUrls: ['./my-collection.scss'],
 })
@@ -19,16 +20,7 @@ export class MyCollection {
 
   isModalOpen = false;
 
-  recipes = [
-    {
-      title: 'Receita Exemplo 1',
-      image: '/receita.png',
-    },
-    {
-      title: 'Receita Exemplo 2',
-      image: '/receita.png',
-    },
-  ];
+  
 
   ngOnInit() {
     // carrega do backend
