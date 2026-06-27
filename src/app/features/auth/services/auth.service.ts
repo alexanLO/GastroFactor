@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { Observable, tap } from 'rxjs';
-import { environment } from '../../../../env/environment';
+import { environment } from '../../../../environments/environment';
 import { AuthResponse, LoginRequest, RegisterRequest } from '../../../shared/models/auth.model';
 
 /**

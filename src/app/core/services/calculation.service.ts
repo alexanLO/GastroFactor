@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { environment } from '../../../env/environment';
+import { environment } from '../../../environments/environment';
 import { CalculationRequest, CalculationResponse } from '../../shared/models/calculation.model';
 
 /**
