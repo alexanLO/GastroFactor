@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { environment } from '../../../env/environment';
+import { environment } from '../../../environments/environment';
 import { RecipeData } from '../../shared/models/recipe-data.model';
 
 @Injectable({
