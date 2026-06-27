@@ -14,7 +14,7 @@ import { CalculationRequest, CalculationResponse } from '../../shared/models/cal
   providedIn: 'root',
 })
 export class CalculationService {
-  private readonly calcFactorUri = `${environment.baseAddress}/v1/calculadora`;
+  private readonly calcFactorUri = `${environment.baseAddress}/v1/calculator`;
 
   constructor(
     private http: HttpClient,
