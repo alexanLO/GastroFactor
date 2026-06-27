@@ -43,9 +43,7 @@
         <nav class="sidebar-menu">
           <span class="menu-label">MENU PRINCIPAL</span>
           <a class="menu-item active">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
-              >dashboard</span
-            >
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">dashboard</span>
             Dashboard
           </a>
           <a class="menu-item">
@@ -90,9 +88,7 @@
       <section class="actions-bar">
         <div class="search-wrapper">
           <span
-            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant"
-            >search</span
-          >
+            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
           <input type="text" placeholder="Buscar fichas..." />
         </div>
         <button class="btn-new-sheet" (click)="openModal()">
@@ -105,36 +101,10 @@
       <section class="recipes-grid-section">
         <div class="section-header">
           <h2 class="section-title">Minhas Fichas Técnicas</h2>
-          <a class="link-see-all"
-            >Ver todas <span class="material-symbols-outlined text-xs">arrow_forward</span></a
-          >
+          <a class="link-see-all">Ver todas <span class="material-symbols-outlined text-xs">arrow_forward</span></a>
         </div>
 
-        <div class="recipes-grid">
-          <!--TODO Card Exemplo (Repetir conforme necessário ou usar *ngFor) -->
-          <article class="recipe-card" *ngFor="let recipe of recipes">
-            <div class="card-image">
-              <img [src]="recipe.image" [alt]="recipe.title" />
-            </div>
-            <div class="card-content">
-              <div class="card-meta">
-                <span class="meta-tag">FICHA TÉCNICA</span>
-                <a class="meta-link">Acessar Detalhes</a>
-              </div>
-              <h3 class="recipe-title">{{ recipe.title }}</h3>
-              <div class="card-footer">
-                <button class="btn-view">
-                  <!-- TODO tailwind -->
-                  <span class="material-symbols-outlined text-sm">visibility</span> Visualizar
-                </button>
-                <!-- TODO tailwind -->
-                <span class="material-symbols-outlined hover:text-primary transition-colors"
-                  >arrow_forward</span
-                >
-              </div>
-            </div>
-          </article>
-        </div>
+        <app-recipe-card-component></app-recipe-card-component>
       </section>
     </main>
   </div>

@@ -86,12 +86,14 @@
         background: rgba($white, 0.1);
         border-radius: 3px;
         margin-bottom: 0.5rem;
+
         .progress-fill {
           height: 100%;
           background: linear-gradient(135deg, $primary, $primary-container);
           border-radius: 3px;
         }
       }
+
       .storage-detail {
         font-size: 0.65rem;
         color: $outline;
@@ -132,12 +134,14 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+
     .menu-label {
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       color: $outline;
       margin-bottom: 1rem;
     }
+
     .menu-item {
       display: flex;
       align-items: center;
@@ -148,11 +152,13 @@
       color: $on-surface-variant;
       transition: all 0.3s;
       cursor: pointer;
+
       &.active {
         background: rgba($surface-tint, 0.15);
         color: $surface-tint;
         font-weight: 600;
       }
+
       &:hover:not(.active) {
         background: rgba($white, 0.05);
       }
@@ -215,6 +221,7 @@
       font-size: 1.25rem;
       color: $surface-tint;
     }
+
     .header-title {
       color: $on-surface;
       font-family: $font-serif;
@@ -225,25 +232,30 @@
     .stats-row {
       display: flex;
       gap: 2rem;
+
       .stat-card {
         background: rgba($white, 0.05);
         backdrop-filter: blur(10px);
         padding: 1.5rem 2rem;
         border-radius: 12px;
         min-width: 180px;
+
         .stat-label {
           font-size: 0.7rem;
           letter-spacing: 0.1em;
           color: $outline;
         }
+
         .stat-value {
           font-size: 1.75rem;
           font-weight: 400;
           margin: 0.5rem 0;
         }
+
         .stat-unit {
           color: $surface-tint;
         }
+
         .stat-subtext {
           font-size: 0.65rem;
           color: $outline;
@@ -273,6 +285,7 @@
         color: $white;
         font-size: 1rem;
       }
+
       span {
         position: absolute;
         left: 1.25rem;
@@ -322,6 +335,7 @@
         font-size: 2rem;
         color: $on-surface;
       }
+
       .link-see-all {
         color: $outline;
         text-decoration: none;
@@ -337,12 +351,6 @@
           line-height: 1rem;
         }
       }
-    }
-
-    .recipes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2rem;
     }
   }
 }
@@ -378,12 +386,14 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1rem;
+
       .meta-tag {
         font-size: 0.65rem;
         letter-spacing: 0.1em;
         color: $surface-tint;
         font-weight: bold;
       }
+
       .meta-link {
         font-size: 0.75rem;
         color: $outline;
@@ -417,6 +427,7 @@
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
@@ -437,6 +448,7 @@
         transform: translateY(20px);
         opacity: 0;
       }
+
       to {
         transform: translateY(0);
         opacity: 1;
@@ -474,6 +486,7 @@
     .modal-body {
       width: 100%;
       height: 100%;
+
       app-technical-specification {
         display: block;
         width: 100%;
