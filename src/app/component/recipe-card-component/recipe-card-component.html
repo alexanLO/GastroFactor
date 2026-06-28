@@ -1,6 +1,6 @@
 <div class="recipes-grid">
-   
-    <article class="recipe-card" *ngFor="let recipe of recipes">
+    @for (recipe of recipes; track $index) {
+    <article class="recipe-card">
         <div class="card-image">
             <img [src]="" src="/receita.png" [alt]="recipe.details.name" />
         </div>
@@ -12,7 +12,7 @@
             </div>
 
             <h3 class="recipe-title">{{ recipe.details.name }}</h3>
-           
+
             <div class="card-footer">
                 <button class="btn-view">
                     Visualizar Detalhes
@@ -21,4 +21,5 @@
             </div>
         </div>
     </article>
+    }
 </div>
