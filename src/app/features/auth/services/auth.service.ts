@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
@@ -16,11 +16,10 @@ export class AuthService {
   private loggedIn = false;
 
   private router: Router = inject(Router);
+  private http: HttpClient = inject(HttpClient);
+  private log: NGXLogger = inject(NGXLogger);
 
-  constructor(
-    private http: HttpClient,
-    private log: NGXLogger,
-  ) {}
+  showLoginModal = signal(false);
 
   userLogin(request: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(this.uriApiLogin, request).pipe(
@@ -40,7 +39,7 @@ export class AuthService {
         localStorage.setItem('access_token', response.accessToken);
         localStorage.setItem('refresh_token', response.refreshToken);
         this.loggedIn = true;
-        this.router.navigate(['/meu-acervo']); // ✅ agora funciona
+        this.router.navigate(['/meu-acervo']);
       }),
     );
   }
@@ -49,10 +48,20 @@ export class AuthService {
     this.loggedIn = false;
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
-    this.router.navigate(["/gastrofactor"])
+    this.router.navigate(['/gastrofactor']);
   }
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('access_token');
+  }
+
+  openLoginModal() {
+    this.showLoginModal.set(true);
+    document.body.classList.add('modal-open');
+  }
+
+  closeLoginModal() {
+    this.showLoginModal.set(false);
+    document.body.classList.remove('modal-open');
   }
 }

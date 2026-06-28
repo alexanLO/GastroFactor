@@ -1,18 +1,10 @@
-import { ChangeDetectorRef, Component, EventEmitter, Inject, inject, Output } from '@angular/core';
-import {
-  FormGroup,
-  NonNullableFormBuilder,
-  ReactiveFormsModule,
-  Validators,
-  ɵInternalFormsSharedModule,
-} from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
-import { NGXLogger } from 'ngx-logger';
 import { CommonModule } from '@angular/common';
-import { AuthResponse, LoginRequest } from '../../../../../shared/models/auth.model';
-import { response } from 'express';
-import { error } from 'console';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NGXLogger } from 'ngx-logger';
 import { ErrorInputComponent } from '../../../../../shared/components/error-input/error-input.component';
+import { AuthResponse, LoginRequest } from '../../../../../shared/models/auth.model';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -21,13 +13,11 @@ import { ErrorInputComponent } from '../../../../../shared/components/error-inpu
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
-  @Output() close = new EventEmitter<void>();
-
   private authService = inject(AuthService);
   private formBuilder = inject(NonNullableFormBuilder);
   private cdr = inject(ChangeDetectorRef);
   private log = inject(NGXLogger);
- 
+
   public loginForm: FormGroup;
 
   constructor() {
@@ -36,6 +26,7 @@ export class LoginPageComponent {
       password: ['', [Validators.required]],
     });
   }
+
   onSubmit() {
     this.log.info('Chamando API para logar o uruario');
 
@@ -58,7 +49,7 @@ export class LoginPageComponent {
     });
   }
 
-  onClose() {
-    this.close.emit();
+  onClose(): void {
+    this.authService.closeLoginModal();
   }
 }
