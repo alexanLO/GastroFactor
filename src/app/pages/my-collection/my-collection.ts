@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FooterComponent } from '../../component/footer/footer.component';
 import { NavbarComponent } from '../../component/navbar/navbar.component';
 import { RecipeService } from '../../core/services/recipe.service';
@@ -20,9 +20,13 @@ import { RecipeCardComponent } from '../../component/recipe-card-component/recip
   templateUrl: './my-collection.html',
   styleUrls: ['./my-collection.scss'],
 })
-export class MyCollection {
+export class MyCollection implements OnInit {
   recipeService = inject(RecipeService);
   isModalOpen = false;
+
+  ngOnInit(): void {
+    this.recipeService.refreshRecipes();
+  }
 
   openModal(): void {
     this.isModalOpen = true;

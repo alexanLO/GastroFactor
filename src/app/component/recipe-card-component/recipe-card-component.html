@@ -1,6 +1,6 @@
 <div class="recipes-grid">
 
-    @for (recipe of recipes; track recipe.details.name) {
+    @for (recipe of recipes(); track recipe.details.name) {
     <article class="recipe-card">
         <div class="card-image">
             <div>
@@ -25,5 +25,5 @@
         </div>
     </article>
     }
-    
+
 </div>

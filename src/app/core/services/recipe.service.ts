@@ -18,6 +18,7 @@ export class RecipeService {
    * Carrega todas as receitas da API.
    */
   loadRecipes(): Observable<RecipeData[]> {
+    console.log('Chamando GET das receitas');
     return this.http
       .get<RecipeData[]>(this.apiUrl)
       .pipe(tap((recipes) => this.recipesSubject.next(recipes)));

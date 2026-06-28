@@ -1,13 +1,11 @@
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import {
   ApplicationConfig,
   importProvidersFrom,
-  provideBrowserGlobalErrorListeners,
-  provideZonelessChangeDetection,
+  provideBrowserGlobalErrorListeners
 } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { routes } from './app.routes';
 
@@ -20,10 +18,9 @@ export const appConfig: ApplicationConfig = {
         serverLoggingUrl: '',
       }),
     ),
+
     provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection(),
-    provideRouter(routes, withViewTransitions()),
-    provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch()),
+    provideRouter(routes),
+    provideHttpClient(),
   ],
 };
