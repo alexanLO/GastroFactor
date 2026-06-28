@@ -1,6 +1,7 @@
 export interface RecipeData {
   details: {
     name: string;
+    image: string;
     servings: number;
     category: string;
   };

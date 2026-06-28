@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { RecipeService } from '../../core/services/recipe.service';
-import { RecipeData } from '../../shared/models/recipe-data.model';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-recipe-card-component',
@@ -10,17 +10,9 @@ import { RecipeData } from '../../shared/models/recipe-data.model';
   templateUrl: './recipe-card-component.html',
   styleUrls: ['./recipe-card-component.scss'],
 })
-export class RecipeCardComponent {
+export class RecipeCardComponent  {
   private recipeService = inject(RecipeService);
-  recipes: RecipeData[] = [];
-
-  ngOnInit() {
-    this.recipeService.getAllRecipes().subscribe((data) => {
-      this.recipes = data;
-    });
-
-    this.recipeService.recipes$.subscribe((data) => {
-      this.recipes = data;
-    });
-  }
+  recipes = toSignal(this.recipeService.recipes$, {
+    initialValue: [],
+  });
 }

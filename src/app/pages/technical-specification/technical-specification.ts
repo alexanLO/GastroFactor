@@ -1,6 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, inject, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  ViewChild,
+  EventEmitter,
+  Output,
+  ElementRef,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CardDetailsComponent } from '../../component/card-details-component/card-details-component';
 import { CardNutritionalComponent } from '../../component/card-nutritional/card-nutritional-component';
 import { PreparationMethodComponent } from '../../component/preparation-method-component/preparation-method-component';
@@ -26,19 +35,30 @@ import { MyCollection } from '../my-collection/my-collection';
 })
 export class TechnicalSpecification {
   @Input() isModal: boolean = false;
+  @Output() saved = new EventEmitter<void>();
 
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   @ViewChild(CardDetailsComponent) detailsComponent!: CardDetailsComponent;
   @ViewChild(TableIngredientsComponent) ingredientsComponent!: TableIngredientsComponent;
   @ViewChild(CardNutritionalComponent) nutritionalComponent!: CardNutritionalComponent;
   @ViewChild(PreparationMethodComponent) preparationComponent!: PreparationMethodComponent;
 
-  private collection = inject(MyCollection);
   private recipeService = inject(RecipeService);
   private pdfService = inject(PdfExportService);
+  private cdr = inject(ChangeDetectorRef);
+
+  selectedImage: string | ArrayBuffer | null = '';
+
+  onImportImage(): void {
+    this.fileInput.nativeElement.click();
+  }
 
   saveRecipe(): void {
+    const details = this.detailsComponent.getDetails();
+    details.image = this.selectedImage as string;
+
     const recipeData: RecipeData = {
-      details: this.detailsComponent.getDetails(),
+      details,
       ingredients: this.ingredientsComponent.ingredients,
       nutritional: this.nutritionalComponent.getNutritional(),
       preparationMethod: this.preparationComponent.steps,
@@ -46,8 +66,15 @@ export class TechnicalSpecification {
 
     this.recipeService.saveRecipe(recipeData).subscribe({
       next: () => {
-        alert('Receita salva com sucesso!');
-        this.collection.closeModal();
+        // Aguarda a lista ser atualizada
+        this.recipeService.loadRecipes().subscribe({
+          next: () => {
+            this.saved.emit();
+          },
+          error: (error) => {
+            console.error('Erro ao atualizar a lista de receitas:', error);
+          },
+        });
       },
       error: (error) => {
         alert('Erro ao salvar a receita!');
@@ -65,5 +92,27 @@ export class TechnicalSpecification {
     };
 
     this.pdfService.generateRecipePdf(recipeData);
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+
+      // exemplo: ler como base64 para exibir na tela
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.selectedImage = reader.result as string;
+        this.cdr.detectChanges();
+      };
+      reader.readAsDataURL(file);
+
+      // aqui você pode enviar para o backend com HttpClient
+      // const formData = new FormData();
+      // formData.append('image', file);
+      // this.http.post('/api/upload', formData).subscribe(...);
+    }
   }
 }
