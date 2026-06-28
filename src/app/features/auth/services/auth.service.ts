@@ -28,6 +28,7 @@ export class AuthService {
         localStorage.setItem('access_token', response.accessToken);
         localStorage.setItem('refresh_token', response.refreshToken);
         this.loggedIn = true;
+        this.router.navigate(['/meu-acervo']);
       }),
     );
   }
