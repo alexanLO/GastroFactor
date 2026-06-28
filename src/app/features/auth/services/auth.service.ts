@@ -49,6 +49,7 @@ export class AuthService {
     this.loggedIn = false;
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+    this.router.navigate(["/gastrofactor"])
   }
 
   isAuthenticated(): boolean {
