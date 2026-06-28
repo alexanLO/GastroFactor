@@ -68,8 +68,3 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 300ms;
-}

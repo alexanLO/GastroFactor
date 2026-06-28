@@ -8,5 +8,5 @@ export const routes: Routes = [
   { path: '', redirectTo: 'gastrofactor', pathMatch: 'full' },
   { path: 'gastrofactor', component: MainScreen },
   { path: 'meu-acervo', component: MyCollection, canActivate: [authGuard] },
-  { path: 'sobre', component: TechnicalSpecification }, // TODO depois criar a pagina sobre
+  { path: 'sobre', component: MainScreen }, // TODO depois criar a pagina sobre
 ];
