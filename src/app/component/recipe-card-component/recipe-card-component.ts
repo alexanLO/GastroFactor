@@ -15,7 +15,7 @@ export class RecipeCardComponent {
   recipes: RecipeData[] = [];
 
   ngOnInit() {
-    this.recipeService.getAllRecipes().subscribe((data: RecipeData[]) => {
+    this.recipeService.getAllRecipes().subscribe((data) => {
       this.recipes = data;
     });
 
