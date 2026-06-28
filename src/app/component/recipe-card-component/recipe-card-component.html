@@ -1,8 +1,11 @@
 <div class="recipes-grid">
-    @for (recipe of recipes; track $index) {
+
+    @for (recipe of recipes; track recipe.details.name) {
     <article class="recipe-card">
         <div class="card-image">
-            <img [src]="" src="/receita.png" [alt]="recipe.details.name" />
+            <div>
+                <img [src]="recipe.details.image || '/receita.png'" [alt]="recipe.details.name || 'Receita padrão'" />
+            </div>
         </div>
 
         <div class="card-content">
@@ -22,4 +25,5 @@
         </div>
     </article>
     }
+    
 </div>

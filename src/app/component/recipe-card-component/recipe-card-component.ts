@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecipeService } from '../../core/services/recipe.service';
 import { RecipeData } from '../../shared/models/recipe-data.model';
@@ -11,16 +11,15 @@ import { RecipeData } from '../../shared/models/recipe-data.model';
   styleUrls: ['./recipe-card-component.scss'],
 })
 export class RecipeCardComponent {
+  @Input() recipe!: RecipeData;
   private recipeService = inject(RecipeService);
   recipes: RecipeData[] = [];
 
-  ngOnInit() {
-    this.recipeService.getAllRecipes().subscribe((data) => {
-      this.recipes = data;
-    });
+  ngOnInit(): void {
+    this.recipeService.loadRecipes().subscribe();
 
-    this.recipeService.recipes$.subscribe((data) => {
-      this.recipes = data;
+    this.recipeService.recipes$.subscribe((recipes) => {
+      this.recipes = recipes;
     });
   }
 }

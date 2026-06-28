@@ -1,12 +1,22 @@
 <div class="card-body">
 
   <main class="card-content">
-    <header class="card-header">
+    <header class="card-header" [style.background-image]="selectedImage 
+    ? 'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(' + selectedImage + ')' 
+    : 'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(/bg-TechnicalSpecification.png)'">
+    
       <div class="card-header-content">
         <span class="card-subtitle">Editorial Template</span>
         <h1 class="card-title">Ficha Técnica<br /><span>de Preparo</span></h1>
       </div>
       <div class="card-btn-conteiner">
+
+        <button class="card-btn-import-img" (click)="onImportImage()">
+          <span class="material-symbols-outlined">upload_file</span>
+          <span>Importar Imagem</span>
+        </button>
+        <input type="file" accept="image/*" #fileInput style="display: none" (change)="onFileSelected($event)" />
+
         <button class="card-btn-save" (click)="saveRecipe()">
           <span class="material-symbols-outlined">save</span>
           <span>Salvar</span>

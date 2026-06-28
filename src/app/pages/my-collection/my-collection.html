@@ -114,13 +114,17 @@
 </div>
 
 <!-- Modal de Ficha Técnica -->
-<div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+@if (isModalOpen) {
+
+<div class="modal-overlay" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <button class="modal-close-btn" (click)="closeModal()">
       <span class="material-symbols-outlined">close</span>
     </button>
     <div class="modal-body">
-      <app-technical-specification [isModal]="true"></app-technical-specification>
+      <app-technical-specification [isModal]="true" (saved)="closeModal()">
+      </app-technical-specification>
     </div>
   </div>
 </div>
+}

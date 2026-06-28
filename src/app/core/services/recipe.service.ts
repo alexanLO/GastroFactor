@@ -8,35 +8,55 @@ import { RecipeData } from '../../shared/models/recipe-data.model';
   providedIn: 'root',
 })
 export class RecipeService {
-  private apiUrl = `${environment.baseAddress}/v1/recipes`;
-  private http = inject(HttpClient);
-  private recipesSubject = new BehaviorSubject<RecipeData[]>([]);
-  recipes$ = this.recipesSubject.asObservable();
+  private readonly apiUrl = `${environment.baseAddress}/v1/recipes`;
+  private readonly http = inject(HttpClient);
 
-  saveRecipe(recipe: RecipeData): Observable<RecipeData> {
-    return this.http.post<RecipeData>(this.apiUrl, recipe).pipe(
-      tap((newRecipe) => {
-        const current = this.recipesSubject.value;
-        this.recipesSubject.next([...current, newRecipe]);
-      }),
-    );
+  private readonly recipesSubject = new BehaviorSubject<RecipeData[]>([]);
+  readonly recipes$ = this.recipesSubject.asObservable();
+
+  /**
+   * Carrega todas as receitas da API.
+   */
+  loadRecipes(): Observable<RecipeData[]> {
+    return this.http
+      .get<RecipeData[]>(this.apiUrl)
+      .pipe(tap((recipes) => this.recipesSubject.next(recipes)));
   }
 
+  /**
+   * Atualiza a lista armazenada.
+   */
+  refreshRecipes(): void {
+    this.loadRecipes().subscribe();
+  }
+
+  /**
+   * Busca uma receita específica.
+   */
   getRecipe(id: string): Observable<RecipeData> {
     return this.http.get<RecipeData>(`${this.apiUrl}/${id}`);
   }
 
-  getAllRecipes(): Observable<RecipeData[]> {
+  /**
+   * Salva uma nova receita.
+   */
+  saveRecipe(recipe: RecipeData): Observable<RecipeData> {
+    return this.http.post<RecipeData>(this.apiUrl, recipe);
+  }
+
+  /**
+   * Atualiza uma receita existente.
+   */
+  updateRecipe(id: string, recipe: RecipeData): Observable<RecipeData> {
     return this.http
-      .get<RecipeData[]>(this.apiUrl)
-      .pipe(tap((data) => this.recipesSubject.next(data)));
+      .put<RecipeData>(`${this.apiUrl}/${id}`, recipe)
+      .pipe(tap(() => this.refreshRecipes()));
   }
 
-  updateRecipe(id: string, recipe: RecipeData): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, recipe);
-  }
-
-  deleteRecipe(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  /**
+   * Remove uma receita.
+   */
+  deleteRecipe(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(tap(() => this.refreshRecipes()));
   }
 }

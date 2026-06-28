@@ -61,6 +61,36 @@
         gap: 1rem;
         margin-bottom: 0.5rem;
 
+        .card-btn-import-img {
+          color: $on-surface;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          background-color: rgba($surface-container-highest, 0.4);
+          border: 1px solid rgba($outline-variant, 0.2);
+          backdrop-filter: blur(4px);
+          padding: 0.75rem 1.5rem;
+          border-radius: 0.5rem;
+          transition: all 0.2s ease;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $surface-container-high;
+          }
+
+          span:first-child {
+            color: $primary;
+          }
+
+          span:last-child {
+            font-family: $font-sans;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            font-weight: 700;
+          }
+        }
+
         .card-btn-save {
           color: $on-surface;
           display: flex;
