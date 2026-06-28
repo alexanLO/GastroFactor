@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { RecipeData } from '../../shared/models/recipe-data.model';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,10 @@ export class RecipeService {
 
   private readonly recipesSubject = new BehaviorSubject<RecipeData[]>([]);
   readonly recipes$ = this.recipesSubject.asObservable();
+
+  recipes = toSignal(this.recipes$, {
+    initialValue: [],
+  });
 
   /**
    * Carrega todas as receitas da API.
