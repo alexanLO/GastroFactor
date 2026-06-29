@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, switchMap, tap } from 'rxjs';
 import { NGXLogger } from 'ngx-logger';
@@ -54,7 +54,7 @@ export class RecipeService {
   loadRecipes(): Observable<RecipeData[]> {
     this.log.debug('Chamando GET das receitas');
     return this.http
-      .get<ApiRecipe[]>(this.apiUrl)
+      .get<ApiRecipe[]>(this.apiUrl, this.getAuthRequestOptions())
       .pipe(map((recipes) => recipes.map((recipe) => this.toUiRecipe(recipe))))
       .pipe(tap((recipes) => this.recipesSubject.next(recipes)));
   }
@@ -70,7 +70,7 @@ export class RecipeService {
    * Salva uma nova receita.
    */
   saveRecipe(recipe: RecipeData): Observable<string> {
-    return this.http.post<string>(this.apiUrl, this.toApiRecipe(recipe));
+    return this.http.post<string>(this.apiUrl, this.toApiRecipe(recipe), this.getAuthRequestOptions());
   }
 
   /**
@@ -165,5 +165,23 @@ export class RecipeService {
   private toOrdinationId(value: string, fallbackIndex: number): number {
     const parsed = Number.parseInt(value, 10);
     return Number.isFinite(parsed) ? parsed : fallbackIndex + 1;
+  }
+
+  private getAuthRequestOptions(): { headers?: HttpHeaders } {
+    if (typeof window === 'undefined') {
+      return {};
+    }
+
+    const token = window.localStorage.getItem('access_token');
+
+    if (!token) {
+      return {};
+    }
+
+    return {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
   }
 }
