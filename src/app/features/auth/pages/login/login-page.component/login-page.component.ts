@@ -4,7 +4,7 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NGXLogger } from 'ngx-logger';
 import { ErrorInputComponent } from '../../../../../shared/components/error-input/error-input.component';
-import { AuthResponse, LoginRequest } from '../../../../../shared/models/auth.model';
+import { LoginRequest } from '../../../../../shared/models/auth.model';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class LoginPageComponent {
 
     this.log.info('Fazendo requisição do serviço: {}', request);
     this.authService.userLogin(request).subscribe({
-      next: (response: AuthResponse) => {
+      next: () => {
         this.log.info('Resposta Recebida');
         this.onClose();
         this.cdr.detectChanges();

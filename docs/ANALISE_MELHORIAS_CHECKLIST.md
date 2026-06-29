@@ -35,7 +35,7 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 - [x] Tipar erros de subscribe em login/registro ao inves de any.
 - [x] Substituir nested subscribe por operadores RxJS (switchMap, concatMap, finalize) em src/app/pages/technical-specification/technical-specification.ts.
 - [x] Evitar subscribe sem tratamento de ciclo de vida em src/app/core/services/recipe.service.ts (refreshRecipes).
-- [ ] Revisar imports nao utilizados em src/app/features/auth/pages/login/login-page.component/login-page.component.ts.
+- [x] Revisar imports nao utilizados em src/app/features/auth/pages/login/login-page.component/login-page.component.ts.
 - [ ] Padronizar nomenclatura de componentes/pastas para evitar sufixos duplicados e inconsistentes.
 - [ ] Revisar separacao de responsabilidades entre pagina e servico no fluxo de salvar receita.
 
