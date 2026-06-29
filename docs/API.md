@@ -12,18 +12,18 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecipeService {
   private apiUrl = '/api/recipes';
-  
+
   constructor(private http: HttpClient) {}
-  
+
   // CRUD Operations
-  saveRecipe(recipe: RecipeData): Observable<any>
-  getRecipe(id: string): Observable<RecipeData>
-  updateRecipe(id: string, recipe: RecipeData): Observable<any>
-  deleteRecipe(id: string): Observable<any>
+  saveRecipe(recipe: RecipeData): Observable<any>;
+  getRecipe(id: string): Observable<RecipeData>;
+  updateRecipe(id: string, recipe: RecipeData): Observable<any>;
+  deleteRecipe(id: string): Observable<any>;
 }
 ```
 
@@ -81,24 +81,24 @@ Content-Type: application/json
 ```typescript
 export class TechnicalSpecification {
   constructor(private recipeService: RecipeService) {}
-  
+
   saveRecipe() {
     const recipe: RecipeData = {
       details: this.detailsComponent.getDetails(),
       ingredients: this.ingredientsComponent.ingredients,
       nutritional: this.nutritionalComponent.getNutritional(),
-      preparationMethod: this.preparationComponent.steps
+      preparationMethod: this.preparationComponent.steps,
     };
-    
+
     this.recipeService.saveRecipe(recipe).subscribe(
-      response => {
+      (response) => {
         console.log('Receita salva:', response);
         alert('Receita salva com sucesso!');
       },
-      error => {
+      (error) => {
         console.error('Erro ao salvar:', error);
         alert('Erro ao salvar receita');
-      }
+      },
     );
   }
 }
@@ -137,7 +137,7 @@ GET /api/recipes/{id}
 **Exemplo**:
 
 ```typescript
-this.recipeService.getRecipe('recipe_12345').subscribe(recipe => {
+this.recipeService.getRecipe('recipe_12345').subscribe((recipe) => {
   console.log('Receita carregada:', recipe);
 });
 ```
@@ -207,10 +207,10 @@ DELETE /api/recipes/{id}
 
 ```typescript
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PdfExportService {
-  generateRecipePdf(recipe: RecipeData): void
+  generateRecipePdf(recipe: RecipeData): void;
 }
 ```
 
@@ -237,15 +237,15 @@ generateRecipePdf(recipe: RecipeData): void
 ```typescript
 export class TechnicalSpecification {
   constructor(private pdfService: PdfExportService) {}
-  
+
   exportPdf() {
     const recipe: RecipeData = {
       details: this.detailsComponent.getDetails(),
       ingredients: this.ingredientsComponent.ingredients,
       nutritional: this.nutritionalComponent.getNutritional(),
-      preparationMethod: this.preparationComponent.steps
+      preparationMethod: this.preparationComponent.steps,
     };
-    
+
     // Gera e baixa PDF automaticamente
     this.pdfService.generateRecipePdf(recipe);
   }
@@ -301,31 +301,31 @@ interface RecipeData {
 }
 
 interface RecipeDetails {
-  name: string;           // "Costela 48h Braseada"
-  servings: number;       // 12
-  category: string;       // "Prato Principal"
+  name: string; // "Costela 48h Braseada"
+  servings: number; // 12
+  category: string; // "Prato Principal"
 }
 
 interface Ingredient {
-  name: string;           // "Costela Prime Rib"
-  netWeight: string;      // "2000g"
-  correctionFactor: string;  // "1.2"
-  grossWeight: string;    // "2400g"
-  cookingFactor: string;  // "0.85"
-  totalQuantity: string;  // "20400g"
+  name: string; // "Costela Prime Rib"
+  netWeight: string; // "2000g"
+  correctionFactor: string; // "1.2"
+  grossWeight: string; // "2400g"
+  cookingFactor: string; // "0.85"
+  totalQuantity: string; // "20400g"
 }
 
 interface NutritionalInfo {
-  calories: string;       // "642 kcal"
-  protein: string;        // "42g"
-  totalFat: string;       // "38g"
-  carbs: string;          // "12g"
+  calories: string; // "642 kcal"
+  protein: string; // "42g"
+  totalFat: string; // "38g"
+  carbs: string; // "12g"
 }
 
 interface PreparationStep {
-  id: string;             // "01", "02", etc
-  title: string;          // "Preparação da Costela"
-  description: string;    // "Limpar a costela..."
+  id: string; // "01", "02", etc
+  title: string; // "Preparação da Costela"
+  description: string; // "Limpar a costela..."
 }
 ```
 
@@ -333,13 +333,13 @@ interface PreparationStep {
 
 ## Endpoints do Backend Necessários
 
-| Método | Endpoint | Descrição | Status |
-|--------|----------|-----------|--------|   
-| POST | `/api/recipes` | Criar receita | 🔴 Backend |
-| GET | `/api/recipes` | Listar todas | 🔴 Backend |
-| GET | `/api/recipes/:id` | Obter uma | 🔴 Backend |
-| PUT | `/api/recipes/:id` | Atualizar | 🔴 Backend |
-| DELETE | `/api/recipes/:id` | Deletar | 🔴 Backend |
+| Método | Endpoint           | Descrição     | Status     |
+| ------ | ------------------ | ------------- | ---------- |
+| POST   | `/api/recipes`     | Criar receita | 🔴 Backend |
+| GET    | `/api/recipes`     | Listar todas  | 🔴 Backend |
+| GET    | `/api/recipes/:id` | Obter uma     | 🔴 Backend |
+| PUT    | `/api/recipes/:id` | Atualizar     | 🔴 Backend |
+| DELETE | `/api/recipes/:id` | Deletar       | 🔴 Backend |
 
 ### Exemplo de Implementação Backend (Node/Express)
 
@@ -349,22 +349,22 @@ interface PreparationStep {
 // POST /api/recipes
 app.post('/api/recipes', async (req, res) => {
   const recipe = req.body;
-  
+
   // Validar dados
   if (!recipe.details.name) {
     return res.status(400).json({
-      error: 'Campo name é obrigatório'
+      error: 'Campo name é obrigatório',
     });
   }
-  
+
   try {
     // Salvar no banco
     const saved = await Recipe.create(recipe);
-    
+
     return res.status(201).json({
       id: saved._id,
       created_at: new Date(),
-      message: 'Receita criada'
+      message: 'Receita criada',
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -386,11 +386,7 @@ app.get('/api/recipes/:id', async (req, res) => {
 
 // PUT /api/recipes/:id
 app.put('/api/recipes/:id', async (req, res) => {
-  const updated = await Recipe.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
+  const updated = await Recipe.findByIdAndUpdate(req.params.id, req.body, { new: true });
   res.json(updated);
 });
 
@@ -413,7 +409,7 @@ app.delete('/api/recipes/:id', async (req, res) => {
 export class ApiErrorInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
-      catchError(error => {
+      catchError((error) => {
         // Tratamento por status
         switch (error.status) {
           case 400:
@@ -430,9 +426,9 @@ export class ApiErrorInterceptor implements HttpInterceptor {
             console.error('Erro do servidor');
             break;
         }
-        
+
         return throwError(() => error);
-      })
+      }),
     );
   }
 }
@@ -455,7 +451,7 @@ this.recipeService.saveRecipe(recipe).subscribe({
   complete: () => {
     // Completo
     console.log('Requisição finalizada');
-  }
+  },
 });
 ```
 
@@ -467,10 +463,10 @@ this.recipeService.saveRecipe(recipe).subscribe({
 
 ```typescript
 // Exemplo: Login
-this.authService.login(email, password).subscribe(response => {
+this.authService.login(email, password).subscribe((response) => {
   // Salvar token
   localStorage.setItem('token', response.token);
-  
+
   // Próximas requisições incluem: Authorization: Bearer <token>
 });
 ```
@@ -483,15 +479,15 @@ this.authService.login(email, password).subscribe(response => {
 export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
-    
+
     if (token) {
       req = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
     }
-    
+
     return next.handle(req);
   }
 }
@@ -506,7 +502,7 @@ export class AuthInterceptor implements HttpInterceptor {
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'
+  apiUrl: 'http://localhost:3000',
 };
 ```
 
@@ -515,7 +511,7 @@ export const environment = {
 ```typescript
 export const environment = {
   production: true,
-  apiUrl: 'https://api.gastrofactor.com'
+  apiUrl: 'https://api.gastrofactor.com',
 };
 ```
 
@@ -537,16 +533,16 @@ export class RecipeService {
 // Caching com RxJS
 export class RecipeService {
   private recipeCache = new Map<string, Observable<RecipeData>>();
-  
+
   getRecipe(id: string): Observable<RecipeData> {
     if (this.recipeCache.has(id)) {
       return this.recipeCache.get(id)!;
     }
-    
+
     const recipe$ = this.http.get<RecipeData>(`${this.apiUrl}/${id}`).pipe(
-      shareReplay(1)  // Cachear
+      shareReplay(1), // Cachear
     );
-    
+
     this.recipeCache.set(id, recipe$);
     return recipe$;
   }
@@ -561,28 +557,28 @@ export class RecipeService {
 describe('RecipeService', () => {
   let service: RecipeService;
   let httpMock: HttpTestingController;
-  
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [RecipeService]
+      providers: [RecipeService],
     });
-    
+
     service = TestBed.inject(RecipeService);
     httpMock = TestBed.inject(HttpTestingController);
   });
-  
+
   afterEach(() => {
     httpMock.verify();
   });
-  
+
   it('should save recipe', () => {
-    const recipe: RecipeData = { /* ... */ };
-    
-    service.saveRecipe(recipe).subscribe(response => {
+    const recipe: RecipeData = {/* ... */};
+
+    service.saveRecipe(recipe).subscribe((response) => {
       expect(response.id).toBeDefined();
     });
-    
+
     const req = httpMock.expectOne('/api/recipes');
     expect(req.request.method).toBe('POST');
     req.flush({ id: 'recipe_123' });

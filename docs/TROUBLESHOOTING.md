@@ -63,7 +63,7 @@ npm install
 ```typescript
 @Component({
   selector: 'app-my-component',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MyComponent {}
 ```
@@ -122,7 +122,7 @@ npm install jspdf html2canvas --save
 // ✅ Correto
 .container {
   padding: 1rem;
-  
+
   &__item {
     color: blue;
   }
@@ -131,8 +131,9 @@ npm install jspdf html2canvas --save
 // ❌ Errado - falta &
 .container {
   padding: 1rem;
-  
-  .item {  // Isso vai gerar .container .item
+
+  .item {
+    // Isso vai gerar .container .item
     color: blue;
   }
 }
@@ -151,7 +152,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
-  imports: [FormsModule]  // ← Adicionar
+  imports: [FormsModule], // ← Adicionar
 })
 export class MyComponent {}
 ```
@@ -227,8 +228,8 @@ ng generate component pages/nova-pagina
 const routes: Routes = [
   {
     path: 'nova-pagina',
-    component: NovaPageComponent
-  }
+    component: NovaPageComponent,
+  },
 ];
 ```
 
@@ -248,7 +249,7 @@ ng generate service core/services/meu-servico
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'  // Singleton global
+  providedIn: 'root', // Singleton global
 })
 export class MeuServicoService {
   constructor() {}
@@ -267,11 +268,11 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class MeuServico {
   constructor(private http: HttpClient) {}
-  
+
   getDados() {
     return this.http.get('/api/dados');
   }
-  
+
   saveDados(data) {
     return this.http.post('/api/dados', data);
   }
@@ -340,8 +341,8 @@ ngOnInit() {
    const routes: Routes = [
      {
        path: 'auth',
-       loadChildren: () => import('./features/auth/...').then(m => m.AuthRoutes)
-     }
+       loadChildren: () => import('./features/auth/...').then((m) => m.AuthRoutes),
+     },
    ];
    ```
 
@@ -357,13 +358,13 @@ ngOnInit() {
 
    ```typescript
    private destroy$ = new Subject<void>();
-   
+
    ngOnInit() {
      this.service.getData().pipe(
        takeUntil(this.destroy$)
      ).subscribe(...);
    }
-   
+
    ngOnDestroy() {
      this.destroy$.next();
      this.destroy$.complete();
@@ -391,21 +392,21 @@ import { MyComponent } from './my.component';
 describe('MyComponent', () => {
   let component: MyComponent;
   let fixture: ComponentFixture<MyComponent>;
-  
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MyComponent, FormsModule]
+      imports: [MyComponent, FormsModule],
     }).compileComponents();
-    
+
     fixture = TestBed.createComponent(MyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('should update name', () => {
     component.name = 'Test';
     expect(component.name).toBe('Test');
@@ -424,7 +425,7 @@ describe('MyComponent', () => {
    ```typescript
    // Child
    @Input() data: string;
-   
+
    // Parent Template
    <app-child [data]="'valor'"></app-child>
    ```
@@ -434,11 +435,11 @@ describe('MyComponent', () => {
    ```typescript
    // Child
    @Output() updated = new EventEmitter<string>();
-   
+
    onUpdate() {
      this.updated.emit('novo valor');
    }
-   
+
    // Parent Template
    <app-child (updated)="onChildUpdate($event)"></app-child>
    ```
@@ -450,22 +451,22 @@ describe('MyComponent', () => {
    @Injectable({ providedIn: 'root' })
    export class ComService {
      private message$ = new Subject<string>();
-     
+
      send(msg: string) {
        this.message$.next(msg);
      }
-     
+
      receive() {
        return this.message$.asObservable();
      }
    }
-   
+
    // Componente 1 (emissor)
    constructor(private service: ComService) {}
    send() {
      this.service.send('Olá!');
    }
-   
+
    // Componente 2 (receptor)
    constructor(private service: ComService) {}
    ngOnInit() {
@@ -516,15 +517,15 @@ Resumo:
 ## 📊 Informações de Compatibilidade
 
 | Tecnologia | Versão Mínima | Versão Usada |
-|------------|---------------|-------------|
-| Node.js | 18.0.0 | 20.x LTS |
-| npm | 9.0.0 | 10.x |
-| Angular | 21.0.0 | 21.2.13 |
-| TypeScript | 5.2.0 | 5.5.x |
-| Chrome | 120+ | Latest |
-| Firefox | 121+ | Latest |
-| Safari | 17+ | Latest |
-| Edge | 120+ | Latest |
+| ---------- | ------------- | ------------ |
+| Node.js    | 18.0.0        | 20.x LTS     |
+| npm        | 9.0.0         | 10.x         |
+| Angular    | 21.0.0        | 21.2.13      |
+| TypeScript | 5.2.0         | 5.5.x        |
+| Chrome     | 120+          | Latest       |
+| Firefox    | 121+          | Latest       |
+| Safari     | 17+           | Latest       |
+| Edge       | 120+          | Latest       |
 
 ---
 

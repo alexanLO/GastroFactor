@@ -25,9 +25,9 @@ interface RecipeData {
 
 ```typescript
 interface RecipeDetails {
-  name: string;           // Nome da receita
-  servings: number;       // Número de porções
-  category: string;       // Categoria (Entrada, Prato Principal, Sobremesa)
+  name: string; // Nome da receita
+  servings: number; // Número de porções
+  category: string; // Categoria (Entrada, Prato Principal, Sobremesa)
 }
 ```
 
@@ -35,9 +35,9 @@ interface RecipeDetails {
 
 ```typescript
 const details: RecipeDetails = {
-  name: "Costela 48h Braseada",
+  name: 'Costela 48h Braseada',
   servings: 12,
-  category: "Prato Principal"
+  category: 'Prato Principal',
 };
 ```
 
@@ -58,12 +58,12 @@ const details: RecipeDetails = {
 
 ```typescript
 interface Ingredient {
-  name: string;              // Nome do ingrediente
-  netWeight: string;         // Peso Líquido (PL)
-  correctionFactor: string;  // Fator de Correção (FC)
-  grossWeight: string;       // Peso Bruto (PB)
-  cookingFactor: string;     // Fator de Cocção (FCY)
-  totalQuantity: string;     // Quantidade Total
+  name: string; // Nome do ingrediente
+  netWeight: string; // Peso Líquido (PL)
+  correctionFactor: string; // Fator de Correção (FC)
+  grossWeight: string; // Peso Bruto (PB)
+  cookingFactor: string; // Fator de Cocção (FCY)
+  totalQuantity: string; // Quantidade Total
 }
 ```
 
@@ -71,12 +71,12 @@ interface Ingredient {
 
 ```typescript
 const ingredient: Ingredient = {
-  name: "Costela Prime Rib",
-  netWeight: "2000g",
-  correctionFactor: "1.2",
-  grossWeight: "2400g",
-  cookingFactor: "0.85",
-  totalQuantity: "20400g"
+  name: 'Costela Prime Rib',
+  netWeight: '2000g',
+  correctionFactor: '1.2',
+  grossWeight: '2400g',
+  cookingFactor: '0.85',
+  totalQuantity: '20400g',
 };
 ```
 
@@ -102,10 +102,10 @@ const ingredient: Ingredient = {
 
 ```typescript
 interface NutritionalInfo {
-  calories: string;         // Quilocalorias (kcal)
-  protein: string;          // Proteínas (g)
-  totalFat: string;         // Gordura Total (g)
-  carbs: string;            // Carboidratos (g)
+  calories: string; // Quilocalorias (kcal)
+  protein: string; // Proteínas (g)
+  totalFat: string; // Gordura Total (g)
+  carbs: string; // Carboidratos (g)
 }
 ```
 
@@ -113,10 +113,10 @@ interface NutritionalInfo {
 
 ```typescript
 const nutritional: NutritionalInfo = {
-  calories: "642 kcal",
-  protein: "42g",
-  totalFat: "38g",
-  carbs: "12g"
+  calories: '642 kcal',
+  protein: '42g',
+  totalFat: '38g',
+  carbs: '12g',
 };
 ```
 
@@ -145,10 +145,10 @@ Refeição Normal:
 
 ```typescript
 interface PreparationStep {
-  id: string;           // ID único (01, 02, 03...)
-  title: string;        // Título do passo
-  description: string;  // Descrição detalhada
-  editing?: boolean;    // Flag de edição (apenas frontend)
+  id: string; // ID único (01, 02, 03...)
+  title: string; // Título do passo
+  description: string; // Descrição detalhada
+  editing?: boolean; // Flag de edição (apenas frontend)
 }
 ```
 
@@ -156,10 +156,11 @@ interface PreparationStep {
 
 ```typescript
 const step: PreparationStep = {
-  id: "01",
-  title: "Preparação da Costela",
-  description: "Limpar a costela removendo o excesso de gordura. Temperar com sal e pimenta. Deixar repousar 30 minutos em temperatura ambiente.",
-  editing: false
+  id: '01',
+  title: 'Preparação da Costela',
+  description:
+    'Limpar a costela removendo o excesso de gordura. Temperar com sal e pimenta. Deixar repousar 30 minutos em temperatura ambiente.',
+  editing: false,
 };
 ```
 
@@ -182,12 +183,12 @@ class CardDetailsComponent {
   recipeName: string = '';
   servings: number = 0;
   category: string = 'Entrada';
-  
+
   getDetails(): RecipeDetails {
     return {
       name: this.recipeName,
       servings: this.servings,
-      category: this.category
+      category: this.category,
     };
   }
 }
@@ -200,7 +201,7 @@ class CardDetailsComponent {
 ```typescript
 class TableIngredientsComponent {
   ingredients: Ingredient[] = [];
-  
+
   // Métodos
   addIngredient(): void {
     this.ingredients.push({
@@ -209,10 +210,10 @@ class TableIngredientsComponent {
       correctionFactor: '',
       grossWeight: '',
       cookingFactor: '',
-      totalQuantity: ''
+      totalQuantity: '',
     });
   }
-  
+
   removeIngredient(index: number): void {
     this.ingredients.splice(index, 1);
   }
@@ -229,13 +230,13 @@ class CardNutritionalComponent {
   protein: string = '';
   totalFat: string = '';
   carbs: string = '';
-  
+
   getNutritional(): NutritionalInfo {
     return {
       calories: this.calories,
       protein: this.protein,
       totalFat: this.totalFat,
-      carbs: this.carbs
+      carbs: this.carbs,
     };
   }
 }
@@ -248,17 +249,17 @@ class CardNutritionalComponent {
 ```typescript
 class PreparationMethodComponent {
   steps: PreparationStep[] = [];
-  
+
   addStep(): void {
     const newId = String(this.steps.length + 1).padStart(2, '0');
     this.steps.push({
       id: newId,
       title: '',
       description: '',
-      editing: false
+      editing: false,
     });
   }
-  
+
   removeStep(index: number): void {
     this.steps.splice(index, 1);
     // Renumerar steps
@@ -286,9 +287,9 @@ interface SuccessResponse<T> {
 // Exemplo
 const response: SuccessResponse<RecipeData> = {
   success: true,
-  data: { /* receita */ },
-  message: "Receita criada com sucesso",
-  timestamp: "2024-06-15T10:30:00Z"
+  data: {/* receita */},
+  message: 'Receita criada com sucesso',
+  timestamp: '2024-06-15T10:30:00Z',
 };
 ```
 
@@ -308,13 +309,10 @@ interface ErrorResponse {
 // Exemplo
 const error: ErrorResponse = {
   success: false,
-  error: "Validation failed",
-  details: [
-    "Campo 'name' é obrigatório",
-    "Campo 'servings' deve ser > 0"
-  ],
-  timestamp: "2024-06-15T10:30:00Z",
-  path: "/api/recipes"
+  error: 'Validation failed',
+  details: ["Campo 'name' é obrigatório", "Campo 'servings' deve ser > 0"],
+  timestamp: '2024-06-15T10:30:00Z',
+  path: '/api/recipes',
 };
 ```
 
@@ -340,8 +338,8 @@ const response: PaginatedResponse<RecipeData> = {
     page: 1,
     limit: 10,
     total: 45,
-    pages: 5
-  }
+    pages: 5,
+  },
 };
 ```
 
@@ -357,7 +355,7 @@ enum RecipeCategory {
   PRATO_PRINCIPAL = 'Prato Principal',
   ACOMPANHAMENTO = 'Acompanhamento',
   SOBREMESA = 'Sobremesa',
-  BEBIDA = 'Bebida'
+  BEBIDA = 'Bebida',
 }
 
 // Uso
@@ -380,7 +378,7 @@ const RECIPE_LIMITS = {
   INGREDIENTS_MAX: 100,
   STEPS_MIN: 1,
   STEPS_MAX: 50,
-  DESCRIPTION_MAX: 1000
+  DESCRIPTION_MAX: 1000,
 };
 ```
 
@@ -395,7 +393,7 @@ type PartialRecipeData = Partial<RecipeData>;
 
 // Permite enviar apenas campos que mudaram
 const update: PartialRecipeData = {
-  details: { name: "Novo Nome" }
+  details: { name: 'Novo Nome' },
   // Sem ingredients, nutritional, preparationMethod
 };
 ```
@@ -418,32 +416,32 @@ function createRecipeId(id: string): RecipeId {
 // Validar RecipeData completa
 function validateRecipeData(recipe: RecipeData): string[] {
   const errors: string[] = [];
-  
+
   // Validar details
   if (!recipe.details.name || recipe.details.name.trim() === '') {
     errors.push('Nome da receita é obrigatório');
   }
-  
+
   if (recipe.details.servings <= 0) {
     errors.push('Rendimento deve ser maior que 0');
   }
-  
+
   // Validar ingredientes
   if (recipe.ingredients.length === 0) {
     errors.push('Mínimo 1 ingrediente é obrigatório');
   }
-  
+
   recipe.ingredients.forEach((ing, i) => {
     if (!ing.name) {
       errors.push(`Ingrediente ${i + 1}: Nome é obrigatório`);
     }
   });
-  
+
   // Validar passos
   if (recipe.preparationMethod.length === 0) {
     errors.push('Mínimo 1 passo de preparo é obrigatório');
   }
-  
+
   return errors;
 }
 
@@ -465,27 +463,29 @@ function formToRecipeData(formData: any): RecipeData {
     details: {
       name: formData.recipeName?.trim(),
       servings: Number(formData.servings),
-      category: formData.category
+      category: formData.category,
     },
-    ingredients: formData.ingredients?.map(ing => ({
-      name: ing.name?.trim(),
-      netWeight: ing.netWeight?.trim(),
-      correctionFactor: ing.correctionFactor?.trim(),
-      grossWeight: ing.grossWeight?.trim(),
-      cookingFactor: ing.cookingFactor?.trim(),
-      totalQuantity: ing.totalQuantity?.trim()
-    })) || [],
+    ingredients:
+      formData.ingredients?.map((ing) => ({
+        name: ing.name?.trim(),
+        netWeight: ing.netWeight?.trim(),
+        correctionFactor: ing.correctionFactor?.trim(),
+        grossWeight: ing.grossWeight?.trim(),
+        cookingFactor: ing.cookingFactor?.trim(),
+        totalQuantity: ing.totalQuantity?.trim(),
+      })) || [],
     nutritional: {
       calories: formData.calories?.trim(),
       protein: formData.protein?.trim(),
       totalFat: formData.totalFat?.trim(),
-      carbs: formData.carbs?.trim()
+      carbs: formData.carbs?.trim(),
     },
-    preparationMethod: formData.steps?.map(step => ({
-      id: step.id,
-      title: step.title?.trim(),
-      description: step.description?.trim()
-    })) || []
+    preparationMethod:
+      formData.steps?.map((step) => ({
+        id: step.id,
+        title: step.title?.trim(),
+        description: step.description?.trim(),
+      })) || [],
   };
 }
 ```
@@ -498,49 +498,49 @@ function formToRecipeData(formData: any): RecipeData {
 // Criar receita do zero
 const completeRecipe: RecipeData = {
   details: {
-    name: "Bife Ancho com Batata Fondant",
+    name: 'Bife Ancho com Batata Fondant',
     servings: 4,
-    category: "Prato Principal"
+    category: 'Prato Principal',
   },
-  
+
   ingredients: [
     {
-      name: "Bife Ancho",
-      netWeight: "800g",
-      correctionFactor: "1.1",
-      grossWeight: "880g",
-      cookingFactor: "0.75",
-      totalQuantity: "2640g"
+      name: 'Bife Ancho',
+      netWeight: '800g',
+      correctionFactor: '1.1',
+      grossWeight: '880g',
+      cookingFactor: '0.75',
+      totalQuantity: '2640g',
     },
     {
-      name: "Batata Inglesa",
-      netWeight: "400g",
-      correctionFactor: "1.15",
-      grossWeight: "460g",
-      cookingFactor: "0.9",
-      totalQuantity: "1656g"
-    }
+      name: 'Batata Inglesa',
+      netWeight: '400g',
+      correctionFactor: '1.15',
+      grossWeight: '460g',
+      cookingFactor: '0.9',
+      totalQuantity: '1656g',
+    },
   ],
-  
+
   nutritional: {
-    calories: "850 kcal",
-    protein: "52g",
-    totalFat: "58g",
-    carbs: "28g"
+    calories: '850 kcal',
+    protein: '52g',
+    totalFat: '58g',
+    carbs: '28g',
   },
-  
+
   preparationMethod: [
     {
-      id: "01",
-      title: "Preparação do Bife",
-      description: "Retirar do refrigerador 30 min antes. Temperar com sal e pimenta."
+      id: '01',
+      title: 'Preparação do Bife',
+      description: 'Retirar do refrigerador 30 min antes. Temperar com sal e pimenta.',
     },
     {
-      id: "02",
-      title: "Cocção do Bife",
-      description: "Selar na frigideira bem quente por 4 min de cada lado (ponto roso)."
-    }
-  ]
+      id: '02',
+      title: 'Cocção do Bife',
+      description: 'Selar na frigideira bem quente por 4 min de cada lado (ponto roso).',
+    },
+  ],
 };
 
 // Validar
@@ -548,7 +548,7 @@ const errors = validateRecipeData(completeRecipe);
 
 // Salvar
 if (errors.length === 0) {
-  recipeService.saveRecipe(completeRecipe).subscribe(response => {
+  recipeService.saveRecipe(completeRecipe).subscribe((response) => {
     console.log('Salvo:', response);
   });
 }

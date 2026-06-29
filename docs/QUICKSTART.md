@@ -47,7 +47,7 @@ src/app/
 
 export class CardDetailsComponent {
   recipeName: string = '';
-  
+
   getDetails() {
     return { name: this.recipeName };
   }
@@ -86,14 +86,14 @@ src/app/component/meu-componente/
 
 ## 🛠️ Comando Mais Comuns
 
-| Comando | Descrição |
-|---------|-----------|
-| `npm start` | Inicia dev server |
-| `npm test` | Executa testes |
-| `npm run build` | Build de produção |
-| `ng serve` | Alternativa para `npm start` |
-| `ng generate component` | Cria novo componente |
-| `ng generate service` | Cria novo serviço |
+| Comando                 | Descrição                    |
+| ----------------------- | ---------------------------- |
+| `npm start`             | Inicia dev server            |
+| `npm test`              | Executa testes               |
+| `npm run build`         | Build de produção            |
+| `ng serve`              | Alternativa para `npm start` |
+| `ng generate component` | Cria novo componente         |
+| `ng generate service`   | Cria novo serviço            |
 
 ## 🐛 Troubleshooting
 

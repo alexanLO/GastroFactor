@@ -77,10 +77,10 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 
 ### Prioridade P3 - Pipeline e automacao
 
-- [ ] Adicionar script de lint e configuracao ESLint (Angular + TypeScript).
-- [ ] Adicionar format check automatizado no CI usando Prettier.
-- [ ] Configurar pipeline CI com etapas: install, build, test, lint e cobertura.
-- [ ] Publicar checklist de release com validacoes minimas antes de deploy.
+- [x] Adicionar script de lint e configuracao ESLint (Angular + TypeScript).
+- [x] Adicionar format check automatizado no CI usando Prettier.
+- [x] Configurar pipeline CI com etapas: install, build, test, lint e cobertura.
+- [x] Publicar checklist de release com validacoes minimas antes de deploy.
 
 ## Plano de Execucao Sugerido
 

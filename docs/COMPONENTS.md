@@ -15,7 +15,7 @@ Documentação completa de todos os componentes da aplicação.
   standalone: true,
   imports: [CommonModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
   // Lógica de navegação
@@ -51,9 +51,9 @@ export class NavbarComponent {
 **Propriedades**:
 
 ```typescript
-recipeName: string = '';        // Nome da receita
-servings: number = 0;          // Rendimento
-category: string = 'Entrada';  // Categoria
+recipeName: string = ''; // Nome da receita
+servings: number = 0; // Rendimento
+category: string = 'Entrada'; // Categoria
 ```
 
 **Métodos**:
@@ -107,12 +107,12 @@ saveRecipe() {
 ```typescript
 ingredients: Array<{
   name: string;
-  netWeight: string;         // PL
-  correctionFactor: string;  // FC
-  grossWeight: string;       // PB
-  cookingFactor: string;     // FCY
+  netWeight: string; // PL
+  correctionFactor: string; // FC
+  grossWeight: string; // PB
+  cookingFactor: string; // FCY
   totalQuantity: string;
-}> = []
+}> = [];
 ```
 
 **Métodos**:
@@ -135,10 +135,10 @@ removeIngredient(index): void // Remove ingrediente
   </thead>
   <tbody>
     @for (item of ingredients; track $index) {
-      <tr>
-        <td><input [(ngModel)]="item.name" /></td>
-        <!-- ... -->
-      </tr>
+    <tr>
+      <td><input [(ngModel)]="item.name" /></td>
+      <!-- ... -->
+    </tr>
     }
   </tbody>
 </table>
@@ -168,10 +168,10 @@ saveRecipe() {
 **Propriedades**:
 
 ```typescript
-calories: string = '';       // Ex: "642 kcal"
-protein: string = '';        // Ex: "42g"
-totalFat: string = '';       // Ex: "38g"
-carbs: string = '';          // Ex: "12g"
+calories: string = ''; // Ex: "642 kcal"
+protein: string = ''; // Ex: "42g"
+totalFat: string = ''; // Ex: "38g"
+carbs: string = ''; // Ex: "12g"
 ```
 
 **Métodos**:
@@ -225,11 +225,11 @@ saveRecipe() {
 
 ```typescript
 steps: Array<{
-  id: string;          // "01", "02", etc
-  title: string;       // Título do passo
+  id: string; // "01", "02", etc
+  title: string; // Título do passo
   description: string; // Descrição detalhada
-  editing: boolean;    // Estado de edição
-}> = []
+  editing: boolean; // Estado de edição
+}> = [];
 ```
 
 **Métodos**:
@@ -247,11 +247,11 @@ confirmStep(step): void   // Confirma edição
 <section class="preparation-method">
   <button (click)="addStep()">Adicionar Passo</button>
   @for (step of steps; track $index) {
-    <div class="step">
-      <input [(ngModel)]="step.title" />
-      <textarea [(ngModel)]="step.description"></textarea>
-      <button (click)="removeStep($index)">Remover</button>
-    </div>
+  <div class="step">
+    <input [(ngModel)]="step.title" />
+    <textarea [(ngModel)]="step.description"></textarea>
+    <button (click)="removeStep($index)">Remover</button>
+  </div>
   }
 </section>
 ```
@@ -306,13 +306,13 @@ closeModal(): void       // Fecha modal
 <!-- Dashboard Principal -->
 <div class="dashboard-container">
   <app-navbar-component></app-navbar-component>
-  
+
   <div class="dashboard-layout">
     <!-- Sidebar -->
     <aside class="sidebar">
       <!-- Status da conta -->
     </aside>
-    
+
     <!-- Main Content -->
     <main class="main-content">
       <!-- Grid de receitas -->
@@ -323,7 +323,7 @@ closeModal(): void       // Fecha modal
       </section>
     </main>
   </div>
-  
+
   <app-footer-component></app-footer-component>
 </div>
 
@@ -408,7 +408,7 @@ exportPdf(): void       // Gera PDF e permite download
 // Parent Component
 export class TechnicalSpecification {
   @ViewChild(CardDetailsComponent) details!: CardDetailsComponent;
-  
+
   saveRecipe() {
     // Acessar método público do filho
     const data = this.details.getDetails();
@@ -418,7 +418,7 @@ export class TechnicalSpecification {
 // Child Component
 export class CardDetailsComponent {
   recipeName: string = '';
-  
+
   // Método público acessível pelo pai
   getDetails() {
     return { name: this.recipeName };
@@ -441,13 +441,11 @@ recipe = { name: '' };
 ```html
 <!-- Angular 17+ @for syntax -->
 @for (item of ingredients; track $index) {
-  <div>{{ item.name }}</div>
+<div>{{ item.name }}</div>
 }
 
 <!-- Alternativa *ngFor -->
-<div *ngFor="let item of ingredients; let i = index">
-  {{ item.name }}
-</div>
+<div *ngFor="let item of ingredients; let i = index">{{ item.name }}</div>
 ```
 
 ---
@@ -462,10 +460,10 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-my-new',
-  standalone: true,                    // Standalone
+  standalone: true, // Standalone
   imports: [FormsModule, CommonModule], // Imports necessários
   templateUrl: './my-new.component.html',
-  styleUrl: './my-new.component.scss'
+  styleUrl: './my-new.component.scss',
 })
 export class MyNewComponent {
   // Lógica do componente

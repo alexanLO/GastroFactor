@@ -8,7 +8,7 @@ on:
 
 jobs:
   quality-gate:
-    name: Build and Coverage Gate
+    name: Install Build Test Lint Coverage
     runs-on: ubuntu-latest
 
     steps:
@@ -23,6 +23,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Check formatting (Prettier)
+        run: npm run format:check
+
+      - name: Lint source code
+        run: npm run lint
 
       - name: Build application
         run: npm run build

@@ -24,6 +24,7 @@ Este guia define o plano para migrar a autenticacao atual (tokens em localStorag
 ## Mudancas Necessarias no Backend
 
 1. Endpoints de autenticacao
+
 - POST /v1/auth/login:
   - Retorna access token no body.
   - Seta refresh token em cookie HttpOnly.
@@ -38,6 +39,7 @@ Este guia define o plano para migrar a autenticacao atual (tokens em localStorag
   - Invalida todas as sessoes do usuario.
 
 2. Configuracoes de cookie
+
 - HttpOnly: true
 - Secure: true em producao
 - SameSite:
@@ -47,11 +49,13 @@ Este guia define o plano para migrar a autenticacao atual (tokens em localStorag
 - Max-Age alinhado a politica de sessao
 
 3. CORS e credenciais
+
 - Access-Control-Allow-Credentials: true
 - Origem explicita (sem wildcard) para frontend
 - Frontend deve enviar withCredentials: true
 
 4. Persistencia e revogacao
+
 - Armazenar refresh token hasheado no servidor.
 - Rotacionar refresh token por uso.
 - Detectar reutilizacao de token rotacionado e invalidar cadeia.
@@ -59,12 +63,14 @@ Este guia define o plano para migrar a autenticacao atual (tokens em localStorag
 ## Mudancas Necessarias no Frontend
 
 1. AuthService
+
 - Parar de persistir refresh token em localStorage.
 - Opcional: manter access token apenas em memoria.
 - Login com withCredentials habilitado.
 - Fluxo de refresh via endpoint dedicado quando houver 401 por expiracao.
 
 2. Http Interceptor de autenticacao
+
 - Em 401 por expiracao de access token:
   - Tentar refresh uma vez.
   - Repetir request original se refresh funcionar.
@@ -72,6 +78,7 @@ Este guia define o plano para migrar a autenticacao atual (tokens em localStorag
 - Evitar loops de refresh.
 
 3. Logout
+
 - Logout local:
   - Limpar estado em memoria.
   - Chamar endpoint de logout para expirar cookie.
@@ -108,21 +115,25 @@ Este guia define o plano para migrar a autenticacao atual (tokens em localStorag
 ## Plano de Migracao por Fases
 
 Fase 1 - Preparacao
+
 - Implementar endpoint /refresh com cookie HttpOnly.
 - Ajustar CORS para credenciais.
 - Adicionar flag de rollout no backend.
 
 Fase 2 - Dual mode
+
 - Aceitar modelo atual e novo temporariamente.
 - Frontend passa a usar withCredentials e fluxo de refresh.
 - Medir taxa de sucesso de renovacao e erros 401.
 
 Fase 3 - Cutover
+
 - Descontinuar refresh token em localStorage.
 - Forcar renovacao somente por cookie HttpOnly.
 - Monitorar erros e rollback plan.
 
 Fase 4 - Hardening
+
 - Rotacao obrigatoria + deteccao de reutilizacao.
 - Auditoria e alertas de seguranca.
 - Revisao de headers de seguranca (CSP, X-Frame-Options, etc.).
@@ -130,6 +141,7 @@ Fase 4 - Hardening
 ## Checklist de Implementacao
 
 Backend
+
 - [ ] Login seta refresh token em cookie HttpOnly.
 - [ ] Endpoint refresh implementado com rotacao.
 - [ ] Endpoint logout invalida sessao e expira cookie.
@@ -137,6 +149,7 @@ Backend
 - [ ] CORS com credentials configurado corretamente.
 
 Frontend
+
 - [ ] Requests de auth com withCredentials.
 - [ ] Interceptor de refresh com retry unico.
 - [ ] Sem refresh token em localStorage/sessionStorage.
@@ -144,6 +157,7 @@ Frontend
 - [ ] Tratamento de falha de refresh com redirecionamento seguro.
 
 Governanca
+
 - [ ] Politica de expiracao aprovada.
 - [ ] Politica de logout global publicada.
 - [ ] Runbook de incidentes de autenticacao documentado.

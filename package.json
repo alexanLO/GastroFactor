@@ -10,12 +10,15 @@
     "start": "ng serve",
     "build": "ng build",
     "build:stats": "ng build --stats-json",
+    "lint": "ng lint",
+    "format": "prettier --write \"README.md\" \"docs/**/*.md\" \".github/workflows/*.{yml,yaml}\"",
+    "format:check": "prettier --check \"README.md\" \"docs/**/*.md\" \".github/workflows/*.{yml,yaml}\"",
     "perf:bundle:report": "node tools/perf/bundle-size-report.mjs",
     "perf:bundle:check": "node tools/perf/bundle-size-report.mjs --check",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless --code-coverage --progress=false",
-    "quality:ci": "npm run build && npm run test:ci",
+    "quality:ci": "npm run format:check && npm run lint && npm run build && npm run test:ci",
     "serve:ssr:GastroFactor": "node dist/GastroFactor/server/server.mjs"
   },
   "prettier": {
@@ -61,17 +64,26 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^21.2.11",
+    "@angular-eslint/builder": "^21.4.0",
+    "@angular-eslint/eslint-plugin": "^21.4.0",
+    "@angular-eslint/eslint-plugin-template": "^21.4.0",
+    "@angular-eslint/template-parser": "^21.4.0",
     "@angular/cli": "^21.2.11",
     "@angular/compiler-cli": "^21.2.13",
     "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.19.39",
+    "@typescript-eslint/eslint-plugin": "^8.62.1",
+    "@typescript-eslint/parser": "^8.62.1",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
     "jasmine-core": "~5.9.0",
     "karma": "^6.3.17",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "^3.9.3",
     "typescript": "~5.9.2"
   }
 }
