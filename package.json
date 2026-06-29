@@ -14,6 +14,8 @@
     "perf:bundle:check": "node tools/perf/bundle-size-report.mjs --check",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless --code-coverage --progress=false",
+    "quality:ci": "npm run build && npm run test:ci",
     "serve:ssr:GastroFactor": "node dist/GastroFactor/server/server.mjs"
   },
   "prettier": {
