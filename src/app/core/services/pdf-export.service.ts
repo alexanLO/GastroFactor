@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RecipeData } from '../../shared/models/recipe-data.model';
 import { NotificationService } from './notification.service';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { NotificationService } from './notification.service';
 export class PdfExportService {
   constructor(private readonly notificationService: NotificationService) {}
 
-  generateRecipePdf(recipe: any): void {
+  generateRecipePdf(recipe: RecipeData): void {
     // Dinamicamente importar jsPDF quando necessário
     import('jspdf').then(({ jsPDF }) => {
       import('html2canvas').then(({ default: html2canvas }) => {
@@ -90,10 +91,10 @@ export class PdfExportService {
     });
   }
 
-  private createPdfContent(recipe: any): string {
+  private createPdfContent(recipe: RecipeData): string {
     const ingredientsHtml = recipe.ingredients
       .map(
-        (item: any) =>
+        (item) =>
           `<tr>
             <td>${item.name || ''}</td>
             <td>${item.netWeight || ''}</td>
@@ -107,7 +108,7 @@ export class PdfExportService {
 
     const stepsHtml = recipe.preparationMethod
       .map(
-        (step: any, index: number) =>
+        (step, index: number) =>
           `<li>
             <strong>${index + 1}. ${step.title || ''}</strong>
             <p>${step.description || ''}</p>
