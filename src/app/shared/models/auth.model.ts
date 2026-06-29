@@ -1,16 +1,16 @@
 export interface LoginRequest {
-  email: String;
-  password: String;
+  email: string;
+  password: string;
 }
 
 export interface AuthResponse {
   accessToken: string;
-  refreshToken: string;
+  refreshToken: string | null;
 }
 
 export interface RegisterRequest {
-  name: String;
-  email: String;
-  password: String;
-  occupation: String;
+  name: string;
+  email: string;
+  password: string;
+  occupation: string;
 }

@@ -1,373 +1,135 @@
-# 🍽️ GastroFactor - Ficha Técnica de Receitas
+# GastroFactor
 
-[![Angular](https://img.shields.io/badge/Angular-21-dd0031?style=flat-square&logo=angular)](https://angular.io)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=flat-square)](https://github.com/alexanLO/GastroFactor/tree/feature/desen-atividas)
+Aplicacao web Angular para criacao e gerenciamento de fichas tecnicas de receitas.
 
-Aplicação web moderna para criação, edição e gerenciamento de fichas técnicas de receitas culinárias. Desenvolvida com **Angular 21** e **TypeScript**, oferece uma interface intuitiva e responsiva para chefs e cozinheiros profissionais.
+## Stack
 
-## 📋 Sumário
+- Angular 21 (standalone components)
+- TypeScript 5
+- RxJS 7
+- NGX Logger
+- jsPDF + html2canvas (carregamento dinamico)
+- Express para SSR
 
-- [Visão Geral](#-visão-geral)
-- [Recursos Principais](#-recursos-principais)
-- [Pré-requisitos](#-pré-requisitos)
-- [Instalação](#-instalação)
-- [Execução](#-execução)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Documentação](#-documentação)
-- [Integração com Backend](#-integração-com-backend)
-- [Design System](#-design-system)
-- [Contribuição](#-contribuição)
+## Requisitos
 
-## 🎯 Visão Geral
+- Node.js 22.12.x (LTS) (veja `.nvmrc`)
+- npm 10+
 
-**GastroFactor** é uma plataforma para padronização de receitas profissionais. Permite que cozinheiros criem fichas técnicas detalhadas com dados completos sobre ingredientes, informações nutricionais e modo de preparo. O projeto também funciona como portfólio profissional da desenvolvedora.
-
-**Status**: 🚧 Em Desenvolvimento (Branch: `feature/desen-atividas`)
-
-## 🚀 Recursos Principais
-
-### 1. **Dashboard de Coleção** (`my-collection`)
-
-- ✅ Visualização de todas as receitas salvas
-- ✅ Cards com preview de receitas
-- ✅ Status da conta (plano, armazenamento utilizado)
-- ✅ Filtro e busca rápida
-- ✅ Acesso rápido às receitas favoritas
-
-### 2. **Editor de Fichas Técnicas** (`technical-specification`)
-
-- ✅ Interface intuitiva em modal (não redireciona)
-- ✅ Preenchimento de dados básicos (nome, categoria, rendimento)
-- ✅ Tabela interativa de ingredientes
-- ✅ Campo de valores nutricionais editáveis
-- ✅ Método de preparo com passos numerados
-
-### 3. **Funcionalidades de Dados**
-
-- ✅ **Salvar**: Envia todos os dados para o backend
-- ✅ **Exportar PDF**: Gera PDF profissional com formatação elegante
-- ✅ Suporte a múltiplas páginas automáticas
-- ✅ Download automático com nome da receita
-
-### 4. **Autenticação e Segurança**
-
-- 🔐 Sistema de login/registro
-- 🔐 Guards de rota para proteção
-- 🔐 Interceptadores para tratamento de erros
-- 🔐 Token baseado em JWT (para implementar)
-
-## 📦 Pré-requisitos
-
-- **Node.js**: v18 ou superior
-- **npm**: v9 ou superior
-- **Angular CLI**: v21 (`npm install -g @angular/cli@21`)
-- **Git**: Para versionamento
-
-## 🔧 Instalação
-
-### 1. Clonar o repositório
+## Inicio rapido
 
 ```bash
 git clone https://github.com/alexanLO/GastroFactor.git
 cd GastroFactor
-```
-
-### 2. Instalar dependências
-
-```bash
-npm install
-```
-
-### 3. Instalar dependências para PDF (já incluídas)
-
-```bash
-npm install jspdf html2canvas
-```
-
-## 🎮 Execução
-
-### Desenvolvimento Local
-
-```bash
+npm ci
 npm start
-# ou
-ng serve
 ```
 
-Acesse: http://localhost:4200
+Aplicacao local: `http://localhost:4200`
 
-O aplicativo recarrega automaticamente ao modificar arquivos.
+## Scripts disponiveis
 
-### Build para Produção
+- `npm start`: servidor local (dev)
+- `npm run build`: build de producao
+- `npm run build:stats`: build com `stats.json` para analise de bundles
+- `npm test`: testes unitarios (modo padrao)
+- `npm run test:ci`: testes headless com cobertura
+- `npm run quality:ci`: gate local de qualidade (build + cobertura)
+- `npm run perf:bundle:report`: relatorio de bundles vs baseline
+- `npm run perf:bundle:check`: falha se houver regressao de tamanho acima do limite
+- `npm run serve:ssr:GastroFactor`: executa artefato SSR em `dist/GastroFactor/server/server.mjs`
 
-```bash
-npm run build
-# ou
-ng build --configuration production
-```
+## Ambientes
 
-Arquivos gerados em: `dist/GastroFactor`
+Arquivos em `src/environments/`:
 
-### Testes Unitários
+- `environment.ts`
+- `environment.local.ts`
+- `environment.hom.ts`
+- `environment.prod.ts`
 
-```bash
-npm test
-```
+Configuracoes no `angular.json`:
 
-### Server-Side Rendering (SSR)
+- `build:production`
+- `build:homologation`
+- `build:local`
 
-```bash
-npm run build:ssr
-npm run serve:ssr:GastroFactor
-```
+Consulte o guia de ambientes em [docs/AMBIENTES.md](docs/AMBIENTES.md).
 
-## 📁 Estrutura do Projeto
+## Estrutura atual do projeto
 
 ```text
-src/app/
-├── core/                          # Serviços e lógica global (singleton)
-│   ├── interceptors/
-│   │   └── api-error.interceptor.ts
-│   └── services/
-│       ├── recipe.service.ts      # CRUD de receitas
-│       ├── pdf-export.service.ts  # Exportação de PDF
-│       └── calculation.service.ts
-│
-├── shared/                        # Reutilizáveis em todo o app
-│   ├── components/
-│   ├── models/                    # Interfaces TypeScript
-│   ├── styles/                    # SCSS global (variáveis, mixins)
-│   └── directives/
-│
-├── features/                      # Módulos por funcionalidade
-│   └── auth/                      # Autenticação
-│       ├── pages/
-│       ├── services/
-│       └── guards/
-│
-├── pages/                         # Páginas principais
-│   ├── my-collection/             # Dashboard de receitas
-│   ├── technical-specification/   # Editor de fichas
-│   └── main-screen/
-│
-├── component/                     # Componentes de layout global
-│   ├── navbar/
-│   ├── footer/
-│   ├── table-ingredients/         # Tabela de ingredientes
-│   ├── card-details-component/    # Dados básicos da receita
-│   ├── card-nutritional/          # Valores nutricionais
-│   ├── preparation-method-component/  # Modo de preparo
-│   └── ...
-│
-├── env/                           # Configurações por ambiente
-│   ├── environment.ts
-│   ├── environment.prod.ts
-│   ├── environment.hom.ts
-│   └── environment.local.ts
-│
-├── app.routes.ts                  # Rotas principais
-├── app.config.ts                  # Configuração da aplicação
-├── main.ts                        # Ponto de entrada
-└── main.server.ts                 # SSR Entry
+src/
+  app/
+    app.config.ts
+    app.routes.ts
+    component/
+      calcular-dialog/
+      card-details/
+      card-nutritional/
+      footer/
+      navbar/
+      preparation-method/
+      recipe-card/
+      table-ingredients/
+    core/
+      interceptors/
+      services/
+      utils/
+    features/
+      auth/
+        guard/
+        pages/
+        services/
+    pages/
+      main-screen/
+      my-collection/
+      technical-specification/
+    shared/
+      components/
+      models/
+      styles/
+  environments/
 ```
 
-## 🏗️ Arquitetura
+## Rotas principais
 
-### Padrões Implementados
+Definidas em `src/app/app.routes.ts`:
 
-1. **Standalone Components**: Sem NgModules
-2. **Signals**: (em preparação)
-3. **Lazy Loading**: Rotas com carregamento tardio
-4. **Smart/Dumb Components**: Separação clara de responsabilidades
-5. **RxJS**: Reactive programming com Observables
+- `/gastrofactor`
+- `/meu-acervo` (protegida por `authGuard`)
+- `/sobre` (placeholder)
 
-### Fluxo de Dados
+## Qualidade e CI
 
-```text
-User Interaction
-      ↓
-Component Method
-      ↓
-Service (RecipeService)
-      ↓
-HTTP Call / API
-      ↓
-Backend
-      ↓
-Response
-      ↓
-State Update
-      ↓
-Template Change
-```
+- Budgets de bundle de producao configurados em `angular.json`
+- Monitoramento de regressao de bundle em `tools/perf/`
+- Gate de cobertura em `karma.conf.cjs`
+- Workflow de CI em `.github/workflows/ci-quality-gate.yml`
+- ESLint e Prettier integrados ao fluxo `quality:ci`
 
-## 🔌 Integração com Backend
+## Documentacao
 
-### Endpoints Necessários
+Indice completo: [docs/INDEX.md](docs/INDEX.md)
 
-Seu backend deve fornecer os seguintes endpoints:
+Documentos principais:
 
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| POST | `/api/recipes` | Criar nova receita |
-| GET | `/api/recipes` | Listar todas as receitas |
-| GET | `/api/recipes/:id` | Obter uma receita |
-| PUT | `/api/recipes/:id` | Atualizar receita |
-| DELETE | `/api/recipes/:id` | Deletar receita |
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- [docs/API.md](docs/API.md)
+- [docs/COMPONENTS.md](docs/COMPONENTS.md)
+- [docs/DATA_MODELS.md](docs/DATA_MODELS.md)
+- [docs/AMBIENTES.md](docs/AMBIENTES.md)
+- [docs/GUIA_CONTRIBUICAO.md](docs/GUIA_CONTRIBUICAO.md)
+- [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
 
-### Formato de Dados Esperado
+## Estado atual
 
-```typescript
-interface RecipeData {
-  details: {
-    name: string;              // Ex: "Costela 48h Braseada"
-    servings: number;          // Ex: 12
-    category: string;          // "Entrada", "Prato Principal", "Sobremesa"
-  };
-  ingredients: Array<{
-    name: string;
-    netWeight: string;         // Peso líquido
-    correctionFactor: string;  // Fator de correção
-    grossWeight: string;       // Peso bruto
-    cookingFactor: string;     // Fator de cocção
-    totalQuantity: string;     // Quantidade total
-  }>;
-  nutritional: {
-    calories: string;          // Ex: "642 kcal"
-    protein: string;           // Ex: "42g"
-    totalFat: string;          // Ex: "38g"
-    carbs: string;             // Ex: "12g"
-  };
-  preparationMethod: Array<{
-    id: string;                // Número do passo
-    title: string;             // Título do passo
-    description: string;       // Descrição detalhada
-  }>;
-}
-```
+- Build, lint e testes estao operacionais
+- Pipeline local `npm run quality:ci` validado
+- Cobertura minima em CI configurada com threshold incremental
+- Documentacao central alinhada com a estrutura real em `src/`
 
-### Exemplo de Requisição
+## Licenca
 
-```typescript
-// recipe.service.ts
-saveRecipe(recipe: RecipeData): Observable<any> {
-  return this.http.post(`${this.apiUrl}`, recipe);
-}
-```
-
-## 🎨 Design System
-
-### Cores Principais
-
-```scss
-$primary: #ff6b35;              // Laranja (principal)
-$primary-container: #ffdcc8;    // Laranja claro
-$secondary: #d0bcff;            // Roxo
-$surface: #1a1a1a;              // Fundo escuro
-$surface-container: #2d2d2d;    // Cinza escuro
-$on-surface: #ffffff;           // Texto branco
-$on-surface-variant: #c4c7c5;   // Texto cinza
-```
-
-### Tipografia
-
-- **Serif Font**: Para títulos e destaques (`font-serif`)
-- **Sans Font**: Para corpo de texto (`font-sans`)
-
-Consulte `src/app/shared/styles/_variables.scss` para referência completa.
-
-## 📱 Responsividade
-
-Otimizado para múltiplos dispositivos:
-
-- 📱 **Mobile**: 320px - 768px
-- 💻 **Tablet**: 768px - 1024px
-- 🖥️ **Desktop**: 1024px+
-
-Utiliza CSS Grid e Flexbox para layouts adaptativos.
-
-## 📚 Documentação
-
-### Documentos Principais
-
-1. **[ARCHITECTURE.md](./docs/ARCHITECTURE.md)** - Estrutura detalhada e padrões
-2. **[COMPONENTS.md](./docs/COMPONENTS.md)** - Guia de componentes
-3. **[API.md](./docs/API.md)** - Documentação de serviços
-4. **[DATA_MODELS.md](./docs/DATA_MODELS.md)** - Estrutura de dados
-5. **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Como contribuir
-
-## 🔐 Autenticação
-
-Sistema baseado em JWT:
-
-```typescript
-// Fluxo
-1. Usuário faz login
-2. Backend retorna token
-3. Token armazenado em localStorage
-4. Requisições incluem: Authorization: Bearer <token>
-```
-
-## 🧪 Testes
-
-```bash
-# Executar testes
-npm test
-
-# Cobertura de testes
-npm test -- --code-coverage
-```
-
-## 🤝 Contribuição
-
-### Como Contribuir
-
-1. **Fork** o projeto
-2. **Clone** seu fork: `git clone https://github.com/seu-usuario/GastroFactor.git`
-3. **Crie uma branch**: `git checkout -b feature/sua-feature`
-4. **Commit**: `git commit -m 'Descreve a mudança'`
-5. **Push**: `git push origin feature/sua-feature`
-6. **Abra um Pull Request**
-
-### Padrões de Código
-
-- ✅ TypeScript Strict Mode
-- ✅ Formatter: Prettier
-- ✅ Linter: ESLint
-- ✅ Idioma: Português
-
-## 🐛 Reportar Bugs
-
-Abra uma [Issue](https://github.com/alexanLO/GastroFactor/issues) com:
-
-- Descrição clara do problema
-- Passos para reproduzir
-- Comportamento esperado vs atual
-- Screenshots (se aplicável)
-- Ambiente (SO, navegador, versões)
-
-## 💡 Sugestões
-
-Ideias são bem-vindas! Abra uma issue com o label `enhancement`.
-
-## 📄 Licença
-
-MIT License - veja [LICENSE](./LICENSE)
-
-## 👨‍💻 Autor
-
-**Alexandra** - [@alexanLO](https://github.com/alexanLO)
-
-## 🙏 Agradecimentos
-
-- Angular Team
-- Comunidade Angular Brasil
-- Contribuidores
-
----
-
-**Versão**: 0.0.0  
-**Última Atualização**: Junho 2026  
-**Status**: 🚧 Em Desenvolvimento
+MIT. Veja [LICENSE](LICENSE).

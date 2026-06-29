@@ -107,8 +107,8 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn__primary">
-              <span>Criar Conta</span>
+            <button type="submit" class="btn btn__primary" [disabled]="isSubmitting">
+              <span>{{ isSubmitting ? 'Criando conta...' : 'Criar Conta' }}</span>
             </button>
           </form>
 

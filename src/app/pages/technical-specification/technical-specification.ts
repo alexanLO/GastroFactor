@@ -10,14 +10,17 @@ import {
   ElementRef,
   ChangeDetectorRef,
 } from '@angular/core';
-import { CardDetailsComponent } from '../../component/card-details-component/card-details-component';
-import { CardNutritionalComponent } from '../../component/card-nutritional/card-nutritional-component';
-import { PreparationMethodComponent } from '../../component/preparation-method-component/preparation-method-component';
-import { TableIngredientsComponent } from '../../component/table-ingredients/table-ingredients-component';
+import { NGXLogger } from 'ngx-logger';
+import { CardDetailsComponent } from '../../component/card-details/card-details.component';
+import { CardNutritionalComponent } from '../../component/card-nutritional/card-nutritional.component';
+import { PreparationMethodComponent } from '../../component/preparation-method/preparation-method.component';
+import { TableIngredientsComponent } from '../../component/table-ingredients/table-ingredients.component';
 import { PdfExportService } from '../../core/services/pdf-export.service';
+import { NotificationService } from '../../core/services/notification.service';
 import { RecipeService } from '../../core/services/recipe.service';
+import { resolveUnknownErrorMessage } from '../../core/utils/api-error-message.util';
 import { RecipeData } from '../../shared/models/recipe-data.model';
-import { MyCollection } from '../my-collection/my-collection';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-technical-specification',
@@ -45,15 +48,24 @@ export class TechnicalSpecification {
 
   private recipeService = inject(RecipeService);
   private pdfService = inject(PdfExportService);
+  private notificationService = inject(NotificationService);
+  private log = inject(NGXLogger);
   private cdr = inject(ChangeDetectorRef);
 
   selectedImage: string | ArrayBuffer | null = '';
+  isSaving = false;
 
   onImportImage(): void {
     this.fileInput.nativeElement.click();
   }
 
   saveRecipe(): void {
+    if (this.isSaving) {
+      return;
+    }
+
+    this.isSaving = true;
+
     const details = this.detailsComponent.getDetails();
     details.image = this.selectedImage as string;
 
@@ -64,23 +76,25 @@ export class TechnicalSpecification {
       preparationMethod: this.preparationComponent.steps,
     };
 
-    this.recipeService.saveRecipe(recipeData).subscribe({
-      next: () => {
-        // Aguarda a lista ser atualizada
-        this.recipeService.loadRecipes().subscribe({
-          next: () => {
-            this.saved.emit();
-          },
-          error: (error) => {
-            console.error('Erro ao atualizar a lista de receitas:', error);
-          },
-        });
-      },
-      error: (error) => {
-        alert('Erro ao salvar a receita!');
-        console.error('Erro:', error);
-      },
-    });
+    this.recipeService
+      .saveRecipeAndRefresh(recipeData)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.cdr.detectChanges();
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.notificationService.showSuccess('Receita salva com sucesso.');
+          this.saved.emit();
+        },
+        error: (error: unknown) => {
+          const message = resolveUnknownErrorMessage(error, 'Erro ao salvar a receita. Tente novamente.');
+          this.notificationService.showError(message);
+          this.log.error('Erro ao salvar receita:', error);
+        },
+      });
   }
 
   exportPdf(): void {

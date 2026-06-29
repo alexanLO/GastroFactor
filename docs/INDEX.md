@@ -15,6 +15,14 @@ GastroFactor/
 │   ├── COMPONENTS.md            # Guia de componentes
 │   ├── API.md                   # Serviços e endpoints
 │   ├── DATA_MODELS.md           # Modelos de dados
+│   ├── ANALISE_MELHORIAS_CHECKLIST.md # Análise técnica e checklist de melhorias
+│   ├── SEGURANCA_AUTH_HTTPONLY.md # Migração de autenticação para cookie HttpOnly
+│   ├── AMBIENTES.md             # Guia de ambientes e baseAddress
+│   ├── GUIA_CONTRIBUICAO.md     # Guia prático de commits, naming e revisão
+│   ├── CONVENTIONAL_COMMITS.md  # Padrao de tipos de commit (feat, fix, refactor, etc.)
+│   ├── RELEASE_CHECKLIST.md     # Checklist mínimo antes de deploy
+│   ├── performance/
+│   │   └── BUNDLE_MONITORING.md # Monitoramento de regressão de tamanho de bundles
 │   └── TROUBLESHOOTING.md       # Problemas e soluções
 ```
 
@@ -73,9 +81,45 @@ GastroFactor/
    - Enumerações e constantes
    - Exemplos completos
 
+7. **[ANALISE_MELHORIAS_CHECKLIST.md](./ANALISE_MELHORIAS_CHECKLIST.md)** (20 min)
+   - Diagnóstico técnico atual
+   - Lista priorizada de melhorias
+   - Checklist por área (P0 a P3)
+   - Plano sugerido por sprint
+
+8. **[SEGURANCA_AUTH_HTTPONLY.md](./SEGURANCA_AUTH_HTTPONLY.md)** (20 min)
+   - Plano de migração para cookie HttpOnly
+   - Mudanças frontend e backend
+   - Política de expiração e logout global
+   - Checklist de rollout seguro
+
+9. **[AMBIENTES.md](./AMBIENTES.md)** (10 min)
+   - Mapeamento de ambientes e fileReplacements
+   - Exemplos de baseAddress
+   - Boas práticas de configuração
+
+10. **[GUIA_CONTRIBUICAO.md](./GUIA_CONTRIBUICAO.md)** (10 min)
+   - Padrão de branch e commits
+   - Checklist de PR
+   - Critérios de revisão
+
+11. **[CONVENTIONAL_COMMITS.md](./CONVENTIONAL_COMMITS.md)** (10 min)
+   - Tipos de commit (`feat`, `fix`, `refactor`, etc.)
+   - Exemplos prontos para front/back
+   - Guia de escopo e breaking changes
+
+12. **[RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md)** (5 min)
+   - Validações mínimas de release
+   - Itens de qualidade, regressão e rollback
+
+13. **[performance/BUNDLE_MONITORING.md](./performance/BUNDLE_MONITORING.md)** (10 min)
+   - Budgets de bundles monitorados
+   - Scripts de relatório e validação
+   - Baseline versionada e política de regressão
+
 ### 🤝 **Contribuir com Código**
 
-7. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
+14. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
    - Código de Conduta
    - Como reportar bugs
    - Padrões de código
@@ -84,7 +128,7 @@ GastroFactor/
 
 ### 🔧 **Resolver Problemas**
 
-8. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
+15. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
    - Problemas comuns e soluções
    - Perguntas frequentes
    - Debugging
@@ -337,16 +381,16 @@ ng generate service core/services/meu-servico
 
 ## 📞 Quando Consultar Cada Documento
 
-| Pergunta | Documento |
-|----------|-----------|
-| "Como começo?" | QUICKSTART.md |
-| "Qual é a estrutura?" | ARCHITECTURE.md |
-| "Como usar este componente?" | COMPONENTS.md |
-| "Como fazer requisição HTTP?" | API.md |
-| "Qual tipo usar?" | DATA_MODELS.md |
-| "Como contribuir?" | CONTRIBUTING.md |
-| "Algo não funciona" | TROUBLESHOOTING.md |
-| "Qual é a visão geral?" | README.md |
+| Pergunta                      | Documento          |
+| ----------------------------- | ------------------ |
+| "Como começo?"                | QUICKSTART.md      |
+| "Qual é a estrutura?"         | ARCHITECTURE.md    |
+| "Como usar este componente?"  | COMPONENTS.md      |
+| "Como fazer requisição HTTP?" | API.md             |
+| "Qual tipo usar?"             | DATA_MODELS.md     |
+| "Como contribuir?"            | CONTRIBUTING.md    |
+| "Algo não funciona"           | TROUBLESHOOTING.md |
+| "Qual é a visão geral?"       | README.md          |
 
 ---
 

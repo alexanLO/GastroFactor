@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PreparationMethodComponent } from './preparation-method-component';
+import { PreparationMethodComponent } from './preparation-method.component';
 
 describe('PreparationMethodComponent', () => {
   let component: PreparationMethodComponent;

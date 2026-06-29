@@ -1,0 +1,11 @@
+{
+  "generatedFrom": "ng build --stats-json",
+  "maxRegressionPercent": 10,
+  "bundles": {
+    "main": 465312,
+    "jspdf-es-min": 367864,
+    "html2canvas": 202845,
+    "index": 109498,
+    "purify-es": 27690
+  }
+}

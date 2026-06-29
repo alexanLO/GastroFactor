@@ -5,14 +5,14 @@ Comece a desenvolver em 5 minutos.
 ## 1️⃣ Instalação
 
 ```bash
-# Clonar repositório
 git clone https://github.com/alexanLO/GastroFactor.git
 cd GastroFactor
+npm ci
+```
 
-# Instalar dependências
-npm install
+Opcional:
 
-# Instalar Angular CLI (opcional, se não tiver)
+```bash
 npm install -g @angular/cli@21
 ```
 
@@ -31,11 +31,13 @@ O aplicativo recarrega automaticamente ao salvar arquivos.
 ```text
 src/app/
 ├── pages/
-│   ├── my-collection/      ← Dashboard (início)
-│   └── technical-specification/  ← Editor de receita
-├── component/              ← Componentes reutilizáveis
-├── core/services/          ← Lógica de negócio
-└── shared/                 ← Compartilhados
+│   ├── main-screen/              ← Tela pública inicial
+│   ├── my-collection/            ← Área autenticada de receitas
+│   └── technical-specification/  ← Editor de ficha técnica
+├── component/                    ← Componentes reutilizáveis
+├── core/services/                ← Serviços de negócio
+├── features/auth/                ← Login, cadastro e guarda de rota
+└── shared/                       ← Models, estilos e componentes compartilhados
 ```
 
 ## 4️⃣ Primeiros Passos
@@ -43,11 +45,11 @@ src/app/
 ### Editar um Componente
 
 ```typescript
-// 📁 src/app/component/card-details-component/card-details-component.ts
+// src/app/component/card-details/card-details.component.ts
 
 export class CardDetailsComponent {
   recipeName: string = '';
-  
+
   getDetails() {
     return { name: this.recipeName };
   }
@@ -57,7 +59,7 @@ export class CardDetailsComponent {
 ### Editar Template
 
 ```html
-<!-- 📁 src/app/component/card-details-component/card-details-component.html -->
+<!-- src/app/component/card-details/card-details.component.html -->
 
 <input [(ngModel)]="recipeName" placeholder="Nome da receita" />
 ```
@@ -86,14 +88,17 @@ src/app/component/meu-componente/
 
 ## 🛠️ Comando Mais Comuns
 
-| Comando | Descrição |
-|---------|-----------|
-| `npm start` | Inicia dev server |
-| `npm test` | Executa testes |
-| `npm run build` | Build de produção |
-| `ng serve` | Alternativa para `npm start` |
-| `ng generate component` | Cria novo componente |
-| `ng generate service` | Cria novo serviço |
+| Comando                 | Descrição                         |
+| ----------------------- | --------------------------------- |
+| `npm start`             | Inicia dev server                 |
+| `npm test`              | Executa testes                    |
+| `npm run lint`          | Executa lint                      |
+| `npm run format:check`  | Verifica formatação               |
+| `npm run build`         | Build de produção                 |
+| `npm run quality:ci`    | Roda format, lint, build e testes |
+| `ng serve`              | Alternativa para `npm start`      |
+| `ng generate component` | Cria novo componente              |
+| `ng generate service`   | Cria novo serviço                 |
 
 ## 🐛 Troubleshooting
 
@@ -107,9 +112,7 @@ ng serve --port 4300
 ### Erro: "Cannot find module"?
 
 ```bash
-# Limpar cache
-rm -rf node_modules package-lock.json
-npm install
+npm ci
 ```
 
 ### SCSS não compila?
@@ -127,13 +130,12 @@ npm install
 - **[DATA_MODELS.md](./docs/DATA_MODELS.md)** - Estrutura de dados
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Como contribuir
 
-## 🎯 Próximas Tarefas
+## 🎯 Próximos Passos Naturais
 
-1. Implementar backend em Node/Express
-2. Conectar banco de dados (MongoDB/PostgreSQL)
-3. Implementar autenticação
-4. Testes e2e
-5. Deploy
+1. Configurar `environment.local.ts` com sua `baseAddress`
+2. Validar `npm run quality:ci`
+3. Integrar com backend `/v1/auth`, `/v1/recipes` e `/v1/calculator`
+4. Acompanhar budgets e cobertura antes de abrir PR
 
 ## 💡 Dicas
 

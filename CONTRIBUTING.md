@@ -74,8 +74,8 @@ Como você imaginaria a feature funcionando?
 
 #### Pré-requisitos
 
-- Node.js v18+
-- npm v9+
+- Node.js 22.12.x LTS
+- npm 10+
 - Git
 - Familiaridade com Angular 21
 
@@ -152,23 +152,20 @@ Closes #123
 ```typescript
 // ✅ BOM
 export class RecipeService {
-  private apiUrl = '/api/recipes';
-  
-  constructor(private http: HttpClient) {}
-  
-  saveRecipe(recipe: RecipeData): Observable<any> {
-    return this.http.post(this.apiUrl, recipe);
+  private readonly apiUrl = `${environment.baseAddress}/v1/recipes`;
+  private readonly http = inject(HttpClient);
+
+  saveRecipe(recipe: RecipeData): Observable<RecipeData> {
+    return this.http.post<RecipeData>(this.apiUrl, recipe);
   }
 }
 
 // ❌ RUIM
 export class recipeService {
   apiUrl = '/api/recipes';
-  
-  constructor(private http: HttpClient) {}
-  
+
   save(r) {
-    return this.http.post(this.apiUrl, r);
+    return r;
   }
 }
 ```
@@ -260,7 +257,7 @@ export class CardDetails {
 ### Requisitos
 
 - Toda funcionalidade nova deve ter testes
-- Mínimo 80% de cobertura
+- Respeitar os thresholds vigentes definidos em `karma.conf.cjs`
 - Testes devem ser determinísticos (não flaky)
 
 ### Executar Testes
@@ -268,7 +265,8 @@ export class CardDetails {
 ```bash
 npm test
 npm test -- --watch          # Modo watch
-npm test -- --code-coverage  # Com cobertura
+npm run test:ci              # Headless + cobertura
+npm run quality:ci           # Format + lint + build + testes
 ```
 
 ### Exemplo de Teste
@@ -293,7 +291,7 @@ describe('RecipeService', () => {
   });
   
   describe('saveRecipe', () => {
-    it('should POST to /api/recipes', () => {
+    it('should POST to /v1/recipes', () => {
       const mockRecipe: RecipeData = {
         /* dados mock */
       };
@@ -302,7 +300,7 @@ describe('RecipeService', () => {
         expect(response.id).toBeDefined();
       });
       
-      const req = httpMock.expectOne('/api/recipes');
+      const req = httpMock.expectOne('/v1/recipes');
       expect(req.request.method).toBe('POST');
       expect(req.request.body).toEqual(mockRecipe);
       
@@ -319,7 +317,7 @@ describe('RecipeService', () => {
         }
       });
       
-      const req = httpMock.expectOne('/api/recipes');
+      const req = httpMock.expectOne('/v1/recipes');
       req.flush({ error: 'Validation failed' }, { status: 400, statusText: 'Bad Request' });
     });
   });

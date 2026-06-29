@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-table-ingredients-component',
+  selector: 'app-table-ingredients',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './table-ingredients-component.html',
-  styleUrls: ['./table-ingredients-component.scss'],
+  templateUrl: './table-ingredients.component.html',
+  styleUrls: ['./table-ingredients.component.scss'],
 })
 export class TableIngredientsComponent {
   ingredients = [
@@ -30,7 +30,7 @@ export class TableIngredientsComponent {
       totalQuantity: '',
     },
     {
-      id: '02',
+      id: '03',
       name: '',
       netWeight: '',
       correctionFactor: '',

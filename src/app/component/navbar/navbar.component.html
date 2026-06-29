@@ -11,9 +11,13 @@
         <a (click)="onLogin()">Login</a>
         <a (click)="onRegister()">Cadastrar-se</a>
       } @else {
-        <a (click)="onLogout()">Logout</a>
+        <a (click)="this.authService.userLogout()">Logout</a>
       }
       <img alt="Chef Profile" class="profile-image" src="/profile.png" />
     </div>
   </nav>
 </header>
+
+@if (authService.showLoginModal()) {
+  <app-login-page></app-login-page>
+}

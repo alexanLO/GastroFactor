@@ -74,12 +74,12 @@
         <div class="stats-row">
           <div class="stat-card">
             <span class="stat-label">TOTAL DE RECEITAS</span>
-            <p class="stat-value">124 <span class="stat-unit">~</span></p>
+            <p class="stat-value"> {{ recipeService.recipes().length }} <span class="stat-unit">~</span></p>
           </div>
           <div class="stat-card">
-            <span class="stat-label">ÚLTIMA EXPORTAÇÃO</span>
-            <p class="stat-value">Hoje, 14:30</p>
-            <p class="stat-subtext">PDF Gerado: Ficha #882</p>
+            <span class="stat-label">RELÓGIO</span>
+            <p class="stat-value">{{ dateTime | date:'dd/MM/yy' }} {{ horaAtual() | date:'HH:mm:ss' }}</p>
+            <!-- <p class="stat-subtext">PDF Gerado: Ficha #882</p> -->
           </div>
         </div>
       </header>
@@ -104,7 +104,7 @@
           <a class="link-see-all">Ver todas <span class="material-symbols-outlined text-xs">arrow_forward</span></a>
         </div>
 
-        <app-recipe-card-component></app-recipe-card-component>
+        <app-recipe-card></app-recipe-card>
       </section>
     </main>
   </div>

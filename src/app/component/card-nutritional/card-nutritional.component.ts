@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-card-nutritional-component',
+  selector: 'app-card-nutritional',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './card-nutritional-component.html',
-  styleUrl: './card-nutritional-component.scss',
+  templateUrl: './card-nutritional.component.html',
+  styleUrl: './card-nutritional.component.scss',
 })
 export class CardNutritionalComponent {
   calories: string = '';
