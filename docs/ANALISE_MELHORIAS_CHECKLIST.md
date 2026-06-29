@@ -56,9 +56,9 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 ### Prioridade P2 - Performance e build
 
 - [x] Mitigar warnings CommonJS (canvg/rgbcolor/html2canvas) avaliando alternativas ESM ou configuracao apropriada.
-- [ ] Definir budget de bundles por rota lazy e monitoramento de regressao de tamanho.
-- [ ] Revisar carregamento dinamico de bibliotecas de PDF para reduzir impacto inicial.
-- [ ] Definir versao LTS de Node em engines do package.json e adicionar arquivo .nvmrc (ou equivalente).
+- [x] Definir budget de bundles por rota lazy e monitoramento de regressao de tamanho.
+- [x] Revisar carregamento dinamico de bibliotecas de PDF para reduzir impacto inicial.
+- [x] Definir versao LTS de Node em engines do package.json e adicionar arquivo .nvmrc (ou equivalente).
 
 ### Prioridade P2 - Testes e confiabilidade
 

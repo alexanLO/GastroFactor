@@ -1,10 +1,17 @@
 {
   "name": "gastro-factor",
   "version": "0.0.0",
+  "engines": {
+    "node": ">=22.12.0 <23",
+    "npm": ">=10"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:stats": "ng build --stats-json",
+    "perf:bundle:report": "node tools/perf/bundle-size-report.mjs",
+    "perf:bundle:check": "node tools/perf/bundle-size-report.mjs --check",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:GastroFactor": "node dist/GastroFactor/server/server.mjs"

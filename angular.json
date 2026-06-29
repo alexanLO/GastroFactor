@@ -52,6 +52,30 @@
                   "maximumError": "1MB"
                 },
                 {
+                  "type": "bundle",
+                  "name": "main",
+                  "maximumWarning": "500kB",
+                  "maximumError": "550kB"
+                },
+                {
+                  "type": "bundle",
+                  "name": "jspdf-es-min",
+                  "maximumWarning": "380kB",
+                  "maximumError": "420kB"
+                },
+                {
+                  "type": "bundle",
+                  "name": "html2canvas",
+                  "maximumWarning": "220kB",
+                  "maximumError": "250kB"
+                },
+                {
+                  "type": "bundle",
+                  "name": "index",
+                  "maximumWarning": "120kB",
+                  "maximumError": "140kB"
+                },
+                {
                   "type": "anyComponentStyle",
                   "maximumWarning": "20kB",
                   "maximumError": "25kB"

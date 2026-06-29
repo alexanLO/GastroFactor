@@ -17,6 +17,8 @@ GastroFactor/
 │   ├── DATA_MODELS.md           # Modelos de dados
 │   ├── ANALISE_MELHORIAS_CHECKLIST.md # Análise técnica e checklist de melhorias
 │   ├── SEGURANCA_AUTH_HTTPONLY.md # Migração de autenticação para cookie HttpOnly
+│   ├── performance/
+│   │   └── BUNDLE_MONITORING.md # Monitoramento de regressão de tamanho de bundles
 │   └── TROUBLESHOOTING.md       # Problemas e soluções
 ```
 
@@ -87,9 +89,14 @@ GastroFactor/
    - Política de expiração e logout global
    - Checklist de rollout seguro
 
+9. **[performance/BUNDLE_MONITORING.md](./performance/BUNDLE_MONITORING.md)** (10 min)
+   - Budgets de bundles monitorados
+   - Scripts de relatório e validação
+   - Baseline versionada e política de regressão
+
 ### 🤝 **Contribuir com Código**
 
-9. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
+10. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
    - Código de Conduta
    - Como reportar bugs
    - Padrões de código
@@ -98,7 +105,7 @@ GastroFactor/
 
 ### 🔧 **Resolver Problemas**
 
-10. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
+11. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
    - Problemas comuns e soluções
    - Perguntas frequentes
    - Debugging

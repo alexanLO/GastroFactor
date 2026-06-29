@@ -7,92 +7,100 @@ import { NotificationService } from './notification.service';
   providedIn: 'root'
 })
 export class PdfExportService {
+  private pdfDependenciesPromise: Promise<{
+    jsPDF: (typeof import('jspdf'))['jsPDF'];
+    html2canvas: (typeof import('html2canvas'))['default'];
+  }> | null = null;
+
   constructor(
     private readonly notificationService: NotificationService,
     private readonly log: NGXLogger,
   ) {}
 
   generateRecipePdf(recipe: RecipeData): void {
-    // Dinamicamente importar jsPDF quando necessário
-    import('jspdf').then(({ jsPDF }) => {
-      import('html2canvas').then(({ default: html2canvas }) => {
-        try {
-          // Criar HTML do PDF dinamicamente
-          const pdfContent = this.createPdfContent(recipe);
-          
-          // Criar elemento temporário
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = pdfContent;
-          tempDiv.style.position = 'absolute';
-          tempDiv.style.left = '-9999px';
-          tempDiv.style.width = '210mm';
-          tempDiv.style.backgroundColor = 'white';
-          tempDiv.style.color = 'black';
-          tempDiv.style.fontFamily = 'Arial, sans-serif';
-          tempDiv.style.padding = '20mm';
-          document.body.appendChild(tempDiv);
+    void this.generateRecipePdfInternal(recipe);
+  }
 
-          // Renderizar canvas
-          html2canvas(tempDiv, {
-            backgroundColor: '#ffffff',
-            scale: 2,
-            logging: false,
-            useCORS: true,
-            allowTaint: true
-          }).then((canvas) => {
-            try {
-              const imgData = canvas.toDataURL('image/png');
-              const doc = new jsPDF({
-                orientation: 'portrait',
-                unit: 'mm',
-                format: 'a4'
-              });
+  private loadPdfDependencies(): Promise<{
+    jsPDF: (typeof import('jspdf'))['jsPDF'];
+    html2canvas: (typeof import('html2canvas'))['default'];
+  }> {
+    if (!this.pdfDependenciesPromise) {
+      this.pdfDependenciesPromise = Promise.all([
+        import('jspdf'),
+        import('html2canvas')
+      ])
+        .then(([jspdfModule, html2canvasModule]) => ({
+          jsPDF: jspdfModule.jsPDF,
+          html2canvas: html2canvasModule.default
+        }))
+        .catch((error: unknown) => {
+          this.pdfDependenciesPromise = null;
+          throw error;
+        });
+    }
 
-              const pageWidth = doc.internal.pageSize.getWidth();
-              const pageHeight = doc.internal.pageSize.getHeight();
-              const imgWidth = pageWidth - 20; // Margem
-              const imgHeight = (canvas.height * imgWidth) / canvas.width;
-              
-              let yPosition = 10;
+    return this.pdfDependenciesPromise;
+  }
 
-              // Primeira página
-              doc.addImage(imgData, 'PNG', 10, yPosition, imgWidth, imgHeight);
-              let remainingHeight = imgHeight - (pageHeight - 20);
+  private async generateRecipePdfInternal(recipe: RecipeData): Promise<void> {
+    let tempDiv: HTMLDivElement | null = null;
 
-              // Páginas adicionais se necessário
-              while (remainingHeight > 0) {
-                doc.addPage();
-                yPosition = -(remainingHeight - pageHeight + 20);
-                doc.addImage(imgData, 'PNG', 10, yPosition, imgWidth, imgHeight);
-                remainingHeight -= pageHeight - 20;
-              }
+    try {
+      const { jsPDF, html2canvas } = await this.loadPdfDependencies();
+      const pdfContent = this.createPdfContent(recipe);
 
-              doc.save(`${this.sanitizeFileName(recipe.details.name) || 'receita'}.pdf`);
-              
-            } catch (error) {
-              this.log.error('Erro ao gerar PDF:', error);
-              this.notificationService.showError('Erro ao exportar PDF. Tente novamente.');
-            } finally {
-              // Remove elemento temporário
-              document.body.removeChild(tempDiv);
-            }
-          }).catch((error) => {
-            this.log.error('Erro ao processar canvas:', error);
-            this.notificationService.showError('Erro ao processar imagem para PDF.');
-            document.body.removeChild(tempDiv);
-          });
-        } catch (error) {
-          this.log.error('Erro ao criar conteúdo PDF:', error);
-          this.notificationService.showError('Erro ao preparar PDF para exportacao.');
-        }
-      }).catch((error) => {
-        this.log.error('Erro ao carregar html2canvas:', error);
-        this.notificationService.showError('Erro ao carregar biblioteca de PDF.');
+      tempDiv = document.createElement('div');
+      tempDiv.innerHTML = pdfContent;
+      tempDiv.style.position = 'absolute';
+      tempDiv.style.left = '-9999px';
+      tempDiv.style.width = '210mm';
+      tempDiv.style.backgroundColor = 'white';
+      tempDiv.style.color = 'black';
+      tempDiv.style.fontFamily = 'Arial, sans-serif';
+      tempDiv.style.padding = '20mm';
+      document.body.appendChild(tempDiv);
+
+      const canvas = await html2canvas(tempDiv, {
+        backgroundColor: '#ffffff',
+        scale: 2,
+        logging: false,
+        useCORS: true,
+        allowTaint: true
       });
-    }).catch((error) => {
-      this.log.error('Erro ao carregar jsPDF:', error);
-      this.notificationService.showError('Erro ao carregar biblioteca de PDF.');
-    });
+
+      const imgData = canvas.toDataURL('image/png');
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const imgWidth = pageWidth - 20;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      let yPosition = 10;
+      doc.addImage(imgData, 'PNG', 10, yPosition, imgWidth, imgHeight);
+      let remainingHeight = imgHeight - (pageHeight - 20);
+
+      while (remainingHeight > 0) {
+        doc.addPage();
+        yPosition = -(remainingHeight - pageHeight + 20);
+        doc.addImage(imgData, 'PNG', 10, yPosition, imgWidth, imgHeight);
+        remainingHeight -= pageHeight - 20;
+      }
+
+      doc.save(`${this.sanitizeFileName(recipe.details.name) || 'receita'}.pdf`);
+    } catch (error) {
+      this.log.error('Erro ao exportar PDF:', error);
+      this.notificationService.showError('Erro ao exportar PDF. Tente novamente.');
+    } finally {
+      if (tempDiv?.parentNode) {
+        tempDiv.parentNode.removeChild(tempDiv);
+      }
+    }
   }
 
   private createPdfContent(recipe: RecipeData): string {
