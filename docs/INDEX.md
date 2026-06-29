@@ -98,41 +98,36 @@ GastroFactor/
    - Boas práticas de configuração
 
 10. **[GUIA_CONTRIBUICAO.md](./GUIA_CONTRIBUICAO.md)** (10 min)
-
-- Padrão de branch e commits
-- Checklist de PR
-- Critérios de revisão
+   - Padrão de branch e commits
+   - Checklist de PR
+   - Critérios de revisão
 
 11. **[RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md)** (5 min)
-
-- Validações mínimas de release
-- Itens de qualidade, regressão e rollback
+   - Validações mínimas de release
+   - Itens de qualidade, regressão e rollback
 
 12. **[performance/BUNDLE_MONITORING.md](./performance/BUNDLE_MONITORING.md)** (10 min)
-
-- Budgets de bundles monitorados
-- Scripts de relatório e validação
-- Baseline versionada e política de regressão
+   - Budgets de bundles monitorados
+   - Scripts de relatório e validação
+   - Baseline versionada e política de regressão
 
 ### 🤝 **Contribuir com Código**
 
 13. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
-
-- Código de Conduta
-- Como reportar bugs
-- Padrões de código
-- Processo de PR
-- Checklist de qualidade
+   - Código de Conduta
+   - Como reportar bugs
+   - Padrões de código
+   - Processo de PR
+   - Checklist de qualidade
 
 ### 🔧 **Resolver Problemas**
 
 14. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
-
-- Problemas comuns e soluções
-- Perguntas frequentes
-- Debugging
-- Otimização
-- Testes
+   - Problemas comuns e soluções
+   - Perguntas frequentes
+   - Debugging
+   - Otimização
+   - Testes
 
 ---
 

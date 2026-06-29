@@ -9,6 +9,7 @@ Aplicacao web Angular para criacao e gerenciamento de fichas tecnicas de receita
 - RxJS 7
 - NGX Logger
 - jsPDF + html2canvas (carregamento dinamico)
+- Express para SSR
 
 ## Requisitos
 
@@ -105,6 +106,7 @@ Definidas em `src/app/app.routes.ts`:
 - Monitoramento de regressao de bundle em `tools/perf/`
 - Gate de cobertura em `karma.conf.cjs`
 - Workflow de CI em `.github/workflows/ci-quality-gate.yml`
+- ESLint e Prettier integrados ao fluxo `quality:ci`
 
 ## Documentacao
 
@@ -114,10 +116,19 @@ Documentos principais:
 
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - [docs/API.md](docs/API.md)
+- [docs/COMPONENTS.md](docs/COMPONENTS.md)
 - [docs/DATA_MODELS.md](docs/DATA_MODELS.md)
 - [docs/AMBIENTES.md](docs/AMBIENTES.md)
 - [docs/GUIA_CONTRIBUICAO.md](docs/GUIA_CONTRIBUICAO.md)
+- [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Estado atual
+
+- Build, lint e testes estao operacionais
+- Pipeline local `npm run quality:ci` validado
+- Cobertura minima em CI configurada com threshold incremental
+- Documentacao central alinhada com a estrutura real em `src/`
 
 ## Licenca
 

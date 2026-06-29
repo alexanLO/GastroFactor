@@ -30,7 +30,7 @@ export class TableIngredientsComponent {
       totalQuantity: '',
     },
     {
-      id: '02',
+      id: '03',
       name: '',
       netWeight: '',
       correctionFactor: '',
