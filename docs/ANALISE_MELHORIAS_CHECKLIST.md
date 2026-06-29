@@ -24,7 +24,7 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 ### Prioridade P0 - Corrigir risco funcional imediato
 
 - [x] Conectar interceptor de erro ao HttpClient em src/app/app.config.ts (com withInterceptors ou withInterceptorsFromDi).
-- [ ] Corrigir mensagem de erro no interceptor em src/app/core/interceptors/api-error.interceptor.ts (template string invalida).
+- [x] Corrigir mensagem de erro no interceptor em src/app/core/interceptors/api-error.interceptor.ts (template string invalida).
 - [ ] Remover ou ajustar configuracao homologation em angular.json para nao apontar para src/environments/environment.hom.ts inexistente.
 - [ ] Revisar fluxo de erro com feedback para usuario sem uso de alert em producao.
 

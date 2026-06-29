@@ -22,7 +22,7 @@ export class ApiErrorInterceptor {
         let errorMessage = 'Erro ao processar requisição';
 
         if (error.error instanceof ErrorEvent) {
-          errorMessage = 'Erro: ${error.error.message';
+          errorMessage = `Erro: ${error.error.message}`;
         } else if (error.status === 0) {
           errorMessage = 'Erro de conexão. Verifique se o servidor está rodando.';
         } else if (error.error && typeof error.error === 'object') {
