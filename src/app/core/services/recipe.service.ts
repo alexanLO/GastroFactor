@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { RecipeData } from '../../shared/models/recipe-data.model';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -32,8 +32,8 @@ export class RecipeService {
   /**
    * Atualiza a lista armazenada.
    */
-  refreshRecipes(): void {
-    this.loadRecipes().subscribe();
+  refreshRecipes(): Observable<RecipeData[]> {
+    return this.loadRecipes();
   }
 
   /**
@@ -56,13 +56,19 @@ export class RecipeService {
   updateRecipe(id: string, recipe: RecipeData): Observable<RecipeData> {
     return this.http
       .put<RecipeData>(`${this.apiUrl}/${id}`, recipe)
-      .pipe(tap(() => this.refreshRecipes()));
+      .pipe(
+        switchMap((updatedRecipe) =>
+          this.loadRecipes().pipe(map(() => updatedRecipe)),
+        ),
+      );
   }
 
   /**
    * Remove uma receita.
    */
   deleteRecipe(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(tap(() => this.refreshRecipes()));
+    return this.http
+      .delete<void>(`${this.apiUrl}/${id}`)
+      .pipe(switchMap(() => this.loadRecipes().pipe(map(() => void 0))));
   }
 }

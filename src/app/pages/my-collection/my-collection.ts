@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FooterComponent } from '../../component/footer/footer.component';
 import { NavbarComponent } from '../../component/navbar/navbar.component';
 import { RecipeService } from '../../core/services/recipe.service';
@@ -22,6 +23,7 @@ import { RecipeCardComponent } from '../../component/recipe-card-component/recip
 })
 export class MyCollection implements OnInit {
   recipeService = inject(RecipeService);
+  private readonly destroyRef = inject(DestroyRef);
   isModalOpen = false;
   dateTime: Date = new Date();
 
@@ -36,7 +38,10 @@ export class MyCollection implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipeService.refreshRecipes();
+    this.recipeService
+      .refreshRecipes()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 
   // 3. Limpeza importante: pare o intervalo quando o componente for destruído
