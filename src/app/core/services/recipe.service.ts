@@ -189,17 +189,13 @@ export class RecipeService {
   }
 
   private resolveAccessToken(): Observable<string | null> {
-    if (typeof window === 'undefined') {
-      return of(null);
-    }
-
-    const token = window.localStorage.getItem('access_token');
+    const token = this.authService.getAccessToken();
 
     if (token) {
       return of(token);
     }
 
-    const refreshToken = window.localStorage.getItem('refresh_token');
+    const refreshToken = this.authService.getRefreshToken();
 
     if (!refreshToken) {
       return of(null);

@@ -16,6 +16,8 @@ export class AuthService {
   private readonly uriApiRefresh = `${environment.baseAddress}/v1/auth/refresh`;
   private readonly accessTokenKey = 'access_token';
   private readonly refreshTokenKey = 'refresh_token';
+  private accessTokenCache: string | null = null;
+  private refreshTokenCache: string | null = null;
 
   private loggedIn = false;
 
@@ -77,7 +79,7 @@ export class AuthService {
   }
 
   refreshAccessToken(): Observable<AuthResponse> {
-    const refreshToken = this.getStoredItem(this.refreshTokenKey);
+    const refreshToken = this.getRefreshToken();
 
     if (!refreshToken) {
       return throwError(() => new Error('Refresh token não encontrado.'));
@@ -91,7 +93,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const accessToken = this.getStoredItem(this.accessTokenKey);
+    const accessToken = this.getAccessToken();
     if (!accessToken) {
       return false;
     }
@@ -119,17 +121,22 @@ export class AuthService {
   }
 
   private persistTokens(response: AuthResponse): void {
+    this.accessTokenCache = response.accessToken;
     this.setStoredItem(this.accessTokenKey, response.accessToken);
 
     if (response.refreshToken) {
+      this.refreshTokenCache = response.refreshToken;
       this.setStoredItem(this.refreshTokenKey, response.refreshToken);
       return;
     }
 
+    this.refreshTokenCache = null;
     this.removeStoredItem(this.refreshTokenKey);
   }
 
   private clearTokens(): void {
+    this.accessTokenCache = null;
+    this.refreshTokenCache = null;
     this.removeStoredItem(this.accessTokenKey);
     this.removeStoredItem(this.refreshTokenKey);
   }
@@ -154,6 +161,34 @@ export class AuthService {
     }
 
     return null;
+  }
+
+  getAccessToken(): string | null {
+    if (this.accessTokenCache) {
+      return this.accessTokenCache;
+    }
+
+    const token = this.getStoredItem(this.accessTokenKey);
+
+    if (token) {
+      this.accessTokenCache = token;
+    }
+
+    return token;
+  }
+
+  getRefreshToken(): string | null {
+    if (this.refreshTokenCache) {
+      return this.refreshTokenCache;
+    }
+
+    const token = this.getStoredItem(this.refreshTokenKey);
+
+    if (token) {
+      this.refreshTokenCache = token;
+    }
+
+    return token;
   }
 
   private removeStoredItem(key: string): void {
