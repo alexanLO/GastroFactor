@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {
   ApplicationConfig,
   importProvidersFrom,
@@ -7,6 +7,7 @@ import {
 import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { ApiErrorInterceptor } from './core/interceptors/api-error.interceptor';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -20,7 +21,8 @@ export const appConfig: ApplicationConfig = {
     ),
 
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes, withViewTransitions()),
-    provideHttpClient(),
+  provideRouter(routes, withViewTransitions()),
+    { provide: HTTP_INTERCEPTORS, useClass: ApiErrorInterceptor, multi: true },
+    provideHttpClient(withInterceptorsFromDi()),
   ],
 };

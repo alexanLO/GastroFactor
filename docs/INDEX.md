@@ -15,6 +15,7 @@ GastroFactor/
 │   ├── COMPONENTS.md            # Guia de componentes
 │   ├── API.md                   # Serviços e endpoints
 │   ├── DATA_MODELS.md           # Modelos de dados
+│   ├── ANALISE_MELHORIAS_CHECKLIST.md # Análise técnica e checklist de melhorias
 │   └── TROUBLESHOOTING.md       # Problemas e soluções
 ```
 
@@ -73,9 +74,15 @@ GastroFactor/
    - Enumerações e constantes
    - Exemplos completos
 
+7. **[ANALISE_MELHORIAS_CHECKLIST.md](./ANALISE_MELHORIAS_CHECKLIST.md)** (20 min)
+   - Diagnóstico técnico atual
+   - Lista priorizada de melhorias
+   - Checklist por área (P0 a P3)
+   - Plano sugerido por sprint
+
 ### 🤝 **Contribuir com Código**
 
-7. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
+8. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
    - Código de Conduta
    - Como reportar bugs
    - Padrões de código
@@ -84,7 +91,7 @@ GastroFactor/
 
 ### 🔧 **Resolver Problemas**
 
-8. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
+9. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
    - Problemas comuns e soluções
    - Perguntas frequentes
    - Debugging
