@@ -16,6 +16,7 @@ GastroFactor/
 │   ├── API.md                   # Serviços e endpoints
 │   ├── DATA_MODELS.md           # Modelos de dados
 │   ├── ANALISE_MELHORIAS_CHECKLIST.md # Análise técnica e checklist de melhorias
+│   ├── SEGURANCA_AUTH_HTTPONLY.md # Migração de autenticação para cookie HttpOnly
 │   └── TROUBLESHOOTING.md       # Problemas e soluções
 ```
 
@@ -80,9 +81,15 @@ GastroFactor/
    - Checklist por área (P0 a P3)
    - Plano sugerido por sprint
 
+8. **[SEGURANCA_AUTH_HTTPONLY.md](./SEGURANCA_AUTH_HTTPONLY.md)** (20 min)
+   - Plano de migração para cookie HttpOnly
+   - Mudanças frontend e backend
+   - Política de expiração e logout global
+   - Checklist de rollout seguro
+
 ### 🤝 **Contribuir com Código**
 
-8. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
+9. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
    - Código de Conduta
    - Como reportar bugs
    - Padrões de código
@@ -91,7 +98,7 @@ GastroFactor/
 
 ### 🔧 **Resolver Problemas**
 
-9. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
+10. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
    - Problemas comuns e soluções
    - Perguntas frequentes
    - Debugging

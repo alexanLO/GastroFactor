@@ -42,8 +42,8 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 ### Prioridade P1 - Seguranca
 
 - [x] Revisar estrategia de armazenamento de token (localStorage) em src/app/features/auth/services/auth.service.ts.
-- [ ] Planejar migracao para cookie HttpOnly + refresh token seguro (backend + frontend).
-- [ ] Incluir redacao de politica de expiracao/renovacao de sessao e logout global.
+- [x] Planejar migracao para cookie HttpOnly + refresh token seguro (backend + frontend).
+- [x] Incluir redacao de politica de expiracao/renovacao de sessao e logout global.
 - [ ] Avaliar sanitizacao de HTML no fluxo de exportacao PDF.
 
 ### Prioridade P2 - UX e observabilidade
