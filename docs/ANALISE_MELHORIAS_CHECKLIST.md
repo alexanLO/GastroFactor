@@ -62,9 +62,9 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 
 ### Prioridade P2 - Testes e confiabilidade
 
-- [ ] Atualizar teste base em src/app/app.spec.ts para refletir o comportamento real da UI.
-- [ ] Criar testes unitarios para src/app/core/services/recipe.service.ts (sucesso e erro).
-- [ ] Criar testes unitarios para src/app/features/auth/services/auth.service.ts (login, logout, token).
+- [x] Atualizar teste base em src/app/app.spec.ts para refletir o comportamento real da UI.
+- [x] Criar testes unitarios para src/app/core/services/recipe.service.ts (sucesso e erro).
+- [x] Criar testes unitarios para src/app/features/auth/services/auth.service.ts (login, logout, token).
 - [ ] Criar testes para fluxo de salvar receita em src/app/pages/technical-specification/technical-specification.ts.
 - [ ] Adicionar metas de cobertura minima e gate de qualidade em CI.
 

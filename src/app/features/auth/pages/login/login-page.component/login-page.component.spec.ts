@@ -1,6 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NGXLogger } from 'ngx-logger';
 
 import { LoginPageComponent } from './login-page.component';
+
+const loggerStub = {
+  debug: jasmine.createSpy('debug'),
+  info: jasmine.createSpy('info'),
+  warn: jasmine.createSpy('warn'),
+  error: jasmine.createSpy('error')
+};
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -8,7 +16,8 @@ describe('LoginPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginPageComponent]
+      imports: [LoginPageComponent],
+      providers: [{ provide: NGXLogger, useValue: loggerStub }]
     })
     .compileComponents();
 
