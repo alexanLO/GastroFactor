@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     ),
 
     provideBrowserGlobalErrorListeners(),
-  provideRouter(routes, withViewTransitions()),
+    provideRouter(routes, withViewTransitions()),
     { provide: HTTP_INTERCEPTORS, useClass: ApiErrorInterceptor, multi: true },
     provideHttpClient(withInterceptorsFromDi()),
   ],

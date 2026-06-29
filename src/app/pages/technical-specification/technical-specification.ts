@@ -15,6 +15,7 @@ import { CardNutritionalComponent } from '../../component/card-nutritional/card-
 import { PreparationMethodComponent } from '../../component/preparation-method-component/preparation-method-component';
 import { TableIngredientsComponent } from '../../component/table-ingredients/table-ingredients-component';
 import { PdfExportService } from '../../core/services/pdf-export.service';
+import { NotificationService } from '../../core/services/notification.service';
 import { RecipeService } from '../../core/services/recipe.service';
 import { RecipeData } from '../../shared/models/recipe-data.model';
 import { MyCollection } from '../my-collection/my-collection';
@@ -45,6 +46,7 @@ export class TechnicalSpecification {
 
   private recipeService = inject(RecipeService);
   private pdfService = inject(PdfExportService);
+  private notificationService = inject(NotificationService);
   private cdr = inject(ChangeDetectorRef);
 
   selectedImage: string | ArrayBuffer | null = '';
@@ -77,7 +79,7 @@ export class TechnicalSpecification {
         });
       },
       error: (error) => {
-        alert('Erro ao salvar a receita!');
+        this.notificationService.showError('Erro ao salvar a receita. Tente novamente.');
         console.error('Erro:', error);
       },
     });

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PdfExportService {
-
-  constructor() { }
+  constructor(private readonly notificationService: NotificationService) {}
 
   generateRecipePdf(recipe: any): void {
     // Dinamicamente importar jsPDF quando necessário
@@ -66,27 +66,27 @@ export class PdfExportService {
               
             } catch (error) {
               console.error('Erro ao gerar PDF:', error);
-              alert('Erro ao exportar PDF!');
+              this.notificationService.showError('Erro ao exportar PDF. Tente novamente.');
             } finally {
               // Remove elemento temporário
               document.body.removeChild(tempDiv);
             }
           }).catch((error) => {
             console.error('Erro ao processar canvas:', error);
-            alert('Erro ao processar imagem para PDF!');
+            this.notificationService.showError('Erro ao processar imagem para PDF.');
             document.body.removeChild(tempDiv);
           });
         } catch (error) {
           console.error('Erro ao criar conteúdo PDF:', error);
-          alert('Erro ao preparar PDF para exportação!');
+          this.notificationService.showError('Erro ao preparar PDF para exportacao.');
         }
       }).catch((error) => {
         console.error('Erro ao carregar html2canvas:', error);
-        alert('Erro ao carregar biblioteca de PDF!');
+        this.notificationService.showError('Erro ao carregar biblioteca de PDF.');
       });
     }).catch((error) => {
       console.error('Erro ao carregar jsPDF:', error);
-      alert('Erro ao carregar biblioteca de PDF!');
+      this.notificationService.showError('Erro ao carregar biblioteca de PDF.');
     });
   }
 
