@@ -183,12 +183,23 @@ export class AuthService {
     }
 
     try {
-      const payload = tokenParts[1].replace(/-/g, '+').replace(/_/g, '/');
+      const payload = this.normalizeBase64Url(tokenParts[1]);
       const decoded = window.atob(payload);
       return JSON.parse(decoded) as { exp?: number };
     } catch {
       return null;
     }
+  }
+
+  private normalizeBase64Url(value: string): string {
+    const normalized = value.replace(/-/g, '+').replace(/_/g, '/');
+    const padding = normalized.length % 4;
+
+    if (padding === 0) {
+      return normalized;
+    }
+
+    return normalized + '='.repeat(4 - padding);
   }
 
   private finalizeLogout(): void {

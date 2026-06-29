@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { NGXLogger } from 'ngx-logger';
 import { environment } from '../../../environments/environment';
 import { RecipeData } from '../../shared/models/recipe-data.model';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { AuthService } from '../../features/auth/services/auth.service';
 
 interface ApiRecipe {
   details: {
@@ -40,6 +41,7 @@ export class RecipeService {
   private readonly apiUrl = `${environment.baseAddress}/v1/recipes`;
   private readonly http = inject(HttpClient);
   private readonly log = inject(NGXLogger);
+  private readonly authService = inject(AuthService);
 
   private readonly recipesSubject = new BehaviorSubject<RecipeData[]>([]);
   readonly recipes$ = this.recipesSubject.asObservable();
@@ -53,10 +55,11 @@ export class RecipeService {
    */
   loadRecipes(): Observable<RecipeData[]> {
     this.log.debug('Chamando GET das receitas');
-    return this.http
-      .get<ApiRecipe[]>(this.apiUrl, this.getAuthRequestOptions())
-      .pipe(map((recipes) => recipes.map((recipe) => this.toUiRecipe(recipe))))
-      .pipe(tap((recipes) => this.recipesSubject.next(recipes)));
+    return this.resolveRequestOptions().pipe(
+      switchMap((options) => this.http.get<ApiRecipe[]>(this.apiUrl, options)),
+      map((recipes) => recipes.map((recipe) => this.toUiRecipe(recipe))),
+      tap((recipes) => this.recipesSubject.next(recipes)),
+    );
   }
 
   /**
@@ -70,7 +73,9 @@ export class RecipeService {
    * Salva uma nova receita.
    */
   saveRecipe(recipe: RecipeData): Observable<string> {
-    return this.http.post<string>(this.apiUrl, this.toApiRecipe(recipe), this.getAuthRequestOptions());
+    return this.resolveRequestOptions().pipe(
+      switchMap((options) => this.http.post<string>(this.apiUrl, this.toApiRecipe(recipe), options)),
+    );
   }
 
   /**
@@ -167,21 +172,45 @@ export class RecipeService {
     return Number.isFinite(parsed) ? parsed : fallbackIndex + 1;
   }
 
-  private getAuthRequestOptions(): { headers?: HttpHeaders } {
+  private resolveRequestOptions(): Observable<{ headers?: HttpHeaders }> {
+    return this.resolveAccessToken().pipe(
+      map((token) => {
+        if (!token) {
+          return {};
+        }
+
+        return {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${token}`,
+          }),
+        };
+      }),
+    );
+  }
+
+  private resolveAccessToken(): Observable<string | null> {
     if (typeof window === 'undefined') {
-      return {};
+      return of(null);
     }
 
     const token = window.localStorage.getItem('access_token');
 
-    if (!token) {
-      return {};
+    if (token) {
+      return of(token);
     }
 
-    return {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`,
+    const refreshToken = window.localStorage.getItem('refresh_token');
+
+    if (!refreshToken) {
+      return of(null);
+    }
+
+    return this.authService.refreshAccessToken().pipe(
+      map((response) => response.accessToken),
+      catchError((error) => {
+        this.log.warn('Falha ao recuperar access token via refresh token.', error);
+        return of(null);
       }),
-    };
+    );
   }
 }
