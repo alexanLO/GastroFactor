@@ -18,8 +18,6 @@ import { PdfExportService } from '../../core/services/pdf-export.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { RecipeService } from '../../core/services/recipe.service';
 import { RecipeData } from '../../shared/models/recipe-data.model';
-import { MyCollection } from '../my-collection/my-collection';
-import { EMPTY, catchError, concatMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-technical-specification',
@@ -68,22 +66,14 @@ export class TechnicalSpecification {
     };
 
     this.recipeService
-      .saveRecipe(recipeData)
-      .pipe(
-        concatMap(() =>
-          this.recipeService.loadRecipes().pipe(
-            tap(() => this.saved.emit()),
-            catchError((error: HttpErrorResponse) => {
-              console.error('Erro ao atualizar a lista de receitas:', error);
-              return EMPTY;
-            }),
-          ),
-        ),
-      )
+      .saveRecipeAndRefresh(recipeData)
       .subscribe({
+        next: () => {
+          this.saved.emit();
+        },
         error: (error: HttpErrorResponse) => {
-        this.notificationService.showError('Erro ao salvar a receita. Tente novamente.');
-        console.error('Erro:', error);
+          this.notificationService.showError('Erro ao salvar a receita. Tente novamente.');
+          console.error('Erro:', error);
         },
       });
   }

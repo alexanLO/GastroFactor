@@ -51,6 +51,17 @@ export class RecipeService {
   }
 
   /**
+   * Salva uma receita e sincroniza a lista em memoria.
+   */
+  saveRecipeAndRefresh(recipe: RecipeData): Observable<RecipeData> {
+    return this.saveRecipe(recipe).pipe(
+      switchMap((savedRecipe) =>
+        this.loadRecipes().pipe(map(() => savedRecipe)),
+      ),
+    );
+  }
+
+  /**
    * Atualiza uma receita existente.
    */
   updateRecipe(id: string, recipe: RecipeData): Observable<RecipeData> {

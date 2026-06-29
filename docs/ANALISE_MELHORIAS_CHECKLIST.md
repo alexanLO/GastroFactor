@@ -37,7 +37,7 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 - [x] Evitar subscribe sem tratamento de ciclo de vida em src/app/core/services/recipe.service.ts (refreshRecipes).
 - [x] Revisar imports nao utilizados em src/app/features/auth/pages/login/login-page.component/login-page.component.ts.
 - [x] Padronizar nomenclatura de componentes/pastas para evitar sufixos duplicados e inconsistentes.
-- [ ] Revisar separacao de responsabilidades entre pagina e servico no fluxo de salvar receita.
+- [x] Revisar separacao de responsabilidades entre pagina e servico no fluxo de salvar receita.
 
 ### Prioridade P1 - Seguranca
 
