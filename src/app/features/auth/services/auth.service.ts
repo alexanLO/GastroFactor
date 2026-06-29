@@ -4,7 +4,7 @@ import { NGXLogger } from 'ngx-logger';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { AuthResponse, LoginRequest, RegisterRequest } from '../../../shared/models/auth.model';
-import { Router } from '@angular/router'; // ✅ import correto
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,8 @@ import { Router } from '@angular/router'; // ✅ import correto
 export class AuthService {
   private readonly uriApiLogin = `${environment.baseAddress}/v1/auth/login`;
   private readonly uriApiRegister = `${environment.baseAddress}/v1/auth/register`;
+  private readonly accessTokenKey = 'access_token';
+  private readonly refreshTokenKey = 'refresh_token';
 
   private loggedIn = false;
 
@@ -25,8 +27,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(this.uriApiLogin, request).pipe(
       tap((response) => {
         this.log.info('Login realizado com sucesso.');
-        localStorage.setItem('access_token', response.accessToken);
-        localStorage.setItem('refresh_token', response.refreshToken);
+        this.persistTokens(response);
         this.loggedIn = true;
         this.router.navigate(['/meu-acervo']);
       }),
@@ -37,8 +38,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(this.uriApiRegister, request).pipe(
       tap((response) => {
         this.log.info('Usuário cadastrado com sucesso.');
-        localStorage.setItem('access_token', response.accessToken);
-        localStorage.setItem('refresh_token', response.refreshToken);
+        this.persistTokens(response);
         this.loggedIn = true;
         this.router.navigate(['/meu-acervo']);
       }),
@@ -47,22 +47,102 @@ export class AuthService {
 
   userLogout() {
     this.loggedIn = false;
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    this.clearTokens();
     this.router.navigate(['/gastrofactor']);
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('access_token');
+    const accessToken = this.getStoredItem(this.accessTokenKey);
+    if (!accessToken) {
+      return false;
+    }
+
+    if (this.isJwtExpired(accessToken)) {
+      this.clearTokens();
+      return false;
+    }
+
+    return true;
   }
 
   openLoginModal() {
     this.showLoginModal.set(true);
-    document.body.classList.add('modal-open');
+    if (typeof document !== 'undefined') {
+      document.body.classList.add('modal-open');
+    }
   }
 
   closeLoginModal() {
     this.showLoginModal.set(false);
-    document.body.classList.remove('modal-open');
+    if (typeof document !== 'undefined') {
+      document.body.classList.remove('modal-open');
+    }
+  }
+
+  private persistTokens(response: AuthResponse): void {
+    this.setStoredItem(this.accessTokenKey, response.accessToken);
+    this.setStoredItem(this.refreshTokenKey, response.refreshToken);
+  }
+
+  private clearTokens(): void {
+    this.removeStoredItem(this.accessTokenKey);
+    this.removeStoredItem(this.refreshTokenKey);
+  }
+
+  private setStoredItem(key: string, value: string): void {
+    try {
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(key, value);
+      }
+    } catch (error) {
+      this.log.warn('Falha ao persistir token no storage.', error);
+    }
+  }
+
+  private getStoredItem(key: string): string | null {
+    try {
+      if (typeof window !== 'undefined') {
+        return window.localStorage.getItem(key);
+      }
+    } catch (error) {
+      this.log.warn('Falha ao ler token do storage.', error);
+    }
+
+    return null;
+  }
+
+  private removeStoredItem(key: string): void {
+    try {
+      if (typeof window !== 'undefined') {
+        window.localStorage.removeItem(key);
+      }
+    } catch (error) {
+      this.log.warn('Falha ao remover token do storage.', error);
+    }
+  }
+
+  private isJwtExpired(token: string): boolean {
+    const payload = this.decodeJwtPayload(token);
+    if (!payload || typeof payload.exp !== 'number') {
+      return true;
+    }
+
+    const nowInSeconds = Math.floor(Date.now() / 1000);
+    return payload.exp <= nowInSeconds;
+  }
+
+  private decodeJwtPayload(token: string): { exp?: number } | null {
+    const tokenParts = token.split('.');
+    if (tokenParts.length !== 3 || typeof window === 'undefined') {
+      return null;
+    }
+
+    try {
+      const payload = tokenParts[1].replace(/-/g, '+').replace(/_/g, '/');
+      const decoded = window.atob(payload);
+      return JSON.parse(decoded) as { exp?: number };
+    } catch {
+      return null;
+    }
   }
 }
