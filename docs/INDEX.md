@@ -17,6 +17,8 @@ GastroFactor/
 │   ├── DATA_MODELS.md           # Modelos de dados
 │   ├── ANALISE_MELHORIAS_CHECKLIST.md # Análise técnica e checklist de melhorias
 │   ├── SEGURANCA_AUTH_HTTPONLY.md # Migração de autenticação para cookie HttpOnly
+│   ├── AMBIENTES.md             # Guia de ambientes e baseAddress
+│   ├── GUIA_CONTRIBUICAO.md     # Guia prático de commits, naming e revisão
 │   ├── performance/
 │   │   └── BUNDLE_MONITORING.md # Monitoramento de regressão de tamanho de bundles
 │   └── TROUBLESHOOTING.md       # Problemas e soluções
@@ -89,14 +91,24 @@ GastroFactor/
    - Política de expiração e logout global
    - Checklist de rollout seguro
 
-9. **[performance/BUNDLE_MONITORING.md](./performance/BUNDLE_MONITORING.md)** (10 min)
+9. **[AMBIENTES.md](./AMBIENTES.md)** (10 min)
+   - Mapeamento de ambientes e fileReplacements
+   - Exemplos de baseAddress
+   - Boas práticas de configuração
+
+10. **[GUIA_CONTRIBUICAO.md](./GUIA_CONTRIBUICAO.md)** (10 min)
+   - Padrão de branch e commits
+   - Checklist de PR
+   - Critérios de revisão
+
+11. **[performance/BUNDLE_MONITORING.md](./performance/BUNDLE_MONITORING.md)** (10 min)
    - Budgets de bundles monitorados
    - Scripts de relatório e validação
    - Baseline versionada e política de regressão
 
 ### 🤝 **Contribuir com Código**
 
-10. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
+12. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
    - Código de Conduta
    - Como reportar bugs
    - Padrões de código
@@ -105,7 +117,7 @@ GastroFactor/
 
 ### 🔧 **Resolver Problemas**
 
-11. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
+13. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
    - Problemas comuns e soluções
    - Perguntas frequentes
    - Debugging

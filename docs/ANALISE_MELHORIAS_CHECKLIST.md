@@ -70,10 +70,10 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 
 ### Prioridade P3 - Documentacao e governanca
 
-- [ ] Atualizar README.md para remover referencias desatualizadas (branch de status, scripts e estrutura).
-- [ ] Garantir consistencia entre README.md, docs/ARCHITECTURE.md e estrutura real do src.
-- [ ] Criar guia de ambientes (local, homologation, production) com exemplos de baseAddress.
-- [ ] Criar guia de contribuicao para padrao de commits, naming e revisao.
+- [x] Atualizar README.md para remover referencias desatualizadas (branch de status, scripts e estrutura).
+- [x] Garantir consistencia entre README.md, docs/ARCHITECTURE.md e estrutura real do src.
+- [x] Criar guia de ambientes (local, homologation, production) com exemplos de baseAddress.
+- [x] Criar guia de contribuicao para padrao de commits, naming e revisao.
 
 ### Prioridade P3 - Pipeline e automacao
 
