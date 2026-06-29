@@ -29,7 +29,13 @@
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/app/shared/styles"]
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "canvg",
+              "html2canvas",
+              "raf",
+              "rgbcolor"
+            ]
           },
           "configurations": {
             "production": {
