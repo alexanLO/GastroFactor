@@ -6,7 +6,7 @@ import { NavbarComponent } from '../../component/navbar/navbar.component';
 import { RecipeService } from '../../core/services/recipe.service';
 import { RecipeData } from '../../shared/models/recipe-data.model';
 import { TechnicalSpecification } from '../technical-specification/technical-specification';
-import { RecipeCardComponent } from '../../component/recipe-card-component/recipe-card-component';
+import { RecipeCardComponent } from '../../component/recipe-card/recipe-card.component';
 
 @Component({
   selector: 'app-my-collection',

@@ -10,10 +10,10 @@ import {
   ElementRef,
   ChangeDetectorRef,
 } from '@angular/core';
-import { CardDetailsComponent } from '../../component/card-details-component/card-details-component';
-import { CardNutritionalComponent } from '../../component/card-nutritional/card-nutritional-component';
-import { PreparationMethodComponent } from '../../component/preparation-method-component/preparation-method-component';
-import { TableIngredientsComponent } from '../../component/table-ingredients/table-ingredients-component';
+import { CardDetailsComponent } from '../../component/card-details/card-details.component';
+import { CardNutritionalComponent } from '../../component/card-nutritional/card-nutritional.component';
+import { PreparationMethodComponent } from '../../component/preparation-method/preparation-method.component';
+import { TableIngredientsComponent } from '../../component/table-ingredients/table-ingredients.component';
 import { PdfExportService } from '../../core/services/pdf-export.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { RecipeService } from '../../core/services/recipe.service';

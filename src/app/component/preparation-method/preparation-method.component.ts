@@ -8,10 +8,10 @@ type PreparationStep = RecipeData['preparationMethod'][number] & {
 };
 
 @Component({
-  selector: 'app-preparation-method-component',
+  selector: 'app-preparation-method',
   imports: [CommonModule, FormsModule],
-  templateUrl: './preparation-method-component.html',
-  styleUrl: './preparation-method-component.scss',
+  templateUrl: './preparation-method.component.html',
+  styleUrl: './preparation-method.component.scss',
 })
 export class PreparationMethodComponent {
   steps: PreparationStep[] = [
