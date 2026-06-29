@@ -5,7 +5,10 @@ import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } fr
 import { NGXLogger } from 'ngx-logger';
 import { ErrorInputComponent } from '../../../../../shared/components/error-input/error-input.component';
 import { LoginRequest } from '../../../../../shared/models/auth.model';
+import { NotificationService } from '../../../../../core/services/notification.service';
+import { resolveUnknownErrorMessage } from '../../../../../core/utils/api-error-message.util';
 import { AuthService } from '../../../services/auth.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -18,8 +21,10 @@ export class LoginPageComponent {
   private formBuilder = inject(NonNullableFormBuilder);
   private cdr = inject(ChangeDetectorRef);
   private log = inject(NGXLogger);
+  private notificationService = inject(NotificationService);
 
   public loginForm: FormGroup;
+  public isSubmitting = false;
 
   constructor() {
     this.loginForm = this.formBuilder.group({
@@ -29,6 +34,16 @@ export class LoginPageComponent {
   }
 
   onSubmit() {
+    if (this.isSubmitting) {
+      return;
+    }
+
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    this.isSubmitting = true;
     this.log.info('Chamando API para logar o uruario');
 
     const request: LoginRequest = {
@@ -37,17 +52,26 @@ export class LoginPageComponent {
     };
 
     this.log.info('Fazendo requisição do serviço: {}', request);
-    this.authService.userLogin(request).subscribe({
-      next: () => {
-        this.log.info('Resposta Recebida');
-        this.onClose();
-        this.cdr.detectChanges();
-      },
-      error: (error: HttpErrorResponse) => {
-        this.log.info('Erro ao tentar logar o usuário', error);
-        this.cdr.detectChanges();
-      },
-    });
+    this.authService
+      .userLogin(request)
+      .pipe(
+        finalize(() => {
+          this.isSubmitting = false;
+          this.cdr.detectChanges();
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.log.info('Resposta Recebida');
+          this.notificationService.showSuccess('Login realizado com sucesso.');
+          this.onClose();
+        },
+        error: (error: HttpErrorResponse) => {
+          const message = resolveUnknownErrorMessage(error, 'Erro ao tentar logar. Tente novamente.');
+          this.notificationService.showError(message);
+          this.log.info('Erro ao tentar logar o usuário', error);
+        },
+      });
   }
 
   onClose(): void {

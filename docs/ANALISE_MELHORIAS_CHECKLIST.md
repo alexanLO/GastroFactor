@@ -51,7 +51,7 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 - [x] Trocar console.log e console.error por logger configuravel por ambiente.
 - [x] Substituir alerts por componente de notificacao/toast consistente.
 - [x] Definir padrao de mensagens de erro de API centralizado e amigavel.
-- [ ] Melhorar estado de carregamento/sucesso/erro em formularios de login, registro e salvar receita.
+- [x] Melhorar estado de carregamento/sucesso/erro em formularios de login, registro e salvar receita.
 
 ### Prioridade P2 - Performance e build
 

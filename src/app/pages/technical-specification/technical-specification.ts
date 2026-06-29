@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import {
   Component,
   inject,
@@ -20,6 +20,7 @@ import { NotificationService } from '../../core/services/notification.service';
 import { RecipeService } from '../../core/services/recipe.service';
 import { resolveUnknownErrorMessage } from '../../core/utils/api-error-message.util';
 import { RecipeData } from '../../shared/models/recipe-data.model';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-technical-specification',
@@ -52,12 +53,19 @@ export class TechnicalSpecification {
   private cdr = inject(ChangeDetectorRef);
 
   selectedImage: string | ArrayBuffer | null = '';
+  isSaving = false;
 
   onImportImage(): void {
     this.fileInput.nativeElement.click();
   }
 
   saveRecipe(): void {
+    if (this.isSaving) {
+      return;
+    }
+
+    this.isSaving = true;
+
     const details = this.detailsComponent.getDetails();
     details.image = this.selectedImage as string;
 
@@ -70,8 +78,15 @@ export class TechnicalSpecification {
 
     this.recipeService
       .saveRecipeAndRefresh(recipeData)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.cdr.detectChanges();
+        }),
+      )
       .subscribe({
         next: () => {
+          this.notificationService.showSuccess('Receita salva com sucesso.');
           this.saved.emit();
         },
         error: (error: unknown) => {

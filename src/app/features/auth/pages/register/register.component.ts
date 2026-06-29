@@ -12,8 +12,11 @@ import {
 } from '@angular/forms';
 import { NGXLogger } from 'ngx-logger';
 import { AuthResponse, RegisterRequest } from '../../../../shared/models/auth.model';
+import { NotificationService } from '../../../../core/services/notification.service';
+import { resolveUnknownErrorMessage } from '../../../../core/utils/api-error-message.util';
 import { AuthService } from '../../services/auth.service';
 import { ErrorInputComponent } from '../../../../shared/components/error-input/error-input.component';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -30,9 +33,11 @@ export class RegisterComponent {
   private formBuilder = inject(NonNullableFormBuilder);
   private cdr = inject(ChangeDetectorRef);
   private log = inject(NGXLogger);
+  private notificationService = inject(NotificationService);
 
   public authResult: AuthResponse | null = null;
   public registerForm: FormGroup;
+  public isSubmitting = false;
 
   constructor() {
     this.registerForm = this.formBuilder.group(
@@ -48,6 +53,16 @@ export class RegisterComponent {
   }
 
   onSubmit() {
+    if (this.isSubmitting) {
+      return;
+    }
+
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
+    this.isSubmitting = true;
     this.log.info('Chamando API para cadastrar usuario');
     const request: RegisterRequest = {
       name: this.registerForm.get('name')?.value,
@@ -57,18 +72,27 @@ export class RegisterComponent {
     };
 
     this.log.info('Fazendo requisição do serviço: {}', request);
-    this.authService.userRegister(request).subscribe({
-      next: (response: AuthResponse) => {
-        this.log.info('Resposta recebida');
-        this.authResult = response;
-        this.onClose();
-        this.cdr.detectChanges();
-      },
-      error: (error: HttpErrorResponse) => {
-        this.log.error('Erro ao tentar registrar o usuário:', error);
-        this.cdr.detectChanges();
-      },
-    });
+    this.authService
+      .userRegister(request)
+      .pipe(
+        finalize(() => {
+          this.isSubmitting = false;
+          this.cdr.detectChanges();
+        }),
+      )
+      .subscribe({
+        next: (response: AuthResponse) => {
+          this.log.info('Resposta recebida');
+          this.authResult = response;
+          this.notificationService.showSuccess('Cadastro realizado com sucesso.');
+          this.onClose();
+        },
+        error: (error: HttpErrorResponse) => {
+          const message = resolveUnknownErrorMessage(error, 'Erro ao registrar usuario. Tente novamente.');
+          this.notificationService.showError(message);
+          this.log.error('Erro ao tentar registrar o usuário:', error);
+        },
+      });
   }
 
   private passwordMatchValidator: ValidatorFn = (

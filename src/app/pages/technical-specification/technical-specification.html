@@ -17,9 +17,9 @@
         </button>
         <input type="file" accept="image/*" #fileInput style="display: none" (change)="onFileSelected($event)" />
 
-        <button class="card-btn-save" (click)="saveRecipe()">
+        <button class="card-btn-save" (click)="saveRecipe()" [disabled]="isSaving">
           <span class="material-symbols-outlined">save</span>
-          <span>Salvar</span>
+          <span>{{ isSaving ? 'Salvando...' : 'Salvar' }}</span>
         </button>
 
         <button class="card-btn-export" (click)="exportPdf()">
