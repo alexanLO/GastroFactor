@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, switchMap, tap } from 'rxjs';
+import { NGXLogger } from 'ngx-logger';
 import { environment } from '../../../environments/environment';
 import { RecipeData } from '../../shared/models/recipe-data.model';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -11,6 +12,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class RecipeService {
   private readonly apiUrl = `${environment.baseAddress}/v1/recipes`;
   private readonly http = inject(HttpClient);
+  private readonly log = inject(NGXLogger);
 
   private readonly recipesSubject = new BehaviorSubject<RecipeData[]>([]);
   readonly recipes$ = this.recipesSubject.asObservable();
@@ -23,7 +25,7 @@ export class RecipeService {
    * Carrega todas as receitas da API.
    */
   loadRecipes(): Observable<RecipeData[]> {
-    console.log('Chamando GET das receitas');
+    this.log.debug('Chamando GET das receitas');
     return this.http
       .get<RecipeData[]>(this.apiUrl)
       .pipe(tap((recipes) => this.recipesSubject.next(recipes)));

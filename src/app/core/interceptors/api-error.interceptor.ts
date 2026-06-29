@@ -4,13 +4,15 @@ import {
     HttpHandler,
     HttpRequest
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
 import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiErrorInterceptor {
+  private readonly log = inject(NGXLogger);
  /**
    * Trata erros da API de forma centralizada
    * @param error - Erro retornado pela API
@@ -31,7 +33,7 @@ export class ApiErrorInterceptor {
           errorMessage = `Erro ${error.status}: ${error.statusText}`;
         }
 
-        console.error('Erro na API:', errorMessage);
+        this.log.error('Erro na API:', errorMessage);
         return throwError(() => new Error(errorMessage));
       }),
     );

@@ -10,6 +10,7 @@ import {
   ElementRef,
   ChangeDetectorRef,
 } from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
 import { CardDetailsComponent } from '../../component/card-details/card-details.component';
 import { CardNutritionalComponent } from '../../component/card-nutritional/card-nutritional.component';
 import { PreparationMethodComponent } from '../../component/preparation-method/preparation-method.component';
@@ -46,6 +47,7 @@ export class TechnicalSpecification {
   private recipeService = inject(RecipeService);
   private pdfService = inject(PdfExportService);
   private notificationService = inject(NotificationService);
+  private log = inject(NGXLogger);
   private cdr = inject(ChangeDetectorRef);
 
   selectedImage: string | ArrayBuffer | null = '';
@@ -73,7 +75,7 @@ export class TechnicalSpecification {
         },
         error: (error: HttpErrorResponse) => {
           this.notificationService.showError('Erro ao salvar a receita. Tente novamente.');
-          console.error('Erro:', error);
+          this.log.error('Erro ao salvar receita:', error);
         },
       });
   }

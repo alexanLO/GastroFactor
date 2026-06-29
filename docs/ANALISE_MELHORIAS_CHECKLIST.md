@@ -48,7 +48,7 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 
 ### Prioridade P2 - UX e observabilidade
 
-- [ ] Trocar console.log e console.error por logger configuravel por ambiente.
+- [x] Trocar console.log e console.error por logger configuravel por ambiente.
 - [ ] Substituir alerts por componente de notificacao/toast consistente.
 - [ ] Definir padrao de mensagens de erro de API centralizado e amigavel.
 - [ ] Melhorar estado de carregamento/sucesso/erro em formularios de login, registro e salvar receita.

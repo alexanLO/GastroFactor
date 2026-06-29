@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
 import { RecipeData } from '../../shared/models/recipe-data.model';
 import { NotificationService } from './notification.service';
 
@@ -6,7 +7,10 @@ import { NotificationService } from './notification.service';
   providedIn: 'root'
 })
 export class PdfExportService {
-  constructor(private readonly notificationService: NotificationService) {}
+  constructor(
+    private readonly notificationService: NotificationService,
+    private readonly log: NGXLogger,
+  ) {}
 
   generateRecipePdf(recipe: RecipeData): void {
     // Dinamicamente importar jsPDF quando necessário
@@ -66,27 +70,27 @@ export class PdfExportService {
               doc.save(`${this.sanitizeFileName(recipe.details.name) || 'receita'}.pdf`);
               
             } catch (error) {
-              console.error('Erro ao gerar PDF:', error);
+              this.log.error('Erro ao gerar PDF:', error);
               this.notificationService.showError('Erro ao exportar PDF. Tente novamente.');
             } finally {
               // Remove elemento temporário
               document.body.removeChild(tempDiv);
             }
           }).catch((error) => {
-            console.error('Erro ao processar canvas:', error);
+            this.log.error('Erro ao processar canvas:', error);
             this.notificationService.showError('Erro ao processar imagem para PDF.');
             document.body.removeChild(tempDiv);
           });
         } catch (error) {
-          console.error('Erro ao criar conteúdo PDF:', error);
+          this.log.error('Erro ao criar conteúdo PDF:', error);
           this.notificationService.showError('Erro ao preparar PDF para exportacao.');
         }
       }).catch((error) => {
-        console.error('Erro ao carregar html2canvas:', error);
+        this.log.error('Erro ao carregar html2canvas:', error);
         this.notificationService.showError('Erro ao carregar biblioteca de PDF.');
       });
     }).catch((error) => {
-      console.error('Erro ao carregar jsPDF:', error);
+      this.log.error('Erro ao carregar jsPDF:', error);
       this.notificationService.showError('Erro ao carregar biblioteca de PDF.');
     });
   }
