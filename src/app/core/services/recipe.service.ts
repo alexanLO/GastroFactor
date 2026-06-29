@@ -10,6 +10,7 @@ import { AuthService } from '../../features/auth/services/auth.service';
 interface ApiRecipe {
   details: {
     name: string;
+    image?: string | null;
     servings: number;
     category: string;
   };
@@ -93,7 +94,7 @@ export class RecipeService {
     return {
       details: {
         name: recipe.details.name,
-        image: '',
+        image: recipe.details.image ?? '',
         servings: recipe.details.servings,
         category: recipe.details.category,
       },
@@ -123,6 +124,7 @@ export class RecipeService {
     return {
       details: {
         name: recipe.details.name,
+        image: recipe.details.image ?? '',
         servings: recipe.details.servings,
         category: recipe.details.category,
       },
