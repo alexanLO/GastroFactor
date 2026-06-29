@@ -7,6 +7,7 @@ import { CalculationService } from '../../core/services/calculation.service';
 import { LoginPageComponent } from '../../features/auth/pages/login/login-page.component/login-page.component';
 import { RegisterComponent } from '../../features/auth/pages/register/register.component';
 import { AuthService } from '../../features/auth/services/auth.service';
+import { resolveUnknownErrorMessage } from '../../core/utils/api-error-message.util';
 import { CalculationRequest, CalculationResponse } from '../../shared/models/calculation.model';
 import { NavbarComponent } from '../../component/navbar/navbar.component';
 import { NGXLogger } from 'ngx-logger';
@@ -69,7 +70,7 @@ export class MainScreen {
         this.cdr.detectChanges();
       },
       error: (error) => {
-        this.log.error('Erro no cálculo:', error);
+        this.log.error(resolveUnknownErrorMessage(error, 'Erro ao calcular fator de correcao.'), error);
         this.showDialog = true;
         document.body.classList.remove('modal-open'); // garante liberar o scroll mesmo em caso de erro
         this.cdr.detectChanges();

@@ -18,6 +18,7 @@ import { TableIngredientsComponent } from '../../component/table-ingredients/tab
 import { PdfExportService } from '../../core/services/pdf-export.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { RecipeService } from '../../core/services/recipe.service';
+import { resolveUnknownErrorMessage } from '../../core/utils/api-error-message.util';
 import { RecipeData } from '../../shared/models/recipe-data.model';
 
 @Component({
@@ -73,8 +74,9 @@ export class TechnicalSpecification {
         next: () => {
           this.saved.emit();
         },
-        error: (error: HttpErrorResponse) => {
-          this.notificationService.showError('Erro ao salvar a receita. Tente novamente.');
+        error: (error: unknown) => {
+          const message = resolveUnknownErrorMessage(error, 'Erro ao salvar a receita. Tente novamente.');
+          this.notificationService.showError(message);
           this.log.error('Erro ao salvar receita:', error);
         },
       });
