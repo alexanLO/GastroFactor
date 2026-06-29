@@ -31,7 +31,7 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 ### Prioridade P1 - Qualidade de codigo e arquitetura
 
 - [x] Eliminar tipos any em src/app/core/services/pdf-export.service.ts.
-- [ ] Eliminar tipos any em src/app/component/preparation-method-component/preparation-method-component.ts.
+- [x] Eliminar tipos any em src/app/component/preparation-method-component/preparation-method-component.ts.
 - [ ] Tipar erros de subscribe em login/registro ao inves de any.
 - [ ] Substituir nested subscribe por operadores RxJS (switchMap, concatMap, finalize) em src/app/pages/technical-specification/technical-specification.ts.
 - [ ] Evitar subscribe sem tratamento de ciclo de vida em src/app/core/services/recipe.service.ts (refreshRecipes).
