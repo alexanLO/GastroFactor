@@ -30,6 +30,10 @@ Formato recomendado (Conventional Commits):
 
 `tipo(escopo): descricao`
 
+Guia detalhado (tipos, exemplos e breaking change):
+
+- `docs/CONVENTIONAL_COMMITS.md`
+
 Tipos:
 
 - `feat`

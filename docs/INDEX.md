@@ -19,6 +19,7 @@ GastroFactor/
 │   ├── SEGURANCA_AUTH_HTTPONLY.md # Migração de autenticação para cookie HttpOnly
 │   ├── AMBIENTES.md             # Guia de ambientes e baseAddress
 │   ├── GUIA_CONTRIBUICAO.md     # Guia prático de commits, naming e revisão
+│   ├── CONVENTIONAL_COMMITS.md  # Padrao de tipos de commit (feat, fix, refactor, etc.)
 │   ├── RELEASE_CHECKLIST.md     # Checklist mínimo antes de deploy
 │   ├── performance/
 │   │   └── BUNDLE_MONITORING.md # Monitoramento de regressão de tamanho de bundles
@@ -102,18 +103,23 @@ GastroFactor/
    - Checklist de PR
    - Critérios de revisão
 
-11. **[RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md)** (5 min)
+11. **[CONVENTIONAL_COMMITS.md](./CONVENTIONAL_COMMITS.md)** (10 min)
+   - Tipos de commit (`feat`, `fix`, `refactor`, etc.)
+   - Exemplos prontos para front/back
+   - Guia de escopo e breaking changes
+
+12. **[RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md)** (5 min)
    - Validações mínimas de release
    - Itens de qualidade, regressão e rollback
 
-12. **[performance/BUNDLE_MONITORING.md](./performance/BUNDLE_MONITORING.md)** (10 min)
+13. **[performance/BUNDLE_MONITORING.md](./performance/BUNDLE_MONITORING.md)** (10 min)
    - Budgets de bundles monitorados
    - Scripts de relatório e validação
    - Baseline versionada e política de regressão
 
 ### 🤝 **Contribuir com Código**
 
-13. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
+14. **[CONTRIBUTING.md](../CONTRIBUTING.md)** (10 min)
    - Código de Conduta
    - Como reportar bugs
    - Padrões de código
@@ -122,7 +128,7 @@ GastroFactor/
 
 ### 🔧 **Resolver Problemas**
 
-14. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
+15. **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (20 min)
    - Problemas comuns e soluções
    - Perguntas frequentes
    - Debugging
