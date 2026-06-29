@@ -63,7 +63,7 @@ export class PdfExportService {
                 remainingHeight -= pageHeight - 20;
               }
 
-              doc.save(`${recipe.details.name || 'receita'}.pdf`);
+              doc.save(`${this.sanitizeFileName(recipe.details.name) || 'receita'}.pdf`);
               
             } catch (error) {
               console.error('Erro ao gerar PDF:', error);
@@ -92,16 +92,29 @@ export class PdfExportService {
   }
 
   private createPdfContent(recipe: RecipeData): string {
+    const safeRecipeName = this.escapeHtml(recipe.details.name) || 'Sem titulo';
+    const safeCategory = this.escapeHtml(recipe.details.category);
+    const safeServings = Number.isFinite(recipe.details.servings)
+      ? recipe.details.servings
+      : 0;
+
+    const safeNutritional = {
+      calories: this.escapeHtml(recipe.nutritional.calories) || '-',
+      protein: this.escapeHtml(recipe.nutritional.protein) || '-',
+      totalFat: this.escapeHtml(recipe.nutritional.totalFat) || '-',
+      carbs: this.escapeHtml(recipe.nutritional.carbs) || '-',
+    };
+
     const ingredientsHtml = recipe.ingredients
       .map(
         (item) =>
           `<tr>
-            <td>${item.name || ''}</td>
-            <td>${item.netWeight || ''}</td>
-            <td>${item.correctionFactor || ''}</td>
-            <td>${item.grossWeight || ''}</td>
-            <td>${item.cookingFactor || ''}</td>
-            <td>${item.totalQuantity || ''}</td>
+            <td>${this.escapeHtml(item.name)}</td>
+            <td>${this.escapeHtml(item.netWeight)}</td>
+            <td>${this.escapeHtml(item.correctionFactor)}</td>
+            <td>${this.escapeHtml(item.grossWeight)}</td>
+            <td>${this.escapeHtml(item.cookingFactor)}</td>
+            <td>${this.escapeHtml(item.totalQuantity)}</td>
           </tr>`
       )
       .join('');
@@ -110,63 +123,272 @@ export class PdfExportService {
       .map(
         (step, index: number) =>
           `<li>
-            <strong>${index + 1}. ${step.title || ''}</strong>
-            <p>${step.description || ''}</p>
+            <strong>${index + 1}. ${this.escapeHtml(step.title)}</strong>
+            <p>${this.escapeHtml(step.description)}</p>
           </li>`
       )
       .join('');
 
     return `
       <style>
-        body { font-family: Arial, sans-serif; color: #333; }
-        h1 { font-size: 28px; margin-bottom: 10px; color: #1a1a1a; border-bottom: 3px solid #ff6b35; padding-bottom: 10px; }
-        h2 { font-size: 18px; margin-top: 20px; margin-bottom: 10px; color: #333; border-left: 4px solid #ff6b35; padding-left: 10px; }
-        p { font-size: 12px; line-height: 1.6; margin: 8px 0; }
-        table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 11px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f5f5f5; font-weight: bold; color: #333; }
-        tbody tr:nth-child(even) { background-color: #fafafa; }
-        ul, ol { font-size: 12px; line-height: 1.8; margin: 10px 0; padding-left: 20px; }
-        li { margin-bottom: 8px; }
-        strong { color: #333; font-weight: bold; }
-        .pdf-content { width: 100%; }
+        :root {
+          --brand: #ff6b35;
+          --brand-strong: #e8531f;
+          --ink: #1f1f1f;
+          --muted: #6b7280;
+          --line: #e8e8e8;
+          --soft: #fff5ef;
+          --surface: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+          font-family: Arial, sans-serif;
+          color: var(--ink);
+          background: linear-gradient(180deg, #fff9f5 0%, #ffffff 35%);
+          margin: 0;
+        }
+
+        .pdf-content {
+          width: 100%;
+        }
+
+        .hero {
+          background: linear-gradient(135deg, var(--brand) 0%, var(--brand-strong) 100%);
+          color: #fff;
+          padding: 18px 20px;
+          border-radius: 14px;
+          margin-bottom: 16px;
+          box-shadow: 0 10px 24px rgba(232, 83, 31, 0.2);
+        }
+
+        .hero-eyebrow {
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          font-size: 10px;
+          opacity: 0.95;
+          margin-bottom: 8px;
+        }
+
+        h1 {
+          font-size: 30px;
+          line-height: 1.2;
+          margin: 0 0 10px;
+        }
+
+        .meta-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+
+        .meta-chip {
+          background: rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.35);
+          border-radius: 10px;
+          padding: 8px 10px;
+          font-size: 11px;
+        }
+
+        .meta-chip-label {
+          display: block;
+          font-size: 9px;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          margin-bottom: 4px;
+          opacity: 0.9;
+        }
+
+        .section {
+          background: var(--surface);
+          border: 1px solid var(--line);
+          border-radius: 12px;
+          padding: 14px;
+          margin-top: 12px;
+        }
+
+        h2 {
+          font-size: 16px;
+          margin: 0 0 10px;
+          color: var(--ink);
+          padding-left: 10px;
+          border-left: 4px solid var(--brand);
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 10px;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+
+        th, td {
+          border: 1px solid var(--line);
+          padding: 7px;
+          text-align: left;
+          vertical-align: top;
+        }
+
+        th {
+          background-color: var(--soft);
+          color: var(--brand-strong);
+          font-weight: bold;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          font-size: 9px;
+        }
+
+        tbody tr:nth-child(even) { background-color: #fffaf7; }
+
+        .nutritional-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+
+        .nutritional-item {
+          border: 1px solid var(--line);
+          border-radius: 10px;
+          padding: 8px;
+          background: #fff;
+        }
+
+        .nutritional-label {
+          display: block;
+          font-size: 9px;
+          color: var(--muted);
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          margin-bottom: 4px;
+        }
+
+        .nutritional-value {
+          font-size: 13px;
+          font-weight: bold;
+          color: var(--ink);
+        }
+
+        ol {
+          font-size: 11px;
+          line-height: 1.6;
+          margin: 8px 0 0;
+          padding-left: 20px;
+        }
+
+        li {
+          margin-bottom: 8px;
+          background: #fff;
+          border: 1px solid var(--line);
+          border-radius: 10px;
+          padding: 8px 10px;
+          list-style-position: outside;
+        }
+
+        li strong {
+          display: block;
+          margin-bottom: 3px;
+          color: var(--brand-strong);
+        }
+
+        li p {
+          margin: 0;
+          color: var(--ink);
+        }
+
+        .footer-note {
+          margin-top: 12px;
+          text-align: right;
+          font-size: 9px;
+          color: var(--muted);
+        }
       </style>
       <div class="pdf-content">
-        <h1>${recipe.details.name || 'Sem título'}</h1>
-        <p><strong>Categoria:</strong> ${recipe.details.category || ''}</p>
-        <p><strong>Rendimento:</strong> ${recipe.details.servings || 0} pessoas</p>
-        
-        <h2>Ingredientes</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Ingrediente</th>
-              <th>Peso Líquido</th>
-              <th>Fator Correção</th>
-              <th>Peso Bruto</th>
-              <th>Fator Cocção</th>
-              <th>Quantidade Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${ingredientsHtml}
-          </tbody>
-        </table>
+        <section class="hero">
+          <div class="hero-eyebrow">GastroFactor - Ficha Tecnica</div>
+          <h1>${safeRecipeName}</h1>
+          <div class="meta-grid">
+            <div class="meta-chip">
+              <span class="meta-chip-label">Categoria</span>
+              <span>${safeCategory}</span>
+            </div>
+            <div class="meta-chip">
+              <span class="meta-chip-label">Rendimento</span>
+              <span>${safeServings} pessoas</span>
+            </div>
+          </div>
+        </section>
 
-        <h2>Valor Nutricional</h2>
-        <ul>
-          <li><strong>Calorias:</strong> ${recipe.nutritional.calories || '-'}</li>
-          <li><strong>Proteínas:</strong> ${recipe.nutritional.protein || '-'}</li>
-          <li><strong>Gorduras Totais:</strong> ${recipe.nutritional.totalFat || '-'}</li>
-          <li><strong>Carboidratos:</strong> ${recipe.nutritional.carbs || '-'}</li>
-        </ul>
+        <section class="section">
+          <h2>Ingredientes</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Ingrediente</th>
+                <th>Peso Liquido</th>
+                <th>Fator Correcao</th>
+                <th>Peso Bruto</th>
+                <th>Fator Coccao</th>
+                <th>Quantidade Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${ingredientsHtml}
+            </tbody>
+          </table>
+        </section>
 
-        <h2>Modo de Preparo</h2>
-        <ol>
-          ${stepsHtml}
-        </ol>
+        <section class="section">
+          <h2>Valor Nutricional</h2>
+          <ul class="nutritional-grid">
+            <li class="nutritional-item">
+              <span class="nutritional-label">Calorias</span>
+              <span class="nutritional-value">${safeNutritional.calories}</span>
+            </li>
+            <li class="nutritional-item">
+              <span class="nutritional-label">Proteinas</span>
+              <span class="nutritional-value">${safeNutritional.protein}</span>
+            </li>
+            <li class="nutritional-item">
+              <span class="nutritional-label">Gorduras Totais</span>
+              <span class="nutritional-value">${safeNutritional.totalFat}</span>
+            </li>
+            <li class="nutritional-item">
+              <span class="nutritional-label">Carboidratos</span>
+              <span class="nutritional-value">${safeNutritional.carbs}</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2>Modo de Preparo</h2>
+          <ol>
+            ${stepsHtml}
+          </ol>
+        </section>
+
+        <div class="footer-note">Documento gerado automaticamente pela plataforma GastroFactor.</div>
       </div>
     `;
+  }
+
+  private escapeHtml(value: unknown): string {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  private sanitizeFileName(value: string): string {
+    return String(value ?? '')
+      .replace(/[\\/:*?"<>|]/g, '')
+      .trim();
   }
 }
 
