@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, EventEmitter, inject, Inject, Output } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Output } from '@angular/core';
 import {
   AbstractControl,
   FormGroup,
@@ -12,7 +13,7 @@ import {
 import { NGXLogger } from 'ngx-logger';
 import { AuthResponse, RegisterRequest } from '../../../../shared/models/auth.model';
 import { AuthService } from '../../services/auth.service';
-import { ErrorInputComponent } from "../../../../shared/components/error-input/error-input.component";
+import { ErrorInputComponent } from '../../../../shared/components/error-input/error-input.component';
 
 @Component({
   selector: 'app-register',
@@ -63,7 +64,7 @@ export class RegisterComponent {
         this.onClose();
         this.cdr.detectChanges();
       },
-      error: (error: any) => {
+      error: (error: HttpErrorResponse) => {
         this.log.error('Erro ao tentar registrar o usuário:', error);
         this.cdr.detectChanges();
       },

@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NGXLogger } from 'ngx-logger';
@@ -42,7 +43,7 @@ export class LoginPageComponent {
         this.onClose();
         this.cdr.detectChanges();
       },
-      error: (error: any) => {
+      error: (error: HttpErrorResponse) => {
         this.log.info('Erro ao tentar logar o usuário', error);
         this.cdr.detectChanges();
       },

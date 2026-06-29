@@ -32,7 +32,7 @@ Este documento consolida os principais pontos de melhoria identificados no proje
 
 - [x] Eliminar tipos any em src/app/core/services/pdf-export.service.ts.
 - [x] Eliminar tipos any em src/app/component/preparation-method-component/preparation-method-component.ts.
-- [ ] Tipar erros de subscribe em login/registro ao inves de any.
+- [x] Tipar erros de subscribe em login/registro ao inves de any.
 - [ ] Substituir nested subscribe por operadores RxJS (switchMap, concatMap, finalize) em src/app/pages/technical-specification/technical-specification.ts.
 - [ ] Evitar subscribe sem tratamento de ciclo de vida em src/app/core/services/recipe.service.ts (refreshRecipes).
 - [ ] Revisar imports nao utilizados em src/app/features/auth/pages/login/login-page.component/login-page.component.ts.
