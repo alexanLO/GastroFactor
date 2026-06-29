@@ -9,6 +9,7 @@ import { provideRouter, withViewTransitions } from '@angular/router';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { environment } from '../environments/environment';
 import { ApiErrorInterceptor } from './core/interceptors/api-error.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -23,6 +24,7 @@ export const appConfig: ApplicationConfig = {
 
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withViewTransitions()),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ApiErrorInterceptor, multi: true },
     provideHttpClient(withInterceptorsFromDi()),
   ],

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
-import { Observable, tap } from 'rxjs';
+import { catchError, finalize, Observable, of, throwError, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { AuthResponse, LoginRequest, RegisterRequest } from '../../../shared/models/auth.model';
 import { Router } from '@angular/router';
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class AuthService {
   private readonly uriApiLogin = `${environment.baseAddress}/v1/auth/login`;
   private readonly uriApiRegister = `${environment.baseAddress}/v1/auth/register`;
+  private readonly uriApiLogout = `${environment.baseAddress}/v1/auth/logout`;
+  private readonly uriApiRefresh = `${environment.baseAddress}/v1/auth/refresh`;
   private readonly accessTokenKey = 'access_token';
   private readonly refreshTokenKey = 'refresh_token';
 
@@ -45,10 +47,47 @@ export class AuthService {
     );
   }
 
-  userLogout() {
-    this.loggedIn = false;
-    this.clearTokens();
-    this.router.navigate(['/gastrofactor']);
+  userLogout(): void {
+    const accessToken = this.getStoredItem(this.accessTokenKey);
+    const refreshToken = this.getStoredItem(this.refreshTokenKey);
+
+    if (!accessToken || !refreshToken) {
+      this.finalizeLogout();
+      return;
+    }
+
+    this.http
+      .post<void>(
+        this.uriApiLogout,
+        { refreshToken },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      )
+      .pipe(
+        catchError((error) => {
+          this.log.warn('Falha ao invalidar sessão no backend durante logout.', error);
+          return of(void 0);
+        }),
+        finalize(() => this.finalizeLogout()),
+      )
+      .subscribe();
+  }
+
+  refreshAccessToken(): Observable<AuthResponse> {
+    const refreshToken = this.getStoredItem(this.refreshTokenKey);
+
+    if (!refreshToken) {
+      return throwError(() => new Error('Refresh token não encontrado.'));
+    }
+
+    return this.http.post<AuthResponse>(`${this.uriApiRefresh}/${encodeURIComponent(refreshToken)}`, {}).pipe(
+      tap((response) => {
+        this.persistTokens(response);
+      }),
+    );
   }
 
   isAuthenticated(): boolean {
@@ -81,7 +120,13 @@ export class AuthService {
 
   private persistTokens(response: AuthResponse): void {
     this.setStoredItem(this.accessTokenKey, response.accessToken);
-    this.setStoredItem(this.refreshTokenKey, response.refreshToken);
+
+    if (response.refreshToken) {
+      this.setStoredItem(this.refreshTokenKey, response.refreshToken);
+      return;
+    }
+
+    this.removeStoredItem(this.refreshTokenKey);
   }
 
   private clearTokens(): void {
@@ -144,5 +189,11 @@ export class AuthService {
     } catch {
       return null;
     }
+  }
+
+  private finalizeLogout(): void {
+    this.loggedIn = false;
+    this.clearTokens();
+    this.router.navigate(['/gastrofactor']);
   }
 }

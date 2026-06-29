@@ -88,10 +88,16 @@ describe('AuthService', () => {
   });
 
   it('should logout, clear tokens and navigate to home', () => {
-    localStorage.setItem('access_token', 'to-be-removed');
-    localStorage.setItem('refresh_token', 'to-be-removed');
+    localStorage.setItem('access_token', 'access-token');
+    localStorage.setItem('refresh_token', 'refresh-token');
 
     service.userLogout();
+
+    const req = httpMock.expectOne('/v1/auth/logout');
+    expect(req.request.method).toBe('POST');
+    expect(req.request.headers.get('Authorization')).toBe('Bearer access-token');
+    expect(req.request.body).toEqual({ refreshToken: 'refresh-token' });
+    req.flush(null);
 
     expect(localStorage.getItem('access_token')).toBeNull();
     expect(localStorage.getItem('refresh_token')).toBeNull();

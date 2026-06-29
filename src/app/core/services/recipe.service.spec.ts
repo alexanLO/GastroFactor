@@ -20,18 +20,18 @@ describe('RecipeService', () => {
   const makeRecipe = (name: string): RecipeData => ({
     details: {
       name,
-      image: 'image.png',
+      image: '',
       servings: 2,
       category: 'Teste'
     },
     ingredients: [
       {
         name: 'Ingrediente 1',
-        netWeight: '100g',
+        netWeight: '100',
         correctionFactor: '1',
-        grossWeight: '100g',
+        grossWeight: '100',
         cookingFactor: '1',
-        totalQuantity: '100g'
+        totalQuantity: '100'
       }
     ],
     nutritional: {
@@ -42,7 +42,38 @@ describe('RecipeService', () => {
     },
     preparationMethod: [
       {
-        id: '1',
+        id: '01',
+        title: 'Passo 1',
+        description: 'Misturar tudo'
+      }
+    ]
+  });
+
+  const makeApiRecipe = (name: string) => ({
+    details: {
+      name,
+      servings: 2,
+      category: 'Teste'
+    },
+    ingredients: [
+      {
+        name: 'Ingrediente 1',
+        netWeight: 100,
+        correctionFactor: 1,
+        grossWeight: 100,
+        cookingFactor: 1,
+        totalQuantity: 100
+      }
+    ],
+    nutritional: {
+      calories: 100,
+      protein: 10,
+      totalFat: 5,
+      carbs: 15
+    },
+    preparationMethods: [
+      {
+        ordinationId: 1,
         title: 'Passo 1',
         description: 'Misturar tudo'
       }
@@ -68,7 +99,8 @@ describe('RecipeService', () => {
   });
 
   it('should load recipes successfully and update in-memory signal', () => {
-    const response = [makeRecipe('Receita A')];
+    const apiResponse = [makeApiRecipe('Receita A')];
+    const expectedResponse = [makeRecipe('Receita A')];
     let received: RecipeData[] | undefined;
 
     service.loadRecipes().subscribe((recipes) => {
@@ -77,18 +109,19 @@ describe('RecipeService', () => {
 
     const req = httpMock.expectOne('/v1/recipes');
     expect(req.request.method).toBe('GET');
-    req.flush(response);
+    req.flush(apiResponse);
 
-    expect(received).toEqual(response);
-    expect(service.recipes()).toEqual(response);
+    expect(received).toEqual(expectedResponse);
+    expect(service.recipes()).toEqual(expectedResponse);
   });
 
   it('should propagate error and keep previous in-memory recipes', () => {
-    const initialResponse = [makeRecipe('Receita Inicial')];
+    const initialApiResponse = [makeApiRecipe('Receita Inicial')];
+    const initialMappedResponse = [makeRecipe('Receita Inicial')];
 
     service.loadRecipes().subscribe();
     const initialReq = httpMock.expectOne('/v1/recipes');
-    initialReq.flush(initialResponse);
+    initialReq.flush(initialApiResponse);
 
     let capturedError: HttpErrorResponse | undefined;
 
@@ -103,6 +136,6 @@ describe('RecipeService', () => {
     failingReq.flush({ message: 'falha interna' }, { status: 500, statusText: 'Server Error' });
 
     expect(capturedError?.status).toBe(500);
-    expect(service.recipes()).toEqual(initialResponse);
+    expect(service.recipes()).toEqual(initialMappedResponse);
   });
 });

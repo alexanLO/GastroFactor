@@ -5,7 +5,7 @@ export interface LoginRequest {
 
 export interface AuthResponse {
   accessToken: string;
-  refreshToken: string;
+  refreshToken: string | null;
 }
 
 export interface RegisterRequest {

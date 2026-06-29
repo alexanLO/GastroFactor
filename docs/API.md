@@ -47,23 +47,25 @@ Arquivo: `src/app/core/services/recipe.service.ts`
 Responsabilidade:
 
 - carregar receitas da API
-- consultar receita por id
-- salvar, atualizar e remover receitas
+- salvar receitas
 - sincronizar a lista em memoria apos mutacoes
+- mapear payload de receita entre contrato da API e modelo de UI
 
 Base:
 
 - `GET /v1/recipes`
-- `GET /v1/recipes/:id`
 - `POST /v1/recipes`
-- `PUT /v1/recipes/:id`
-- `DELETE /v1/recipes/:id`
+
+Contrato atual da API para `POST /v1/recipes`:
+
+- response `201`: `UUID` da receita (nao retorna objeto completo)
+- campo de preparo no payload: `preparationMethods` (plural)
 
 Comportamento relevante:
 
 - `loadRecipes()` atualiza o estado interno (`BehaviorSubject`)
+- `loadRecipes()` converte tipos numericos da API para strings no modelo de UI
 - `saveRecipeAndRefresh()` salva e depois recarrega a lista
-- `updateRecipe()` e `deleteRecipe()` tambem sincronizam a lista apos a operacao
 
 ## AuthService
 
@@ -74,19 +76,23 @@ Responsabilidade:
 - login e cadastro
 - persistencia local de tokens
 - verificacao de expiracao do access token
+- refresh de token via backend
+- logout com revogacao de token no backend
 - logout e abertura/fechamento do modal de login
 
 Endpoints esperados:
 
 - `POST /v1/auth/login`
 - `POST /v1/auth/register`
+- `POST /v1/auth/refresh/{refreshToken}`
+- `POST /v1/auth/logout` (com `Authorization: Bearer <accessToken>` e body `{ "refreshToken": "..." }`)
 
 Resposta esperada:
 
 ```json
 {
   "accessToken": "jwt-access-token",
-  "refreshToken": "refresh-token"
+  "refreshToken": "refresh-token-ou-null"
 }
 ```
 
@@ -123,10 +129,12 @@ Responsabilidade:
 ## Tratamento de erro
 
 Arquivo: `src/app/core/interceptors/api-error.interceptor.ts`
+Arquivo: `src/app/core/interceptors/auth.interceptor.ts`
 Arquivo: `src/app/core/utils/api-error-message.util.ts`
 
 Comportamento:
 
+- token Bearer e anexado automaticamente nas chamadas autenticadas
 - erros HTTP passam por interceptor global
 - mensagens sao traduzidas para um texto amigavel quando possivel
 - logs sao enviados via `NGXLogger`
