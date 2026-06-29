@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FooterComponent } from '../../component/footer/footer.component';
 import { NavbarComponent } from '../../component/navbar/navbar.component';
 import { RecipeService } from '../../core/services/recipe.service';
-import { RecipeData } from '../../shared/models/recipe-data.model';
 import { TechnicalSpecification } from '../technical-specification/technical-specification';
 import { RecipeCardComponent } from '../../component/recipe-card/recipe-card.component';
 
@@ -21,14 +20,14 @@ import { RecipeCardComponent } from '../../component/recipe-card/recipe-card.com
   templateUrl: './my-collection.html',
   styleUrls: ['./my-collection.scss'],
 })
-export class MyCollection implements OnInit {
+export class MyCollection implements OnInit, OnDestroy {
   recipeService = inject(RecipeService);
   private readonly destroyRef = inject(DestroyRef);
   isModalOpen = false;
   dateTime: Date = new Date();
 
   horaAtual = signal<Date>(new Date());
-  private intervaloId: any;
+  private intervaloId: ReturnType<typeof setInterval> | null = null;
 
   constructor() {
     // 2. Inicie um intervalo para atualizar o signal a cada 1000ms (1 segundo)
@@ -45,9 +44,10 @@ export class MyCollection implements OnInit {
   }
 
   // 3. Limpeza importante: pare o intervalo quando o componente for destruído
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.intervaloId) {
       clearInterval(this.intervaloId);
+      this.intervaloId = null;
     }
   }
 
