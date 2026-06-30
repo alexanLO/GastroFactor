@@ -1,7 +1,16 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { RecipeData } from '../../../../shared/models/recipe-data.model';
 import { TableIngredientsComponent } from '../../../recipe/components/table-ingredients/table-ingredients.component';
-import { CardNutritionalComponent } from '../../../recipe/components/card-nutritional/card-nutritional.component';
+
 import { PreparationMethodComponent } from '../../../recipe/components/preparation-method/preparation-method.component';
 import { PdfExportService } from '../../../../core/services/pdf-export.service';
 import { RecipeService } from '../../../../core/services/recipe.service';
@@ -10,10 +19,16 @@ import { NGXLogger } from 'ngx-logger';
 import { finalize } from 'rxjs';
 import { resolveUnknownErrorMessage } from '../../../../core/utils/api-error-message.util';
 import { CardDetailsComponent } from '../../components/details-card/details-card';
+import { CardNutritionalComponent } from '../../components/nutritional-card/nutritional-card';
 
 @Component({
   selector: 'app-technical-specifications',
-  imports: [CardDetailsComponent, TableIngredientsComponent, CardNutritionalComponent, PreparationMethodComponent],
+  imports: [
+    CardDetailsComponent,
+    TableIngredientsComponent,
+    CardNutritionalComponent,
+    PreparationMethodComponent,
+  ],
   templateUrl: './technical-specifications.html',
   styleUrls: ['./technical-specifications.scss'],
 })
@@ -71,7 +86,10 @@ export class TechnicalSpecification {
           this.saved.emit();
         },
         error: (error: unknown) => {
-          const message = resolveUnknownErrorMessage(error, 'Erro ao salvar a receita. Tente novamente.');
+          const message = resolveUnknownErrorMessage(
+            error,
+            'Erro ao salvar a receita. Tente novamente.',
+          );
           this.notificationService.showError(message);
           this.log.error('Erro ao salvar receita:', error);
         },

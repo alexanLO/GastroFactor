@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-card-nutritional',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './card-nutritional.component.html',
-  styleUrl: './card-nutritional.component.scss',
+  templateUrl: './nutritional-card.html',
+  styleUrl: './nutritional-card.scss',
 })
 export class CardNutritionalComponent {
   calories: string = '';
@@ -19,7 +19,7 @@ export class CardNutritionalComponent {
       calories: this.calories,
       protein: this.protein,
       totalFat: this.totalFat,
-      carbs: this.carbs
+      carbs: this.carbs,
     };
   }
 }

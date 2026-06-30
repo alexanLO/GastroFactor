@@ -11,20 +11,20 @@ const loggerStub = {
   debug: jasmine.createSpy('debug'),
   info: jasmine.createSpy('info'),
   warn: jasmine.createSpy('warn'),
-  error: jasmine.createSpy('error')
+  error: jasmine.createSpy('error'),
 };
 
 const recipeServiceStub = {
-  saveRecipeAndRefresh: jasmine.createSpy('saveRecipeAndRefresh').and.returnValue(of(void 0))
+  saveRecipeAndRefresh: jasmine.createSpy('saveRecipeAndRefresh').and.returnValue(of(void 0)),
 };
 
 const notificationServiceStub = {
   showSuccess: jasmine.createSpy('showSuccess'),
-  showError: jasmine.createSpy('showError')
+  showError: jasmine.createSpy('showError'),
 };
 
 const pdfExportServiceStub = {
-  generateRecipePdf: jasmine.createSpy('generateRecipePdf')
+  generateRecipePdf: jasmine.createSpy('generateRecipePdf'),
 };
 
 describe('TechnicalSpecification', () => {
@@ -36,7 +36,7 @@ describe('TechnicalSpecification', () => {
       name: 'Receita Teste',
       image: '',
       servings: 2,
-      category: 'Categoria'
+      category: 'Categoria',
     });
 
     component.ingredientsComponent.ingredients = [
@@ -47,19 +47,19 @@ describe('TechnicalSpecification', () => {
         correctionFactor: '1',
         grossWeight: '100g',
         cookingFactor: '1',
-        totalQuantity: '100g'
-      }
+        totalQuantity: '100g',
+      },
     ];
 
     spyOn(component.nutritionalComponent, 'getNutritional').and.returnValue({
       calories: '100',
       protein: '10',
       totalFat: '5',
-      carbs: '15'
+      carbs: '15',
     });
 
     component.preparationComponent.steps = [
-      { id: '1', title: 'Passo 1', description: 'Descricao', editing: false }
+      { id: '1', title: 'Passo 1', description: 'Descricao', editing: false },
     ];
   };
 
@@ -76,10 +76,9 @@ describe('TechnicalSpecification', () => {
         { provide: NGXLogger, useValue: loggerStub },
         { provide: RecipeService, useValue: recipeServiceStub },
         { provide: NotificationService, useValue: notificationServiceStub },
-        { provide: PdfExportService, useValue: pdfExportServiceStub }
-      ]
-    })
-    .compileComponents();
+        { provide: PdfExportService, useValue: pdfExportServiceStub },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TechnicalSpecification);
     component = fixture.componentInstance;
@@ -114,7 +113,7 @@ describe('TechnicalSpecification', () => {
   it('should show error notification and log when save fails', () => {
     setupRecipeDataMocks();
     recipeServiceStub.saveRecipeAndRefresh.and.returnValue(
-      throwError(() => new HttpErrorResponse({ status: 500, statusText: 'Server Error' }))
+      throwError(() => new HttpErrorResponse({ status: 500, statusText: 'Server Error' })),
     );
 
     component.saveRecipe();
