@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
 import { RecipeData } from '../../../../shared/models/recipe-data.model';
-import { CardDetailsComponent } from '../../../recipe/components/card-details/card-details.component';
 import { TableIngredientsComponent } from '../../../recipe/components/table-ingredients/table-ingredients.component';
 import { CardNutritionalComponent } from '../../../recipe/components/card-nutritional/card-nutritional.component';
 import { PreparationMethodComponent } from '../../../recipe/components/preparation-method/preparation-method.component';
@@ -10,6 +9,7 @@ import { NotificationService } from '../../../../core/services/notification.serv
 import { NGXLogger } from 'ngx-logger';
 import { finalize } from 'rxjs';
 import { resolveUnknownErrorMessage } from '../../../../core/utils/api-error-message.util';
+import { CardDetailsComponent } from '../../components/details-card/details-card';
 
 @Component({
   selector: 'app-technical-specifications',

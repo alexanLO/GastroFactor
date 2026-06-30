@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-card-details',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './card-details.component.html',
-  styleUrl: './card-details.component.scss',
+  templateUrl: './details-card.html',
+  styleUrls: ['./details-card.scss'],
 })
 export class CardDetailsComponent {
   recipeName: string = '';
@@ -19,7 +19,7 @@ export class CardDetailsComponent {
       name: this.recipeName,
       image: this.image,
       servings: this.servings,
-      category: this.category
+      category: this.category,
     };
   }
 }
