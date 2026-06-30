@@ -11,15 +11,15 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
-import { CardDetailsComponent } from '../../component/card-details/card-details.component';
-import { CardNutritionalComponent } from '../../component/card-nutritional/card-nutritional.component';
-import { PreparationMethodComponent } from '../../component/preparation-method/preparation-method.component';
-import { TableIngredientsComponent } from '../../component/table-ingredients/table-ingredients.component';
-import { PdfExportService } from '../../core/services/pdf-export.service';
-import { NotificationService } from '../../core/services/notification.service';
-import { RecipeService } from '../../core/services/recipe.service';
-import { resolveUnknownErrorMessage } from '../../core/utils/api-error-message.util';
-import { RecipeData } from '../../shared/models/recipe-data.model';
+import { CardDetailsComponent } from '../../components/card-details/card-details.component';
+import { CardNutritionalComponent } from '../../components/card-nutritional/card-nutritional.component';
+import { PreparationMethodComponent } from '../../components/preparation-method/preparation-method.component';
+import { TableIngredientsComponent } from '../../components/table-ingredients/table-ingredients.component';
+import { PdfExportService } from '../../../../core/services/pdf-export.service';
+import { NotificationService } from '../../../../core/services/notification.service';
+import { RecipeService } from '../../../../core/services/recipe.service';
+import { resolveUnknownErrorMessage } from '../../../../core/utils/api-error-message.util';
+import { RecipeData } from '../../../../shared/models/recipe-data.model';
 import { finalize } from 'rxjs';
 
 @Component({

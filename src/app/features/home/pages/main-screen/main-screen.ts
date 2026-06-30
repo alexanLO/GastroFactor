@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CalcularDialog } from '../../component/calcular-dialog/calcular-dialog';
-import { FooterComponent } from '../../component/footer/footer.component';
-import { CalculationService } from '../../core/services/calculation.service';
-import { LoginPageComponent } from '../../features/auth/pages/login/login-page.component/login-page.component';
-import { RegisterComponent } from '../../features/auth/pages/register/register.component';
-import { AuthService } from '../../features/auth/services/auth.service';
-import { resolveUnknownErrorMessage } from '../../core/utils/api-error-message.util';
-import { CalculationRequest, CalculationResponse } from '../../shared/models/calculation.model';
-import { NavbarComponent } from '../../component/navbar/navbar.component';
+import { CalcularDialog } from '../../../calculator/components/calcular-dialog/calcular-dialog';
+import { FooterComponent } from '../../../../shared/components/footer/footer.component';
+import { CalculationService } from '../../../../core/services/calculation.service';
+import { LoginPageComponent } from '../../../../features/auth/pages/login/login-page.component/login-page.component';
+import { RegisterComponent } from '../../../../features/auth/pages/register/register.component';
+import { AuthService } from '../../../../features/auth/services/auth.service';
+import { resolveUnknownErrorMessage } from '../../../../core/utils/api-error-message.util';
+import { CalculationRequest, CalculationResponse } from '../../../../shared/models/calculation.model';
+import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 import { NGXLogger } from 'ngx-logger';
 
 @Component({

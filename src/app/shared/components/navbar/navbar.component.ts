@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../features/auth/services/auth.service';
-import { LoginPageComponent } from "../../features/auth/pages/login/login-page.component/login-page.component";
+import { AuthService } from '../../../features/auth/services/auth.service';
+import { LoginPageComponent } from "../../../features/auth/pages/login/login-page.component/login-page.component";
 
 @Component({
   selector: 'app-navbar-component',

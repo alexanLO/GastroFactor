@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RecipeData } from '../../shared/models/recipe-data.model';
+import { RecipeData } from '../../../../shared/models/recipe-data.model';
 
 type PreparationStep = RecipeData['preparationMethod'][number] & {
   editing: boolean;

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CalculationResponse } from '../../shared/models/calculation.model';
+import { CalculationResponse } from '../../../../shared/models/calculation.model';
 
 @Component({
   standalone: true,

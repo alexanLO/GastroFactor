@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FooterComponent } from '../../component/footer/footer.component';
-import { NavbarComponent } from '../../component/navbar/navbar.component';
-import { RecipeService } from '../../core/services/recipe.service';
+import { FooterComponent } from '../../../../shared/components/footer/footer.component';
+import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
+import { RecipeService } from '../../../../core/services/recipe.service';
 import { TechnicalSpecification } from '../technical-specification/technical-specification';
-import { RecipeCardComponent } from '../../component/recipe-card/recipe-card.component';
+import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.component';
 
 @Component({
   selector: 'app-my-collection',

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { MainScreen } from './pages/main-screen/main-screen';
-import { MyCollection } from './pages/my-collection/my-collection';
+import { MainScreen } from './features/home/pages/main-screen/main-screen';
+import { MyCollection } from './features/recipe/pages/my-collection/my-collection';
 import { authGuard } from './features/auth/guard/auth-guard';
 
 export const routes: Routes = [
