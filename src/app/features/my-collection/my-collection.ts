@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
-import { FooterComponent } from '../../shared/components/footer/footer.component';
-import { TechnicalSpecification } from '../recipe/pages/technical-specification/technical-specification';
-import { RecipeCardComponent } from '../recipe/components/recipe-card/recipe-card.component';
 import { RecipeService } from '../../core/services/recipe.service';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { RecipeCardComponent } from '../recipe/components/recipe-card/recipe-card.component';
+import { TechnicalSpecification } from './modal/technical-specifications/technical-specifications';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { RecipeService } from '../../core/services/recipe.service';
     CommonModule,
     TechnicalSpecification,
     RecipeCardComponent,
-  ],
+],
   templateUrl: './my-collection.html',
   styleUrls: ['./my-collection.scss'],
 })

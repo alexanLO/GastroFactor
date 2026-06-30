@@ -1,40 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import {
-  Component,
-  inject,
-  Input,
-  ViewChild,
-  EventEmitter,
-  Output,
-  ElementRef,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { NGXLogger } from 'ngx-logger';
-import { CardDetailsComponent } from '../../components/card-details/card-details.component';
-import { CardNutritionalComponent } from '../../components/card-nutritional/card-nutritional.component';
-import { PreparationMethodComponent } from '../../components/preparation-method/preparation-method.component';
-import { TableIngredientsComponent } from '../../components/table-ingredients/table-ingredients.component';
-import { PdfExportService } from '../../../../core/services/pdf-export.service';
-import { NotificationService } from '../../../../core/services/notification.service';
-import { RecipeService } from '../../../../core/services/recipe.service';
-import { resolveUnknownErrorMessage } from '../../../../core/utils/api-error-message.util';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
 import { RecipeData } from '../../../../shared/models/recipe-data.model';
+import { CardDetailsComponent } from '../../../recipe/components/card-details/card-details.component';
+import { TableIngredientsComponent } from '../../../recipe/components/table-ingredients/table-ingredients.component';
+import { CardNutritionalComponent } from '../../../recipe/components/card-nutritional/card-nutritional.component';
+import { PreparationMethodComponent } from '../../../recipe/components/preparation-method/preparation-method.component';
+import { PdfExportService } from '../../../../core/services/pdf-export.service';
+import { RecipeService } from '../../../../core/services/recipe.service';
+import { NotificationService } from '../../../../core/services/notification.service';
+import { NGXLogger } from 'ngx-logger';
 import { finalize } from 'rxjs';
+import { resolveUnknownErrorMessage } from '../../../../core/utils/api-error-message.util';
 
 @Component({
-  selector: 'app-technical-specification',
-  standalone: true,
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    TableIngredientsComponent,
-    CardNutritionalComponent,
-    PreparationMethodComponent,
-    CardDetailsComponent,
-  ],
-  templateUrl: './technical-specification.html',
-  styleUrl: './technical-specification.scss',
+  selector: 'app-technical-specifications',
+  imports: [CardDetailsComponent, TableIngredientsComponent, CardNutritionalComponent, PreparationMethodComponent],
+  templateUrl: './technical-specifications.html',
+  styleUrls: ['./technical-specifications.scss'],
 })
 export class TechnicalSpecification {
   @Input() isModal: boolean = false;

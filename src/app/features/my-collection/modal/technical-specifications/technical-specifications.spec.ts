@@ -2,11 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
 import { of, Subject, throwError } from 'rxjs';
-import { NotificationService } from '../../core/services/notification.service';
-import { PdfExportService } from '../../core/services/pdf-export.service';
-import { RecipeService } from '../../core/services/recipe.service';
-
-import { TechnicalSpecification } from './technical-specification';
+import { TechnicalSpecification } from './technical-specifications';
+import { RecipeService } from '../../../../core/services/recipe.service';
+import { NotificationService } from '../../../../core/services/notification.service';
+import { PdfExportService } from '../../../../core/services/pdf-export.service';
 
 const loggerStub = {
   debug: jasmine.createSpy('debug'),
