@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-card-nutritional',
+  selector: 'app-nutritional-card',
   standalone: true,
   imports: [FormsModule],
   templateUrl: './nutritional-card.html',
-  styleUrl: './nutritional-card.scss',
+  styleUrls: ['./nutritional-card.scss'],
 })
-export class CardNutritionalComponent {
+export class NutritionalCard {
   calories: string = '';
   protein: string = '';
   totalFat: string = '';

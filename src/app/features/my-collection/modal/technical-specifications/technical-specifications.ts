@@ -11,24 +11,26 @@ import {
 import { RecipeData } from '../../../../shared/models/recipe-data.model';
 import { TableIngredientsComponent } from '../../../recipe/components/table-ingredients/table-ingredients.component';
 
-import { PreparationMethodComponent } from '../../../recipe/components/preparation-method/preparation-method.component';
-import { PdfExportService } from '../../../../core/services/pdf-export.service';
-import { RecipeService } from '../../../../core/services/recipe.service';
-import { NotificationService } from '../../../../core/services/notification.service';
 import { NGXLogger } from 'ngx-logger';
 import { finalize } from 'rxjs';
+import { NotificationService } from '../../../../core/services/notification.service';
+import { PdfExportService } from '../../../../core/services/pdf-export.service';
+import { RecipeService } from '../../../../core/services/recipe.service';
 import { resolveUnknownErrorMessage } from '../../../../core/utils/api-error-message.util';
-import { CardDetailsComponent } from '../../components/details-card/details-card';
-import { CardNutritionalComponent } from '../../components/nutritional-card/nutritional-card';
+
+import { PreparationMethodCard } from "../../components/preparation-method-card/preparation-method-card";
+import { DetailsCard } from "../../components/details-card/details-card";
+import { NutritionalCard } from "../../components/nutritional-card/nutritional-card";
 
 @Component({
   selector: 'app-technical-specifications',
   imports: [
-    CardDetailsComponent,
     TableIngredientsComponent,
-    CardNutritionalComponent,
-    PreparationMethodComponent,
-  ],
+    PreparationMethodCard,
+    PreparationMethodCard,
+    DetailsCard,
+    NutritionalCard
+],
   templateUrl: './technical-specifications.html',
   styleUrls: ['./technical-specifications.scss'],
 })
@@ -37,10 +39,10 @@ export class TechnicalSpecification {
   @Output() saved = new EventEmitter<void>();
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-  @ViewChild(CardDetailsComponent) detailsComponent!: CardDetailsComponent;
+  @ViewChild(DetailsCard) detailsComponent!: DetailsCard;
   @ViewChild(TableIngredientsComponent) ingredientsComponent!: TableIngredientsComponent;
-  @ViewChild(CardNutritionalComponent) nutritionalComponent!: CardNutritionalComponent;
-  @ViewChild(PreparationMethodComponent) preparationComponent!: PreparationMethodComponent;
+  @ViewChild(NutritionalCard) nutritionalComponent!: NutritionalCard;
+  @ViewChild(PreparationMethodCard) preparationComponent!: PreparationMethodCard;
 
   private recipeService = inject(RecipeService);
   private pdfService = inject(PdfExportService);
