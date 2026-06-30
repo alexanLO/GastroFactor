@@ -1,0 +1,129 @@
+<div class="dashboard-container">
+  <!-- Top Navigation Bar -->
+  <app-navbar-component></app-navbar-component>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar: Status da Conta -->
+    <aside class="sidebar">
+      <section class="account-status">
+        <div class="plan-card">
+          <h3 class="sidebar-title">Status da Conta</h3>
+          <div class="plan-info">
+            <div class="icon-box">
+              <!-- TODO Text-x1 -->
+              <span class="material-symbols-outlined"> menu_book </span>
+            </div>
+
+            <div>
+              <span class="recipe-count">24 RECEITAS SALVAS</span>
+              <p class="plan-name">
+                Premium Chef <br />
+                Plan
+              </p>
+            </div>
+          </div>
+
+          <div class="storage-meter">
+            <div class="meter-labels">
+              <span>ARMAZENAMENTO</span>
+              <span>78%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 78%"></div>
+            </div>
+            <span class="storage-detail">3.2 GB de 5 GB utilizados</span>
+          </div>
+
+          <button class="btn-settings">
+            <span class="material-symbols-outlined">settings</span>
+            <span>Configurações</span>
+          </button>
+        </div>
+
+        <nav class="sidebar-menu">
+          <span class="menu-label">MENU PRINCIPAL</span>
+          <a class="menu-item active">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">dashboard</span>
+            Dashboard
+          </a>
+          <a class="menu-item">
+            <span class="material-symbols-outlined">menu_book</span> Minhas Receitas
+          </a>
+        </nav>
+
+        <div class="upgrade-card">
+          <p class="current-plan">Plano Atual</p>
+          <p class="plan-highlight">Master Chef Pro</p>
+          <button class="btn-upgrade">UPGRADE</button>
+        </div>
+      </section>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Header -->
+      <header class="overview-header">
+        <div class="header-content">
+          <span class="welcome-text">Bem-vindo de volta, Chef</span>
+          <h1 class="header-title">
+            Overview da <br />
+            Cozinha
+          </h1>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-label">TOTAL DE RECEITAS</span>
+            <p class="stat-value"> {{ recipeService.recipes().length }} <span class="stat-unit">~</span></p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">RELÓGIO</span>
+            <p class="stat-value">{{ dateTime | date:'dd/MM/yy' }} {{ horaAtual() | date:'HH:mm:ss' }}</p>
+            <!-- <p class="stat-subtext">PDF Gerado: Ficha #882</p> -->
+          </div>
+        </div>
+      </header>
+
+      <!-- Search & Action Bar -->
+      <section class="actions-bar">
+        <div class="search-wrapper">
+          <span
+            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+          <input type="text" placeholder="Buscar fichas..." />
+        </div>
+        <button class="btn-new-sheet" (click)="openModal()">
+          <span class="material-symbols-outlined">add</span>
+          Nova Ficha Técnica
+        </button>
+      </section>
+
+      <!-- Grid de Receitas -->
+      <section class="recipes-grid-section">
+        <div class="section-header">
+          <h2 class="section-title">Minhas Fichas Técnicas</h2>
+          <a class="link-see-all">Ver todas <span class="material-symbols-outlined text-xs">arrow_forward</span></a>
+        </div>
+
+        <app-recipe-card></app-recipe-card>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <app-footer-component></app-footer-component>
+</div>
+
+<!-- Modal de Ficha Técnica -->
+@if (isModalOpen) {
+
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="modal-close-btn" (click)="closeModal()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="modal-body">
+   <app-technical-specifications [isModal]="true" (saved)="closeModal()"></app-technical-specifications>
+    </div>
+  </div>
+</div>
+}

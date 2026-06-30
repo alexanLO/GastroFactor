@@ -20,18 +20,10 @@ UI -> Component -> Service -> HTTP -> API
 src/app/
   app.config.ts
   app.routes.ts
-  component/
-    calcular-dialog/
-    card-details/
-    card-nutritional/
-    footer/
-    navbar/
-    preparation-method/
-    recipe-card/
-    table-ingredients/
   core/
     interceptors/
       api-error.interceptor.ts
+      auth.interceptor.ts
     services/
       calculation.service.ts
       notification.service.ts
@@ -48,14 +40,33 @@ src/app/
         register/
       services/
         auth.service.ts
-  pages/
-    main-screen/
-    my-collection/
-    technical-specification/
+    calculator/
+      components/
+        calcular-dialog/
+    home/
+      pages/
+        main-screen/
+    recipe/
+      components/
+        card-details/
+        card-nutritional/
+        preparation-method/
+        recipe-card/
+        table-ingredients/
+      pages/
+        my-collection/
+        technical-specification/
   shared/
     components/
+      error-input/
+      footer/
+      navbar/
     models/
+      auth.model.ts
+      calculation.model.ts
+      recipe-data.model.ts
     styles/
+      _variables.scss
 ```
 
 ## Configuracao da aplicacao
@@ -73,8 +84,8 @@ Pontos principais:
 
 Arquivo: `src/app/app.routes.ts`
 
-- `/gastrofactor`: tela principal
-- `/meu-acervo`: colecao (rota protegida por `authGuard`)
+- `/gastrofactor`: tela principal (`features/home/pages/main-screen`)
+- `/meu-acervo`: colecao (rota protegida por `authGuard`, `features/recipe/pages/my-collection`)
 - `/sobre`: mesma tela principal (placeholder)
 
 ## Servicos centrais
@@ -138,5 +149,9 @@ Responsavel por exportacao de ficha tecnica em PDF.
 
 - componentes standalone
 - estilo SCSS com include path em `src/app/shared/styles`
-- nomenclatura de pastas por contexto funcional
-- separacao entre componentes de pagina (`pages/`) e componentes reutilizaveis (`component/` e `shared/components/`)
+- nomenclatura de pastas por contexto funcional (feature-based)
+- componentes de dominio vivem dentro da feature correspondente (`features/<feature>/components/`)
+- componentes globais reutilizaveis ficam em `shared/components/` (footer, navbar, error-input)
+- paginas pertencem a feature correspondente (`features/<feature>/pages/`)
+- servicos de infraestrutura e negocio global ficam em `core/services/`
+- `core/` nao depende de `features/`
