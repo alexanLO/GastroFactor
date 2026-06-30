@@ -4,8 +4,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RecipeService } from '../../core/services/recipe.service';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
-import { RecipeCardComponent } from '../recipe/components/recipe-card/recipe-card.component';
 import { TechnicalSpecification } from './modal/technical-specifications/technical-specifications';
+import { RecipeCard } from './components/recipe-card/recipe-card';
 
 
 @Component({
@@ -16,7 +16,7 @@ import { TechnicalSpecification } from './modal/technical-specifications/technic
     NavbarComponent,
     CommonModule,
     TechnicalSpecification,
-    RecipeCardComponent,
+    RecipeCard,
 ],
   templateUrl: './my-collection.html',
   styleUrls: ['./my-collection.scss'],

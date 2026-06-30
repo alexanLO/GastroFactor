@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-table-ingredients',
-  standalone: true,
+  selector: 'app-ingredients-card',
   imports: [CommonModule, FormsModule],
-  templateUrl: './table-ingredients.component.html',
-  styleUrls: ['./table-ingredients.component.scss'],
+  templateUrl: './ingredients-card.html',
+  styleUrl: './ingredients-card.scss',
 })
-export class TableIngredientsComponent {
+export class IngredientsCard {
   ingredients = [
     {
       id: '01',

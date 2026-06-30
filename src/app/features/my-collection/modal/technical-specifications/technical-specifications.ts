@@ -9,7 +9,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { RecipeData } from '../../../../shared/models/recipe-data.model';
-import { TableIngredientsComponent } from '../../../recipe/components/table-ingredients/table-ingredients.component';
 
 import { NGXLogger } from 'ngx-logger';
 import { finalize } from 'rxjs';
@@ -21,11 +20,12 @@ import { resolveUnknownErrorMessage } from '../../../../core/utils/api-error-mes
 import { PreparationMethodCard } from "../../components/preparation-method-card/preparation-method-card";
 import { DetailsCard } from "../../components/details-card/details-card";
 import { NutritionalCard } from "../../components/nutritional-card/nutritional-card";
+import { IngredientsCard } from '../../components/ingredients-card/ingredients-card';
 
 @Component({
   selector: 'app-technical-specifications',
   imports: [
-    TableIngredientsComponent,
+    IngredientsCard,
     PreparationMethodCard,
     PreparationMethodCard,
     DetailsCard,
@@ -40,7 +40,7 @@ export class TechnicalSpecification {
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   @ViewChild(DetailsCard) detailsComponent!: DetailsCard;
-  @ViewChild(TableIngredientsComponent) ingredientsComponent!: TableIngredientsComponent;
+  @ViewChild(IngredientsCard) ingredientsComponent!: IngredientsCard;
   @ViewChild(NutritionalCard) nutritionalComponent!: NutritionalCard;
   @ViewChild(PreparationMethodCard) preparationComponent!: PreparationMethodCard;
 

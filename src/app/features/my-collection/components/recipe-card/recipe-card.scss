@@ -1,0 +1,511 @@
+@use 'variables' as *;
+
+.dashboard-container {
+  background-color: $background;
+  color: $on-surface-variant;
+  min-height: 100vh;
+  font-family: $font-sans;
+}
+
+.dashboard-layout {
+  display: flex;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+// Sidebar Styles
+.sidebar {
+  width: 320px;
+  padding: 2.5rem;
+  border-right: 1px solid rgba($outline, 0.1);
+
+  .sidebar-title {
+    font-family: $font-serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: $surface-tint;
+  }
+
+  .plan-card {
+    background: $surface-container-high;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    color: $on-surface;
+
+    .plan-info {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+
+      .icon-box {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba($on-surface-variant, 0.05);
+        color: $primary;
+      }
+
+      .recipe-count {
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        color: $on-surface-variant;
+      }
+
+      .plan-name {
+        font-family: $font-serif;
+        font-style: italic;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+    }
+
+    .storage-meter {
+      .meter-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.7rem;
+
+        margin-bottom: 0.5rem;
+
+        span:first-child {
+          color: $on-surface-variant;
+        }
+
+        span:last-child {
+          color: $primary-container;
+        }
+      }
+
+      .progress-bar {
+        height: 6px;
+        background: rgba($white, 0.1);
+        border-radius: 3px;
+        margin-bottom: 0.5rem;
+
+        .progress-fill {
+          height: 100%;
+          background: linear-gradient(135deg, $primary, $primary-container);
+          border-radius: 3px;
+        }
+      }
+
+      .storage-detail {
+        font-size: 0.65rem;
+        color: $outline;
+      }
+    }
+
+    .btn-settings {
+      width: 100%;
+      background: rgba($on-surface-variant, 0.05);
+      border: none;
+      color: $on-surface;
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: $on-surface-variant 0.3s;
+
+      &:hover {
+        background: rgba($on-surface-variant, 0.1);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      span:first-child {
+        font-size: 1.2rem;
+        line-height: 1.125rem;
+        color: $on-surface-variant;
+        margin-right: 0.75rem;
+      }
+    }
+  }
+
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .menu-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: $outline;
+      margin-bottom: 1rem;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: $on-surface-variant;
+      transition: all 0.3s;
+      cursor: pointer;
+
+      &.active {
+        background: rgba($surface-tint, 0.15);
+        color: $surface-tint;
+        font-weight: 600;
+      }
+
+      &:hover:not(.active) {
+        background: rgba($white, 0.05);
+      }
+    }
+  }
+
+  .upgrade-card {
+    margin-top: 3rem;
+    background: $surface-container-high;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: left;
+
+    .current-plan {
+      font-size: 1rem;
+      color: $on-surface-variant;
+    }
+
+    .plan-highlight {
+      font-family: $font-serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      margin: 0.5rem 0 1rem;
+      color: $primary-container;
+    }
+
+    .btn-upgrade {
+      width: 100%;
+      background: rgba($white, 0.1);
+      border: none;
+      color: $white;
+      padding: 0.6rem;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+}
+
+// Main Content Styles
+.main-content {
+  flex: 1;
+
+  .overview-header {
+    width: 100%;
+    height: 400px;
+    background:
+      linear-gradient(rgba($background, 0.7), rgba($background, 0.9)),
+      url('/kitchen.png') center top / cover no-repeat;
+    border-bottom-right-radius: 16px;
+    padding: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+
+    .welcome-text {
+      font-family: $font-serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: $surface-tint;
+    }
+
+    .header-title {
+      color: $on-surface;
+      font-family: $font-serif;
+      font-size: 3.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 2rem;
+
+      .stat-card {
+        background: rgba($white, 0.05);
+        backdrop-filter: blur(10px);
+        padding: 1.5rem 2rem;
+        border-radius: 12px;
+        min-width: 180px;
+
+        .stat-label {
+          font-size: 0.7rem;
+          letter-spacing: 0.1em;
+          color: $outline;
+        }
+
+        .stat-value {
+          font-size: 1.75rem;
+          font-weight: 400;
+          margin: 0.5rem 0;
+        }
+
+        .stat-unit {
+          color: $surface-tint;
+        }
+
+        .stat-subtext {
+          font-size: 0.65rem;
+          color: $outline;
+        }
+      }
+    }
+  }
+
+  .actions-bar {
+    display: flex;
+    padding: 3rem 4rem;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    .search-wrapper {
+      position: relative;
+      margin-right: 1rem;
+      flex: 1;
+      max-width: 500px;
+
+      input {
+        width: 100%;
+        background: rgba($white, 0.05);
+        border: none;
+        padding: 1rem 1rem 1rem 3.5rem;
+        border-radius: 8px;
+        color: $white;
+        font-size: 1rem;
+      }
+
+      span {
+        position: absolute;
+        left: 1.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $outline;
+      }
+    }
+
+    .btn-new-sheet {
+      background: linear-gradient(135deg, $primary, $primary-container);
+      color: $surface;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 3px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.25s ease;
+
+      &:hover {
+        color: $inverse-primary;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba($primary, 0.5);
+      }
+
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+  }
+
+  .recipes-grid-section {
+    padding: 3rem 4rem;
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+
+      .section-title {
+        font-family: $font-serif;
+        font-style: italic;
+        font-size: 2rem;
+        color: $on-surface;
+      }
+
+      .link-see-all {
+        color: $outline;
+        text-decoration: none;
+        font-size: 0.9rem;
+        cursor: pointer;
+
+        &:hover {
+          color: $surface-tint;
+        }
+
+        span {
+          font-size: 0.75rem;
+          line-height: 1rem;
+        }
+      }
+    }
+  }
+}
+
+// Recipe Card Styles
+.recipe-card {
+  background: $surface-container-low;
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  cursor: pointer;
+  border: 1px solid rgba($white, 0.05);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba($surface-tint, 0.3);
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 1.5rem;
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .meta-tag {
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        color: $surface-tint;
+        font-weight: bold;
+      }
+
+      .meta-link {
+        font-size: 0.75rem;
+        color: $outline;
+      }
+    }
+
+    .recipe-title {
+      font-family: $font-serif;
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+// Modal Styles
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .modal-content {
+    background: $background;
+    border-radius: 16px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba($white, 0.1);
+      border: none;
+      color: $white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1001;
+      transition: all 0.3s;
+
+      &:hover {
+        background: rgba($white, 0.2);
+        transform: rotate(90deg);
+      }
+
+      span {
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+      }
+    }
+
+    .modal-body {
+      width: 100%;
+      height: 100%;
+
+      app-technical-specification {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-overlay .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 12px;
+
+    .modal-close-btn {
+      top: 1rem;
+      right: 1rem;
+      width: 2.25rem;
+      height: 2.25rem;
+    }
+  }
+}
