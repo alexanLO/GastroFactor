@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FooterComponent } from '../../../../shared/components/footer/footer.component';
-import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
-import { RecipeService } from '../../../../core/services/recipe.service';
-import { TechnicalSpecification } from '../technical-specification/technical-specification';
-import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.component';
+import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { TechnicalSpecification } from '../recipe/pages/technical-specification/technical-specification';
+import { RecipeCardComponent } from '../recipe/components/recipe-card/recipe-card.component';
+import { RecipeService } from '../../core/services/recipe.service';
+
 
 @Component({
   selector: 'app-my-collection',
@@ -37,10 +38,7 @@ export class MyCollection implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.recipeService
-      .refreshRecipes()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+    this.recipeService.refreshRecipes().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 
   // 3. Limpeza importante: pare o intervalo quando o componente for destruído

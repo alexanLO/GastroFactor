@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainScreen } from './features/home/pages/main-screen/main-screen';
-import { MyCollection } from './features/recipe/pages/my-collection/my-collection';
 import { authGuard } from './features/auth/guard/auth-guard';
+import { MyCollection } from './features/my-collection/my-collection';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'gastrofactor', pathMatch: 'full' },
